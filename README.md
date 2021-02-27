@@ -9,7 +9,7 @@
 [![Gmail Badge](https://img.shields.io/badge/-vineetjk-c14438?style=flat&logo=Gmail&logoColor=white&link=mailto:vinjkcodes@gmail.com)](mailto:vinjkcodes@gmail.com)
 ![](https://komarev.com/ghpvc/?username=vineetjk&style=flat-square&color=blueviolet)
 
-## I'm an Engineering Student, Singer and a  Full Stack Dev
+## I'm an Engineering Student, Singer(bot) and a  Full Stack Dev
  <img align="right" alt="GIF" src="https://github.com/piyush97/piyush97/blob/master/code.gif?raw=true" width="300" height="220" />
 
 - 🔭 I’m currently making amazing products for [UnicoGraphix](https://unicographix.com) <img src="https://media.giphy.com/media/WUlplcMpOCEmTGBtBW/giphy.gif" width="30">
