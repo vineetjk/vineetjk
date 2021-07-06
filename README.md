@@ -5,7 +5,7 @@
 [![Linkedin Badge](https://img.shields.io/badge/-vineetjk-blue?style=flat&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/vineetjk/)](https://www.linkedin.com/in/vineetjk)
 [![Website Badge](https://img.shields.io/badge/-vineetjk.me-47CCCC?style=flat&logo=Google-Chrome&logoColor=white&link=https://piyushmehta.com)](https://vineetjk.me)
 [![Twitter Badge](https://img.shields.io/badge/-@ItsVinjk-1ca0f1?style=flat&labelColor=1ca0f1&logo=twitter&logoColor=white&link=https://twitter.com/ItsVinjk)](https://twitter.com/ItsVinjk)
-[![Instagram Badge](https://img.shields.io/badge/-@vineeet.js-purple?style=flat&logo=instagram&logoColor=white&link=https://instagram.com/vineeet.js/)](https://instagram.com/vineetjk)
+[![Instagram Badge](https://img.shields.io/badge/-@vineeet.js-purple?style=flat&logo=instagram&logoColor=white&link=https://instagram.com/vineeet.js/)](https://instagram.com/vineeet.js)
 [![Gmail Badge](https://img.shields.io/badge/-vineetjk-c14438?style=flat&logo=Gmail&logoColor=white&link=mailto:vinjkcodes@gmail.com)](mailto:vinjkcodes@gmail.com)
 ![](https://komarev.com/ghpvc/?username=vineetjk&style=flat-square&color=blueviolet)
 
