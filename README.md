@@ -9,10 +9,10 @@
 [![Gmail Badge](https://img.shields.io/badge/-vineetjk-c14438?style=flat&logo=Gmail&logoColor=white&link=mailto:vinjkcodes@gmail.com)](mailto:vinjkcodes@gmail.com)
 ![](https://komarev.com/ghpvc/?username=vineetjk&style=flat-square&color=blueviolet)
 
-## I'm an Engineering Student | Full Stack Dev
+## A passionate developer from India
  <img align="right" alt="GIF" src="https://github.com/piyush97/piyush97/blob/master/code.gif?raw=true" width="300" height="220" />
 
-- 🔭 I’m currently making amazing products for [UnicoGraphix](https://unicographix.com) <img src="https://media.giphy.com/media/WUlplcMpOCEmTGBtBW/giphy.gif" width="30">
+- 🔭 I’m currently making amazing products for [Delta Electronics](https://deltaww.com) <img src="https://media.giphy.com/media/WUlplcMpOCEmTGBtBW/giphy.gif" width="30">
 - 😉 Known for converting your markdown to markup!
 - 🌱 Current Tech stack: MERN Stack 🔥
 - 📱 Currently working on Flutter development too
@@ -50,6 +50,10 @@
 [<img align="left" alt="Terminal" width="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/terminal/terminal.png" />][webdev]
 <br/>
 
+--- 
+<p><img align="center" src="https://github-readme-streak-stats.herokuapp.com/?user=vineetjk&" alt="vineetjk" /></p>
+
+  [![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=vineetjk&layout=compact&hide=JupyterNotebook)](https://github.com/vineetjk)
 
 
 ---
@@ -59,12 +63,9 @@
 
 
 
-<details>
-  <summary>:zap: Languages I code</summary>
-  
-  [![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=vineetjk&layout=compact&hide=JupyterNotebook)](https://github.com/vineetjk)
 
-</details>
+
+
 
 <details>
   <summary>:zap: Github Stats</summary>
