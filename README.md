@@ -55,6 +55,8 @@
 
   [![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=vineetjk&layout=compact&hide=JupyterNotebook)](https://github.com/vineetjk)
 
+---
+[![An image of @vineetjk's Holopin badges, which is a link to view their full Holopin profile](https://holopin.me/vineetjk)](https://holopin.io/@vineetjk)
 
 ---
 ### 🎶 What I'm listening to right now!
