@@ -1,5 +1,5 @@
 <h1 align="center">  
- ನಮಸ್ಕಾರ🙏🏻, I'm Vineet J K 
+ ನಮಸ್ಕಾರ🙏🏻, I'm Vineet J K
  </h1>
 
 [![Linkedin Badge](https://img.shields.io/badge/-vineetjk-blue?style=flat&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/vineetjk/)](https://www.linkedin.com/in/vineetjk)
@@ -10,6 +10,7 @@
 ![](https://komarev.com/ghpvc/?username=vineetjk&style=flat-square&color=blueviolet)
 
 ## A passionate developer from India
+
  <img align="right" alt="GIF" src="https://github.com/piyush97/piyush97/blob/master/code.gif?raw=true" width="300" height="220" />
 
 - 🔭 I’m currently making amazing products for [Delta Electronics](https://deltaww.com) <img src="https://media.giphy.com/media/WUlplcMpOCEmTGBtBW/giphy.gif" width="30">
@@ -21,7 +22,7 @@
 - 💬 Ask me about anything, I am happy to help
 - 📫 How to reach me: [@ItsVinjk](https://twitter.com/ItsVinjk)
 
-### Connect with me:
+### Connect with me
 
 [<img align="left" alt="vineetjk.me" width="22px" src="https://raw.githubusercontent.com/iconic/open-iconic/master/svg/globe.svg" />][website]
 
@@ -31,7 +32,7 @@
 
 <br />
 
-### Languages and Tools:
+### Languages and Tools
 
 [<img align="left" alt="Visual Studio Code" width="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/visual-studio-code/visual-studio-code.png" />][webdev]
 [<img align="left" alt="HTML5" width="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/html/html.png" />][webdev]
@@ -50,7 +51,8 @@
 [<img align="left" alt="Terminal" width="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/terminal/terminal.png" />][webdev]
 <br/>
 <br/>
---- 
+---
+
 <p><img align="center" src="https://github-readme-streak-stats.herokuapp.com/?user=vineetjk&" alt="vineetjk" /></p>
 
   [![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=vineetjk&layout=compact&hide=JupyterNotebook)](https://github.com/vineetjk)
@@ -59,15 +61,10 @@
 [![An image of @vineetjk's Holopin badges, which is a link to view their full Holopin profile](https://holopin.me/vineetjk)](https://holopin.io/@vineetjk)
 
 ---
-### 🎶 What I'm listening to right now!
+
+### 🎶 What I'm listening to right now
 
 [![spotify-github-profile](https://spotify-github-profile.vercel.app/api/view?uid=31bc3duqobyj7uw6kewmwiqpfnxi&cover_image=true&theme=default)](https://spotify-github-profile.vercel.app/api/view?uid=31bc3duqobyj7uw6kewmwiqpfnxi&redirect=true)
-
-
-
-
-
-
 
 <details>
   <summary>:zap: Github Stats</summary>
@@ -78,11 +75,10 @@
 
 <details>
  <summary>:sweat_smile: Want to read a tech joke? </summary>
- 
- ![Jokes Card](https://readme-jokes.vercel.app/api)
- 
- </details>
 
+ ![Jokes Card](https://readme-jokes.vercel.app/api)
+
+ </details>
 
 [website]: https://vineetjk.me
 [twitter]: https://twitter.com/ItsVinjk
