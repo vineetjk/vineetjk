@@ -34,13 +34,12 @@
 
 ### Languages and Tools
 
-<p align="center">
+<p align="left">
   <a href="https://skillicons.dev">
-    <img src="https://skillicons.dev/icons?i=androidstudio,arduino,aws,azure,bash,bootstrap,c,cs,css,dart,django,docker,express,figma,firebase,flask,flutter,gcp,git,github,go,grafana,graphql,heroku,html,js,jquery,jest,kotlin,md,matlab,mongodb,mysql,netlify,nextjs,nodejs,ps,postgres,postman,powershell,prisma,prometheus,py,raspberrypi,react,redis,redux,replit,styledcomponents,supabase,svg,tailwind,threejs,visualstudio,vscode,xd" />
+    <img src="https://skillicons.dev/icons?i=androidstudio,arduino,aws,azure,bash,bootstrap,c,cs,css,dart,django,docker,express,figma,firebase,flask,flutter,gcp,git,github,go,grafana,graphql,heroku,html,js,jquery,jest,kotlin,md,matlab,mongodb,mysql,netlify,nextjs,nodejs,ps,postgres,postman,powershell,prisma,prometheus,py,raspberrypi,react,redis,redux,replit,styledcomponents,supabase,svg,tailwind,threejs,visualstudio,vscode,xd&perline=14" />
   </a>
 </p>
 
-<br/>
 <br/>
 
 ---
