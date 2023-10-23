@@ -40,13 +40,12 @@
   </a>
 </p>
 
-<br/>
-
 ---
 
-<p><img align="center" src="https://github-readme-streak-stats.herokuapp.com/?user=vineetjk&" alt="vineetjk" /></p>
-
-  [![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=vineetjk&layout=compact&hide=JupyterNotebook)](https://github.com/vineetjk)
+<p>
+ <img align="center" src="https://github-readme-streak-stats.herokuapp.com/?user=vineetjk" alt="vineetjk" />
+ <img align="center" src="https://github-readme-stats.vercel.app/api/top-langs/?username=vineetjk&layout=compact&hide=JupyterNotebook" alt="vineetjk" />
+</p>
 
 ---
 [![An image of @vineetjk's Holopin badges, which is a link to view their full Holopin profile](https://holopin.me/vineetjk)](https://holopin.io/@vineetjk)
