@@ -1,17 +1,17 @@
 {
   "version": 1,
   "listedOn": "2026-10-06",
-  "price": 5510,
+  "price": 5550,
   "prevClose": 5510,
   "ath": 17470,
   "session": {
     "date": "2026-10-06",
     "status": "open",
     "o": 5510,
-    "h": 5510,
+    "h": 5550,
     "l": 5510,
-    "v": 0,
-    "trades": 0,
+    "v": 5,
+    "trades": 1,
     "flags": []
   },
   "nextOpen": null,
@@ -717,20 +717,48 @@
       "pre": true
     }
   ],
-  "holders": {},
+  "holders": {
+    "Santhu32144": {
+      "id": 124969460,
+      "avatar": "https://avatars.githubusercontent.com/u/124969460?v=4",
+      "cash": 972250,
+      "shares": 5,
+      "cost": 27750,
+      "realized": 0,
+      "dividends": 0,
+      "orders": 1,
+      "joinedAt": "2026-10-06T05:25:55.099Z",
+      "lastOrderAt": "2026-10-06T05:25:55.099Z"
+    }
+  },
   "amo": [],
-  "tape": [],
+  "tape": [
+    {
+      "t": "2026-10-06T05:25:55.099Z",
+      "login": "Santhu32144",
+      "side": "buy",
+      "qty": 5,
+      "px": 5550,
+      "issue": 1
+    }
+  ],
   "news": [
+    {
+      "t": "2026-10-06T05:25:55.099Z",
+      "text": "@Santhu32144 is now the largest shareholder"
+    },
     {
       "t": "2026-10-05T20:36:10.336Z",
       "text": "$VJK lists on Commit Street at ₹55.10, priced off 70 backtested sessions of commits"
     }
   ],
-  "processed": [],
+  "processed": [
+    1
+  ],
   "dividends": {
     "mergedPRs": 21,
     "source": "public",
     "perShare": 0
   },
-  "updatedAt": "2026-10-06T04:37:07.008Z"
+  "updatedAt": "2026-10-06T05:25:55.099Z"
 }
