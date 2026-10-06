@@ -6,8 +6,8 @@ import { svg, n } from './common.js';
 
 const W = 880;
 const H = 96;
-const PITCH = 9; // LED spacing
-const LED = 3.4; // LED radius
+const PITCH = 7; // LED spacing
+const LED = 2.65; // LED radius
 const GOLD = '#ffc23d';
 const GLOW = '#ffad0a';
 const SHINE = '#fff1c2';
@@ -43,8 +43,15 @@ export function sign(v, theme) {
   const x0 = (W - cols.length * PITCH) / 2 + PITCH / 2; // centre of the first LED column
   const y0 = (H - 7 * PITCH) / 2 + PITCH / 2;
 
-  // Unlit LEDs fill the display through a pattern; only lit ones are drawn individually
-  const display = { x: x0 - PITCH / 2 - 2 * PITCH, y: y0 - PITCH / 2 - PITCH, w: (cols.length + 4) * PITCH, h: 9 * PITCH };
+  // Unlit LEDs fill the display through a pattern; only lit ones are drawn individually. The grid
+  // extends past the text so the whole panel is covered in LEDs.
+  const margin = { rows: Math.floor(((H - 16) / PITCH - 7) / 2), cols: 4 };
+  const display = {
+    x: x0 - PITCH / 2 - margin.cols * PITCH,
+    y: y0 - PITCH / 2 - margin.rows * PITCH,
+    w: (cols.length + 2 * margin.cols) * PITCH,
+    h: (7 + 2 * margin.rows) * PITCH,
+  };
   const defs = `<pattern id="leds" patternUnits="userSpaceOnUse" width="${PITCH}" height="${PITCH}" x="${n(x0 - PITCH / 2)}" y="${n(y0 - PITCH / 2)}">`
     + `<circle cx="${PITCH / 2}" cy="${PITCH / 2}" r="${LED}" fill="${OFF}"/></pattern>`;
 
@@ -59,7 +66,7 @@ export function sign(v, theme) {
     const restless = nextRand() < 0.06 ? ` class="f${Math.floor(nextRand() * 3)}"` : '';
     glow.push(`<circle cx="${n(cx)}" cy="${n(cy)}" r="${n(LED * 1.9)}" fill="${GLOW}" opacity=".16"/>`);
     lit.push(`<g${restless}><circle cx="${n(cx)}" cy="${n(cy)}" r="${LED}" fill="${GOLD}"/>`
-      + `<circle cx="${n(cx - 1)}" cy="${n(cy - 1)}" r="${n(LED * 0.4)}" fill="${SHINE}"/></g>`);
+      + `<circle cx="${n(cx - 0.8)}" cy="${n(cy - 0.8)}" r="${n(LED * 0.4)}" fill="${SHINE}"/></g>`);
   }));
 
   const css = [
@@ -72,7 +79,7 @@ export function sign(v, theme) {
 
   const body = [
     `<rect x=".5" y=".5" width="${W - 1}" height="${H - 1}" rx="12" fill="#0d0b07" stroke="${theme.border}"/>`,
-    `<rect x="${n(display.x - 8)}" y="6" width="${n(display.w + 16)}" height="${H - 12}" rx="6" fill="#090704" stroke="#3a2f17"/>`,
+    `<rect x="${n(display.x - 7)}" y="${n(display.y - 5)}" width="${n(display.w + 14)}" height="${n(display.h + 10)}" rx="6" fill="#090704" stroke="#3a2f17"/>`,
     `<rect x="${n(display.x)}" y="${n(display.y)}" width="${n(display.w)}" height="${n(display.h)}" fill="url(#leds)"/>`,
     `<g class="lit">${glow.join('')}${lit.join('')}</g>`,
   ].join('');
