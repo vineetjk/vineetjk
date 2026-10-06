@@ -1,17 +1,17 @@
 {
   "version": 1,
   "listedOn": "2026-10-06",
-  "price": 5550,
+  "price": 5760,
   "prevClose": 5510,
   "ath": 17470,
   "session": {
     "date": "2026-10-06",
     "status": "open",
     "o": 5510,
-    "h": 5550,
+    "h": 5760,
     "l": 5510,
-    "v": 5,
-    "trades": 1,
+    "v": 30,
+    "trades": 2,
     "flags": []
   },
   "nextOpen": null,
@@ -721,18 +721,26 @@
     "Santhu32144": {
       "id": 124969460,
       "avatar": "https://avatars.githubusercontent.com/u/124969460?v=4",
-      "cash": 972250,
-      "shares": 5,
-      "cost": 27750,
+      "cash": 828250,
+      "shares": 30,
+      "cost": 171750,
       "realized": 0,
       "dividends": 0,
-      "orders": 1,
+      "orders": 2,
       "joinedAt": "2026-10-06T05:25:55.099Z",
-      "lastOrderAt": "2026-10-06T05:25:55.099Z"
+      "lastOrderAt": "2026-10-06T06:10:01.739Z"
     }
   },
   "amo": [],
   "tape": [
+    {
+      "t": "2026-10-06T06:10:01.739Z",
+      "login": "Santhu32144",
+      "side": "buy",
+      "qty": 25,
+      "px": 5760,
+      "issue": 3
+    },
     {
       "t": "2026-10-06T05:25:55.099Z",
       "login": "Santhu32144",
@@ -744,6 +752,10 @@
   ],
   "news": [
     {
+      "t": "2026-10-06T06:10:01.739Z",
+      "text": "Whale alert: @Santhu32144 buys 25 $VJK at ₹57.60"
+    },
+    {
       "t": "2026-10-06T05:25:55.099Z",
       "text": "@Santhu32144 is now the largest shareholder"
     },
@@ -754,12 +766,13 @@
   ],
   "processed": [
     1,
-    2
+    2,
+    3
   ],
   "dividends": {
     "mergedPRs": 21,
     "source": "public",
     "perShare": 0
   },
-  "updatedAt": "2026-10-06T05:35:15.970Z"
+  "updatedAt": "2026-10-06T06:10:01.739Z"
 }

@@ -1,8 +1,8 @@
-<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/ticker.b99838cb98.svg"><img src="assets/light/ticker.86060002a0.svg" width="100%" alt="$VJK ₹55.50 +0.73%. market open. @Santhu32144 is now the largest shareholder"></picture></p>
+<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/ticker.17acfa4d00.svg"><img src="assets/light/ticker.dfb9506ec8.svg" width="100%" alt="$VJK ₹57.60 +4.54%. market open. Whale alert: @Santhu32144 buys 25 $VJK at ₹57.60"></picture></p>
 
-<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/quote.97bc5e0a7e.svg"><img src="assets/light/quote.2d8d8a21c7.svg" width="100%" alt="$VJK at ₹55.50, +0.73% today, market open. Fair value from commits: ₹116.20. Circuit band ₹49.60 to ₹60.60."></picture></p>
+<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/quote.73ffc81bf2.svg"><img src="assets/light/quote.4d73824579.svg" width="100%" alt="$VJK at ₹57.60, +4.54% today, market open. Fair value from commits: ₹116.20. Circuit band ₹49.60 to ₹60.60."></picture></p>
 
-<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/chart.16451d1f10.svg"><img src="assets/light/chart.d3a040d8c3.svg" width="100%" alt="Daily candlestick chart of $VJK over 71 sessions from 30 Jun, with the fair value implied by commit activity. Last price 55.50."></picture></p>
+<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/chart.53e43215d2.svg"><img src="assets/light/chart.05f690c710.svg" width="100%" alt="Daily candlestick chart of $VJK over 71 sessions from 30 Jun, with the fair value implied by commit activity. Last price 57.60."></picture></p>
 
 <p align="center"><a href="https://github.com/vineetjk/vineetjk/issues/new?title=BUY%205%20%24VJK&amp;body=Hit%20**Create**%20and%20the%20Commit%20Street%20bot%20fills%20this%20order%20in%20about%20a%20minute.%0A%0A-%20Change%20the%20number%20in%20the%20title%20to%20trade%20anywhere%20from%201%20to%2025%20shares.%0A-%20Outside%20market%20hours%20(09%3A15%E2%80%9315%3A30%20IST%2C%20Mon%E2%80%93Fri)%20the%20order%20waits%20for%20the%20next%20opening%20bell.%20Close%20this%20issue%20to%20cancel%20it.%0A-%20You%20start%20with%20%E2%82%B910%2C000%20of%20play%20money.%20Nothing%20here%20is%20real."><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/buy-5.05b1ce718b.svg"><img src="assets/light/buy-5.7db1f0eeaf.svg" width="180" alt="Buy 5 shares of $VJK"></picture></a>
 <a href="https://github.com/vineetjk/vineetjk/issues/new?title=BUY%2025%20%24VJK&amp;body=Hit%20**Create**%20and%20the%20Commit%20Street%20bot%20fills%20this%20order%20in%20about%20a%20minute.%0A%0A-%20Change%20the%20number%20in%20the%20title%20to%20trade%20anywhere%20from%201%20to%2025%20shares.%0A-%20Outside%20market%20hours%20(09%3A15%E2%80%9315%3A30%20IST%2C%20Mon%E2%80%93Fri)%20the%20order%20waits%20for%20the%20next%20opening%20bell.%20Close%20this%20issue%20to%20cancel%20it.%0A-%20You%20start%20with%20%E2%82%B910%2C000%20of%20play%20money.%20Nothing%20here%20is%20real."><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/buy-25.ab845eda47.svg"><img src="assets/light/buy-25.11f8008336.svg" width="180" alt="Buy 25 shares of $VJK"></picture></a>
@@ -11,7 +11,7 @@
 
 <p align="center"><sub>Buttons open a pre-filled issue. Hit <b>Create</b> to place your order.</sub></p>
 
-<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/book.a6c181a5f1.svg"><img src="assets/light/book.3b61678957.svg" width="100%" alt="Largest shareholder: @Santhu32144 with 5 shares. Last trade: buy 5 at ₹55.50. Market is open. Orders go through within a minute."></picture></p>
+<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/book.c000a40434.svg"><img src="assets/light/book.974ec54cf2.svg" width="100%" alt="Largest shareholder: @Santhu32144 with 30 shares. Last trade: buy 25 at ₹57.60. Market is open. Orders go through within a minute."></picture></p>
 
 <p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/fundamentals.d8c032c501.svg"><img src="assets/light/fundamentals.fb6d04da99.svg" width="100%" alt="Fundamentals from GitHub: 44 contributions in 30 days, 198 in a year, 3-day streak, 51 public repos, 19 stars, 16 followers, 21 merged PRs. Top languages: C, JavaScript, HTML."></picture></p>
 
@@ -26,7 +26,7 @@
 <p>There's no server behind this. A GitHub Action runs at the open, at the close and whenever someone places an order, then redraws these images. Every trade is in <a href="data/market.json">data/market.json</a>.</p>
 </details>
 
-<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/footer.88414d2480.svg"><img src="assets/light/footer.75a36764e4.svg" width="100%" alt="Just a game with fake money. Last updated 06 Oct 2026, 11:05 IST."></picture></p>
+<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/footer.e163cce1f3.svg"><img src="assets/light/footer.f8322619cb.svg" width="100%" alt="Just a game with fake money. Last updated 06 Oct 2026, 11:40 IST."></picture></p>
 
 <p align="center"><a href="https://buymeacoffee.com/vineetjk"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/coffee.7d22460e64.svg"><img src="assets/light/coffee.4e10ab1615.svg" height="44" alt="Buy me a coffee"></picture></a></p>
 
