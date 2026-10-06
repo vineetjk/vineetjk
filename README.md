@@ -1,6 +1,6 @@
-<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/ticker.02eeb1fb7a.svg"><img src="assets/light/ticker.97d2dd7b96.svg" width="100%" alt="$VJK ₹60.60 +9.98%. market closed. Closing bell: $VJK ₹60.60 ▲ +9.98%, fair value ₹119.35"></picture></p>
+<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/ticker.e9f1f42027.svg"><img src="assets/light/ticker.9b41b234c9.svg" width="100%" alt="$VJK ₹60.60 +9.98%. market closed. Closing bell: $VJK ₹60.60 ▲ +9.98%, fair value ₹119.35"></picture></p>
 
-<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/quote.c872ae13ec.svg"><img src="assets/light/quote.58be90b450.svg" width="100%" alt="$VJK at ₹60.60, +9.98% at last close, market closed. Fair value from commits: ₹126.50. Circuit band ₹49.60 to ₹60.60."></picture></p>
+<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/quote.d3c440365a.svg"><img src="assets/light/quote.fab1e3751c.svg" width="100%" alt="$VJK at ₹60.60, +9.98% at last close, market closed. Fair value from commits: ₹127.50. Circuit band ₹49.60 to ₹60.60."></picture></p>
 
 <p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/chart.385af7eb10.svg"><img src="assets/light/chart.f05bfc84f8.svg" width="100%" alt="Daily candlestick chart of $VJK over 71 sessions from 30 Jun, with the fair value implied by commit activity. Last price 60.60."></picture></p>
 
@@ -13,9 +13,9 @@
 
 <p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/book.16e9784188.svg"><img src="assets/light/book.bc7ff2459e.svg" width="100%" alt="Largest shareholder: @Santhu32144 with 30 shares. Last trade: buy 25 at ₹57.60. Market is closed. New orders go through at 09:15 IST on Wed 07 Oct."></picture></p>
 
-<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/fundamentals.b5be118c62.svg"><img src="assets/light/fundamentals.3a66f0caac.svg" width="100%" alt="Fundamentals from GitHub: 54 contributions in 30 days, 208 in a year, 3-day streak, 51 public repos, 19 stars, 16 followers, 21 merged PRs. Top languages: C, JavaScript, HTML."></picture></p>
+<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/fundamentals.c05f300b1b.svg"><img src="assets/light/fundamentals.5701f5f7e8.svg" width="100%" alt="Fundamentals from GitHub: 55 contributions in 30 days, 209 in a year, 3-day streak, 51 public repos, 19 stars, 16 followers, 21 merged PRs. Top languages: C, JavaScript, HTML."></picture></p>
 
-<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/metro.3fd1d73ba8.svg"><img src="assets/light/metro.784b612002.svg" width="100%" alt="Commit Metro: my last 53 weeks of GitHub contributions as one long Namma Metro train on the purple line, one coach per week and one window per day, lit for days I committed. 208 contributions since 05 Oct. The train stops at a station for each of my busiest repos: vfd-explorer, tripppyyy, Alpha-Fin, Vyuha-Network, AllergySafe. Its head pulls up at Commit Street, where $VJK trades at ₹60.60."></picture></p>
+<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/metro.99fc84f668.svg"><img src="assets/light/metro.6921794372.svg" width="100%" alt="Commit Metro: my last 53 weeks of GitHub contributions as one long Namma Metro train on the purple line, one coach per week and one window per day, lit for days I committed. 209 contributions since 05 Oct. It slows under a sign for each of my busiest repos: vfd-explorer, tripppyyy, Alpha-Fin, Vyuha-Network, AllergySafe. Its head pulls up at Commit Street, where $VJK trades at ₹60.60."></picture></p>
 
 <details>
 <summary>How does this work?</summary>
