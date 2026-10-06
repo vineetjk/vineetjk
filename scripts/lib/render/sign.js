@@ -5,7 +5,7 @@
 import { svg, n } from './common.js';
 
 const W = 880;
-const H = 96;
+const H = 80;
 const PITCH = 7; // LED spacing
 const LED = 2.65; // LED radius
 const GOLD = '#ffc23d';
@@ -43,9 +43,14 @@ export function sign(v, theme) {
   const x0 = (W - cols.length * PITCH) / 2 + PITCH / 2; // centre of the first LED column
   const y0 = (H - 7 * PITCH) / 2 + PITCH / 2;
 
-  // Unlit LEDs fill the display through a pattern; only lit ones are drawn individually. The grid
-  // extends past the text so the whole panel is covered in LEDs.
-  const margin = { rows: Math.floor(((H - 16) / PITCH - 7) / 2), cols: 4 };
+  // The display fills the whole board edge to edge: a bezel inset just inside the rounded frame,
+  // and as many whole LED rows and columns as fit inside it, lined up with the text. Unlit LEDs are
+  // a pattern; only lit ones are drawn individually.
+  const bezel = { x: 5, y: 5, w: W - 10, h: H - 10, rx: 7 };
+  const margin = {
+    cols: Math.floor((x0 - PITCH / 2 - bezel.x - 2) / PITCH),
+    rows: Math.floor((y0 - PITCH / 2 - bezel.y - 2) / PITCH),
+  };
   const display = {
     x: x0 - PITCH / 2 - margin.cols * PITCH,
     y: y0 - PITCH / 2 - margin.rows * PITCH,
@@ -79,7 +84,7 @@ export function sign(v, theme) {
 
   const body = [
     `<rect x=".5" y=".5" width="${W - 1}" height="${H - 1}" rx="12" fill="#0d0b07" stroke="${theme.border}"/>`,
-    `<rect x="${n(display.x - 7)}" y="${n(display.y - 5)}" width="${n(display.w + 14)}" height="${n(display.h + 10)}" rx="6" fill="#090704" stroke="#3a2f17"/>`,
+    `<rect x="${bezel.x}" y="${bezel.y}" width="${bezel.w}" height="${bezel.h}" rx="${bezel.rx}" fill="#090704" stroke="#3a2f17"/>`,
     `<rect x="${n(display.x)}" y="${n(display.y)}" width="${n(display.w)}" height="${n(display.h)}" fill="url(#leds)"/>`,
     `<g class="lit">${glow.join('')}${lit.join('')}</g>`,
   ].join('');
