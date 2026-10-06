@@ -26,10 +26,7 @@ export function book(v, theme, avatars) {
 
   // Shareholders
   const top = v.holders.slice(0, ROWS);
-  if (!top.length) {
-    parts.push(text(L, TOP + 20, 'No shareholders yet.', { size: 12, fill: theme.muted }));
-    parts.push(text(L, TOP + 40, 'The first buyer gets the #1 spot.', { size: 12, fill: theme.faint }));
-  }
+  if (!top.length) parts.push(text(L, TOP + 20, 'No shareholders yet.', { size: 12, fill: theme.muted }));
   top.forEach((h, i) => {
     const y = TOP + i * ROW_H;
     const pnl = pct(cfg.startingPaise, netWorth(h, v.price));
@@ -56,11 +53,12 @@ export function book(v, theme, avatars) {
   });
 
   // Footer line: what happens to an order placed right now
+  const opens = `${cfg.market.open} IST on ${fmtDay(v.nextOpen ?? v.state.listedOn)}`;
   const note = v.open
-    ? `Market open: orders fill within a minute. Max ${cfg.maxQty} shares per order.`
+    ? 'Market is open. Orders go through within a minute.'
     : v.amo.length
-      ? `${v.amo.length} order${v.amo.length > 1 ? 's' : ''} queued for the opening bell, ${fmtDay(v.nextOpen)} ${cfg.market.open} IST.`
-      : `Market closed: new orders queue for the opening bell, ${fmtDay(v.nextOpen ?? v.state.listedOn)} ${cfg.market.open} IST.`;
+      ? `Market is closed. ${v.amo.length} order${v.amo.length > 1 ? 's are' : ' is'} waiting for ${opens}.`
+      : `Market is closed. New orders go through at ${opens}.`;
   parts.push(`<line x1="24" y1="${H - 34}" x2="${W - 24}" y2="${H - 34}" stroke="${theme.border}"/>`);
   parts.push(text(24, H - 14, note, { size: 11, fill: theme.muted }));
 

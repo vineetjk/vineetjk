@@ -110,7 +110,7 @@ export function chart(v, theme) {
       parts.push(`<rect x="${n(cx(i) - bodyW / 2)}" y="${n(VY1 - h)}" width="${n(bodyW)}" height="${n(h)}" rx="1" fill="${changeColor(k.c - k.o, theme)}" opacity=".5"/>`);
     });
   } else {
-    parts.push(text((X0 + X1) / 2, (VY0 + VY1) / 2 + 6, 'No trades yet. Be the first: hit BUY below.', { size: 11, fill: theme.faint, anchor: 'middle' }));
+    parts.push(text((X0 + X1) / 2, (VY0 + VY1) / 2 + 6, 'No trades yet.', { size: 11, fill: theme.faint, anchor: 'middle' }));
   }
   parts.push(`<line x1="${X0}" y1="${VY1}" x2="${X1}" y2="${VY1}" stroke="${theme.grid}"/>`);
 
