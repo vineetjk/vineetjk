@@ -60,3 +60,10 @@ test('the metro still renders before any station data exists', () => {
   const state = createState(cfg, stats, ist(MON, '07:00'));
   assert.doesNotMatch(metro(marketView(state, stats, cfg), THEMES.dark), /NaN|undefined/);
 });
+
+test("a repo whose busiest week is this week gets a station before Commit Street", () => {
+  const stats = { ...steadyStats(), stations: [{ name: 'this-week-repo', color: '#555', stars: 0, commits: 9, week: '2026-10-04' }] };
+  const state = createState(cfg, stats, ist(MON, '07:00'));
+  const out = metro(marketView(state, stats, cfg), THEMES.dark);
+  assert.ok(out.indexOf('this-week-repo') > 0 && out.indexOf('this-week-repo') < out.lastIndexOf('COMMIT STREET'));
+});

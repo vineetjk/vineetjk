@@ -27,7 +27,7 @@ const START = 70; // first train's x inside the ride
 const TAIL = 340; // track after the last train, for Commit Street
 const DURATION = 70; // seconds per loop
 const PARALLAX = 0.35;
-const LINE_Y = 294; // route map along the bottom
+const LINE_Y = 287; // route map along the bottom
 
 export const LINES = { purple: '#8b3fa4', green: '#2f9e4f' };
 
@@ -120,7 +120,7 @@ export function metro(v, theme) {
   const coachX = (i, dow) => trainX(i) + dow * (COACH + GAP);
   const stations = (stats.stations ?? [])
     .map((s) => ({ ...s, i: weeks.findIndex((w) => w.start === s.week) }))
-    .filter((s) => s.i >= 0 && s.i < last);
+    .filter((s) => s.i >= 0);
   const rand = seeded(cfg.login);
 
   const defs = [
@@ -173,9 +173,10 @@ export function metro(v, theme) {
   });
 
   const boards = stations.map((s) => station(trainX(s.i) - 10, trainX(s.i) + TRAIN + 10, truncate(s.name, 16), p));
-  const terminusX0 = trainX(last) - 16;
-  const greenX = trainX(last) + TRAIN + 26;
-  const terminusX1 = greenX + 3 * (COACH + GAP) + 40;
+  // Commit Street is the next stop after this week's train, so a station this week still fits
+  const terminusX0 = trainX(last) + TRAIN + 14;
+  const greenX = terminusX0 + 16;
+  const terminusX1 = greenX + 3 * (COACH + GAP) + 26;
   const terminus = station(terminusX0, terminusX1, 'COMMIT STREET', p, { colors: [LINES.purple, LINES.green], lift: 6 });
   ride.push(...boards.map((b) => b.back), terminus.back);
 
@@ -214,21 +215,23 @@ export function metro(v, theme) {
     `<line x1="${sx0}" y1="${LINE_Y}" x2="${W - 44}" y2="${LINE_Y}" stroke="${LINES.purple}" stroke-width="3" stroke-linecap="round"/>`,
     ...weeks.map((_, i) => `<rect x="${n(sx(i) - 2.6)}" y="${LINE_Y - 2.6}" width="5.2" height="5.2" rx="1" fill="${weekTotals[i] ? p.win[lightLevel(weekTotals[i], maxWeek)] : p.tickOff}"/>`),
   ];
-  const labels = [];
-  const fits = (x0, x1) => labels.every(([a, b]) => x1 < a - 6 || x0 > b + 6);
+  // Station names go on the first of two rows below the line where they don't overlap
+  const rows = [[], []];
+  const rowFor = (x0, x1) => rows.findIndex((row) => row.every(([a, b]) => x1 < a - 8 || x0 > b + 8));
   const end = W - 44;
   route.push(`<path d="M${end},${LINE_Y - 5.5} a5.5,5.5 0 0 0 0,11 z" fill="${LINES.purple}"/><path d="M${end},${LINE_Y - 5.5} a5.5,5.5 0 0 1 0,11 z" fill="${LINES.green}"/>`);
   route.push(`<circle cx="${end}" cy="${LINE_Y}" r="5.5" fill="none" stroke="${p.text}" stroke-width="1.2"/>`);
   const endLabel = 'COMMIT STREET';
-  labels.push([W - 24 - width(endLabel, 7.5, 0.6), W - 24]);
-  route.push(text(W - 24, LINE_Y + 17, endLabel, { size: 7.5, weight: 700, fill: p.text, anchor: 'end', ls: 0.6 }));
+  rows[0].push([W - 24 - width(endLabel, 7.5, 0.6), W - 24]);
+  route.push(text(W - 24, LINE_Y + 16, endLabel, { size: 7.5, weight: 700, fill: p.text, anchor: 'end', ls: 0.6 }));
   for (const s of stations) {
     route.push(`<circle cx="${n(sx(s.i))}" cy="${LINE_Y}" r="3.4" fill="#ffffff" stroke="${LINES.purple}" stroke-width="1.8"/>`);
     const name = truncate(s.name, 14);
     const half = width(name, 7.5) / 2;
-    if (fits(sx(s.i) - half, sx(s.i) + half)) {
-      labels.push([sx(s.i) - half, sx(s.i) + half]);
-      route.push(text(sx(s.i), LINE_Y + 17, name, { size: 7.5, fill: p.muted, anchor: 'middle' }));
+    const row = rowFor(sx(s.i) - half, sx(s.i) + half);
+    if (row >= 0) {
+      rows[row].push([sx(s.i) - half, sx(s.i) + half]);
+      route.push(text(sx(s.i), LINE_Y + 16 + row * 11, name, { size: 7.5, fill: p.muted, anchor: 'middle' }));
     }
   }
   // Which week sits in the middle of the view at a given ride offset
