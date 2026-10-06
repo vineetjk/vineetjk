@@ -1,9 +1,17 @@
 name: Commit Street
 
 on:
+  # GitHub can delay or skip scheduled runs, so the bells have backups. Any run catches up on a
+  # missed bell, and a run with nothing to do makes no commit.
   schedule:
     - cron: "47 3 * * 1-5" # 09:17 IST, just after the opening bell
+    - cron: "17,47 4-9 * * 1-5" # every 30 min, 09:47 to 15:17 IST
     - cron: "3 10 * * 1-5" # 15:33 IST, just after the closing bell
+    - cron: "33 10 * * 1-5" # 16:03 IST, backup closing bell
+  # Redraw right away when the market code or config changes. The bot's own pushes never trigger this.
+  push:
+    branches: [master]
+    paths: [".github/workflows/market.yml", "scripts/**", "vjk.config.json"]
   issues:
     types: [opened]
   workflow_dispatch:
