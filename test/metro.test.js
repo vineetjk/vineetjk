@@ -47,7 +47,8 @@ test('the metro draws one coach per day and ends at Commit Street with the live 
   const state = createState(cfg, stats, ist(MON, '07:00'));
   for (const theme of Object.values(THEMES)) {
     const out = metro(marketView(state, stats, cfg), theme);
-    assert.equal(out.match(/<use href="#[cht]\d"/g).length, stats.calendar.length, 'one purple coach per calendar day');
+    assert.equal(out.match(/<use href="#body"/g).length, weeksOf(stats.calendar).length, 'one coach per week');
+    assert.equal(out.match(/<rect class="d"/g).length, stats.calendar.length, 'one window per calendar day');
     assert.match(out, /COMMIT STREET/);
     assert.match(out, /\$VJK ₹100\.00/);
     assert.match(out, /a&lt;b&amp;c/, 'repo names are escaped');

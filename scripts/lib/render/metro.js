@@ -1,14 +1,15 @@
-// Commit Metro: the contribution graph as a Namma Metro line. Each week is a 7-coach train and
-// each coach is a day (Sunday first, like GitHub's grid); lit windows mean commits that day.
-// Stations are my busiest repos, and the line ends at Commit Street, the interchange where the
-// green line carries $VJK.
+// Commit Metro: the contribution graph as one long Namma Metro train. Each coach is a week and
+// its seven windows are the days (Sunday first), so the train is GitHub's grid turned on its
+// side: the oldest week rides at the tail and this week right behind the driver's cab. Stations
+// are my busiest repos, and the line ends at Commit Street, the interchange where the green line
+// carries $VJK.
 //
-// Both the camera and the trains move. The line is stretched longer than the convoy, so the
-// camera overtakes the trains while they run forward along the viaduct. Each station is built
-// exactly where its week's train will be when the camera reaches it: the convoy brakes into the
-// station, the camera zooms in, then it pulls away and the camera zooms out at speed. The
-// journey ends with this week's train in focus next to Commit Street, which is also the resting
-// frame that static renderers and reduced motion see.
+// Both the camera and the train move. The line is stretched longer than the train, so the camera
+// travels along it from tail to head while the train runs forward along the viaduct. Each station
+// is built exactly where its week's coach will be when the camera reaches it: the train brakes
+// into the station, the camera zooms in, then it pulls away and the camera zooms out at speed.
+// The journey ends with this week's coach in focus next to Commit Street, which is also the
+// resting frame that static renderers and reduced motion see.
 
 import { svg, text, width, n, truncate } from './common.js';
 import { rupees, signed, arrow } from '../money.js';
@@ -16,29 +17,28 @@ import { weekStart, weekday, monthName, fmtDate } from '../time.js';
 
 const W = 880;
 const H = 324;
-const COACH = 24;
-const GAP = 0.6;
-const HITCH = 60; // open track between one train and the next
-const TRAIN = 7 * COACH + 6 * GAP;
-const PITCH = TRAIN + HITCH;
+const COACH = 40; // one coach per week
+const GAP = 0.8;
+const PITCH = COACH + GAP;
+const DAY = { x0: 2.2, w: 4, step: 5.3 }; // seven day windows along each coach
 const DX = 6; // oblique depth: right…
 const DY = 5; // …and up
-const CH = 14; // coach side height
-const SNOUT = 5; // how far the bullet nose reaches past the cab coach (front + rear cabs fit in HITCH)
-const SNOUT_FROM = 13; // where along the cab coach the roof starts curving down into the nose
-const TAG_INSET = 6; // month tags sit this far in from a train's tail
-const BEAM = 28; // headlight beam length
+const CH = 18; // coach side height
+const SNOUT = 8; // how far the bullet nose reaches past the cab coach
+const SNOUT_FROM = 22; // where along the cab coach the roof starts curving down into the nose
+const TAG_INSET = 2; // month tags sit this far in from the month's first coach
+const BEAM = 40; // headlight beam length
 const RAIL = 226; // y where the near (purple) track's coaches sit
 const FAR = { dx: 16, dy: 13 }; // offset of the far (green) track
 const DECK = 9; // viaduct front face height
 const GROUND = 266;
 const BELOW = 360; // pillars and buildings run past the frame so zooming out never shows their feet
-const STRETCH = 1.5; // world length / convoy length: how much faster the camera moves than the trains
+const STRETCH = 3; // world length / train length: how much faster the camera moves than the train
 const ANCHOR = 352; // x in the frame where the train in focus sits (and the zoom pivot)
 const PIVOT_Y = RAIL - CH;
 const PARALLAX = 0.3;
 const ZOOM = { rest: 1.18, stop: 1.24, fastest: 0.78 };
-const DURATION = 110; // seconds per loop
+const DURATION = 90; // seconds per loop
 const HOLD = 8; // % of the loop spent resting on today before the journey
 const START = 11.5; // % where the journey begins (after the fade)
 const DWELL = 1.8; // % of the loop each station stop lasts
@@ -113,13 +113,14 @@ function bulletCab(side, { windowFill, stripe, lamp, head = false }, p) {
   const f = ([x, y]) => `${n(x)},${n(y)}`;
   // The nose profile: flat roof until SNOUT_FROM, then one cubic curve down to the snout tip
   const roofEnd = at(SNOUT_FROM, top);
-  const c1 = at(SNOUT_FROM + 6, top);
-  const c2 = at(COACH + SNOUT + 0.5, -9.1);
+  const c1 = at(SNOUT_FROM + 8, top);
+  const c2 = at(COACH + SNOUT + 0.5, top * 0.52);
   const tip = at(COACH + SNOUT, -2.6);
   const chin = at(COACH - 2, 0);
   const chinCtrl = at(COACH + SNOUT - 1, 0);
   const curveAt = (t) => [0, 1].map((k) => (1 - t) ** 3 * roofEnd[k] + 3 * (1 - t) ** 2 * t * c1[k] + 3 * (1 - t) * t ** 2 * c2[k] + t ** 3 * tip[k]);
 
+  const d = side === 'right' ? 1 : -1; // direction the nose points
   const parts = [];
   // Nose skin: the curve swept back into depth
   parts.push(`<path d="M${f(roofEnd)} C${f(c1)} ${f(c2)} ${f(tip)} L${f(lift(tip))} C${f(lift(c2))} ${f(lift(c1))} ${f(lift(roofEnd))} Z" fill="${p.nose}"/>`);
@@ -135,17 +136,20 @@ function bulletCab(side, { windowFill, stripe, lamp, head = false }, p) {
   }
   // Side of the cab, following the nose down to its chin
   parts.push(`<path d="M${f(at(0, 0))} L${f(chin)} Q${f(chinCtrl)} ${f(tip)} C${f(c2)} ${f(c1)} ${f(roofEnd)} L${f(at(0, top))} Z" fill="${p.body}"/>`);
-  // Driver's window, raked along the curve
-  parts.push(`<path d="M${f(at(SNOUT_FROM - 1, top + 2.2))} L${f(at(SNOUT_FROM + 3, top + 2.2))} Q${f(at(SNOUT_FROM + 8.5, top + 3))} ${f(at(SNOUT_FROM + 11, top + 7.6))} L${f(at(SNOUT_FROM - 1, top + 7.6))} Z" fill="${p.glass}"/>`);
-  // Two passenger windows lit for the day's commits
-  for (const x of [1.6, 7.2]) {
+  // Driver's window, raked along the curve of the nose
+  const [ax] = at(SNOUT_FROM - 1.5, 0);
+  const [bx, by] = curveAt(0.1);
+  const [cx, cy] = curveAt(0.45);
+  const low = top + 0.5 * CH;
+  parts.push(`<polygon points="${pts([ax, top + 3], [bx, by + 3], [cx - 1.5 * d, cy + 1.5], [cx - 1.5 * d, low], [ax, low])}" fill="${p.glass}"/>`);
+  // Passenger windows behind the driver
+  for (const x of [1.6, 7.2, 12.8]) {
     const [wx] = at(side === 'right' ? x : x + 4.6, 0);
-    parts.push(`<rect x="${n(wx)}" y="${top + 2.4}" width="4.6" height="5.4" rx=".7" fill="${windowFill}"/>`);
+    parts.push(`<rect x="${n(wx)}" y="${top + 3}" width="4.6" height="7" rx=".7" fill="${windowFill}"/>`);
   }
   // Line stripe, tapering into the tip
   parts.push(`<polygon points="${pts(at(0, -4.2), at(COACH - 2, -4.2), at(COACH + SNOUT - 1.5, -3.4), at(COACH + SNOUT - 1.5, -2.7), at(COACH - 2, -2.2), at(0, -2.2))}" fill="${stripe}"/>`);
   if (head) {
-    const d = side === 'right' ? 1 : -1; // direction of travel
     // A small horn on the roof, just behind where the nose starts curving down
     const [hx, roof] = lift(at(SNOUT_FROM - 3, top), 0.5);
     const hy = roof - 2.1;
@@ -153,7 +157,7 @@ function bulletCab(side, { windowFill, stripe, lamp, head = false }, p) {
     parts.push(`<polygon points="${pts([hx - 2.2 * d, hy - 0.3], [hx + d, hy - 0.45], [hx + 2.6 * d, hy - 1.4], [hx + 2.6 * d, hy + 1.4], [hx + d, hy + 0.45], [hx - 2.2 * d, hy + 0.3])}" fill="${p.horn}"/>`);
     parts.push(`<ellipse cx="${n(hx + 2.6 * d)}" cy="${n(hy)}" rx=".4" ry="1.3" fill="${p.glass}"/>`);
     // Two headlights, on the near and far side of the nose, each throwing a beam down the track
-    const near = at(COACH + SNOUT - 1.8, -4.4);
+    const near = at(COACH + SNOUT - 2.4, -4.6);
     const lamps = [lift(near, 0.75), near];
     for (const [lx, ly] of lamps) {
       parts.push(`<polygon points="${pts([lx, ly - 0.6], [lx + BEAM * d, ly - 3.4], [lx + BEAM * d, ly + 2.4], [lx, ly + 0.6])}" fill="url(#beam-${side})"/>`);
@@ -166,6 +170,8 @@ function bulletCab(side, { windowFill, stripe, lamp, head = false }, p) {
   return parts;
 }
 
+const dayWindow = (x, fill) => `<rect x="${n(x)}" y="${-CH + 3}" width="${DAY.w}" height="7" rx=".6" fill="${fill}"/>`;
+
 /**
  * One coach, origin at the bottom-left of its side face, standing on the rail.
  * `cab` puts a driver's cab on the 'left' or 'right' end.
@@ -173,7 +179,6 @@ function bulletCab(side, { windowFill, stripe, lamp, head = false }, p) {
 function coach(id, { windowFill, stripe, cab = null, lamp = null, head = false }, p) {
   const top = -CH;
   const roofTop = -CH - DY;
-  const win = (x) => `<rect x="${x}" y="${top + 2.4}" width="5.4" height="5.4" rx=".7" fill="${windowFill}"/>`;
   const parts = [];
   if (cab) {
     parts.push(...bulletCab(cab, { windowFill, stripe, lamp, head }, p));
@@ -181,7 +186,7 @@ function coach(id, { windowFill, stripe, cab = null, lamp = null, head = false }
     parts.push(`<polygon points="${pts([0, top], [COACH, top], [COACH + DX, roofTop], [DX, roofTop])}" fill="${p.roof}"/>`);
     parts.push(`<polygon points="${pts([COACH, 0], [COACH, top], [COACH + DX, roofTop], [COACH + DX, -DY])}" fill="${p.end}"/>`);
     parts.push(`<rect y="${top}" width="${COACH}" height="${CH}" fill="${p.body}"/>`);
-    parts.push(win(2.4), win(9.3), win(16.2));
+    if (windowFill) parts.push(...Array.from({ length: 7 }, (_, k) => dayWindow(DAY.x0 + k * DAY.step, windowFill)));
     parts.push(`<rect y="-4.2" width="${COACH}" height="2" fill="${stripe}"/>`);
   }
   return `<g id="${id}">${parts.join('')}</g>`;
@@ -226,13 +231,14 @@ export function metro(v, theme) {
   }
   const stations = [...byWeek].sort((a, b) => a[0] - b[0]).map(([i, names]) => ({ i, names }));
 
-  // Coordinates. The convoy has the oldest train at 0 and runs to the right with this week's train
-  // at the front. `world(u)` is where the camera looks when week u is in focus; since it grows
-  // STRETCH times faster than the convoy, the camera overtakes the trains as they run.
-  const coachX = (i, dow) => i * PITCH + dow * (COACH + GAP);
-  const centre = (u) => u * PITCH + TRAIN / 2;
+  // Coordinates. In the train's own frame the tail cab sits at 0, week i's coach at (i + 1) * PITCH
+  // and the head cab after the last week; the train runs to the right. `world(u)` is where the
+  // camera looks when week u is in focus; since it grows STRETCH times faster than the train
+  // moves, the camera travels along the train from tail to head while it runs.
+  const coachX = (i) => (i + 1) * PITCH;
+  const centre = (u) => coachX(u) + COACH / 2;
   const world = (u) => STRETCH * centre(u) + W;
-  const runAt = (u) => world(u) - centre(u); // convoy offset along the world
+  const runAt = (u) => world(u) - centre(u); // train offset along the world
   const panAt = (u) => ANCHOR - world(u); // world offset in the frame
   const xEnd = world(last) + 2 * W;
 
@@ -243,11 +249,9 @@ export function metro(v, theme) {
     `<clipPath id="frame"><rect width="${W}" height="${H}" rx="12"/></clipPath>`,
     ...['right', 'left'].map((side) => `<linearGradient id="beam-${side}"${side === 'left' ? ' x1="1" x2="0"' : ''}>`
       + `<stop offset="0" stop-color="#fff3b0" stop-opacity="${p.beam}"/><stop offset="1" stop-color="#fff3b0" stop-opacity="0"/></linearGradient>`),
-    ...p.win.flatMap((fill, lvl) => [
-      coach(`c${lvl}`, { ...purple, windowFill: fill }, p),
-      coach(`h${lvl}`, { ...purple, windowFill: fill, cab: 'right', lamp: '#fff3b0', head: true }, p),
-      coach(`t${lvl}`, { ...purple, windowFill: fill, cab: 'left', lamp: '#ff5a5a' }, p),
-    ]),
+    coach('body', purple, p),
+    coach('head', { ...purple, windowFill: p.win[1], cab: 'right', lamp: '#fff3b0', head: true }, p),
+    coach('tail', { ...purple, windowFill: p.win[1], cab: 'left', lamp: '#ff5a5a' }, p),
     coach('gl', { ...green, cab: 'left', lamp: '#fff3b0', head: true }, p),
     coach('gm', green, p),
     coach('gr', { ...green, cab: 'right', lamp: '#ff5a5a' }, p),
@@ -290,33 +294,39 @@ export function metro(v, theme) {
     `<rect y="${RAIL}" width="${n(xEnd)}" height="1.2" fill="${p.deckEdge}"/>`,
   ];
 
-  // Repo stations, each where its week's train will be when the camera arrives
-  const boards = stations.map((s) => station(world(s.i) - TRAIN / 2 - 12, world(s.i) + TRAIN / 2 + 14, s.names, p));
+  // Repo stations, each where its week's coach will be when the camera arrives
+  const boards = stations.map((s) => station(world(s.i) - COACH * 1.15, world(s.i) + COACH * 1.15 + DX, s.names, p));
   line.push(...boards.map((b) => b.back));
 
-  // Commit Street, just past this week's train: a canopy over both tracks and the green line train
-  const cs = { x0: world(last) + TRAIN / 2 + 40, x1: world(last) + TRAIN / 2 + 330 };
+  // Commit Street, just past the head of the train: a canopy over both tracks and the green line train
+  const cs = { x0: world(last) + COACH * 1.5 + SNOUT + 30, x1: world(last) + COACH * 1.5 + SNOUT + 330 };
   const canopyBottom = RAIL - FAR.dy - CH - DY - 18;
   const depth = FAR.dx + DX;
   const rise = FAR.dy + DY + 2;
   line.push(...[cs.x0 + 3, cs.x1 - 6].map((x) => `<rect x="${n(x)}" y="${canopyBottom}" width="2.4" height="${RAIL - DY - canopyBottom}" fill="${p.post}"/>`));
-  const greenX = cs.x1 - 3 * (COACH + GAP) - 60 + FAR.dx;
-  ['gl', 'gm', 'gr'].forEach((id, k) => line.push(`<use href="#${id}" x="${n(greenX + k * (COACH + GAP))}" y="${RAIL - FAR.dy}"/>`));
+  const greenX = cs.x1 - 3 * PITCH - 40 + FAR.dx;
+  ['gl', 'gm', 'gr'].forEach((id, k) => line.push(`<use href="#${id}" x="${n(greenX + k * PITCH)}" y="${RAIL - FAR.dy}"/>`));
 
-  // The convoy: every week's train, nose to tail
-  const convoy = [];
+  // The train: tail cab, one coach per week with a window per day, then the driver's cab
+  const train = [`<use href="#tail" x="0" y="${RAIL}"/>`];
   weeks.forEach((w, i) => {
-    w.days.forEach((day, k) => {
-      const kind = k === w.days.length - 1 ? 'h' : k === 0 ? 't' : 'c';
-      if (day.d === today) {
-        convoy.push(`<rect class="pulse" x="${n(coachX(i, day.dow) - 2)}" y="${RAIL - CH - DY - 2}" width="${COACH + DX + 4}" height="${CH + DY + 3}" rx="2" fill="${p.win[4]}" opacity=".35"/>`);
+    const x = coachX(i);
+    train.push(`<use href="#body" x="${n(x)}" y="${RAIL}"/>`);
+    for (let dow = 0; dow < 7; dow++) {
+      const day = w.days.find((dd) => dd.dow === dow);
+      const wx = x + DAY.x0 + dow * DAY.step;
+      if (day?.d === today) {
+        train.push(`<rect class="pulse" x="${n(wx - 1.2)}" y="${RAIL - CH + 1.8}" width="${DAY.w + 2.4}" height="9.4" rx="1.2" fill="${p.win[4]}" opacity=".55"/>`);
       }
-      convoy.push(`<use href="#${kind}${lightLevel(day.c, maxDay)}" x="${n(coachX(i, day.dow))}" y="${RAIL}"/>`);
-    });
+      // Days before the calendar starts or after today stay dark; class "d" marks real days
+      const fill = day ? p.win[lightLevel(day.c, maxDay)] : p.win[0];
+      train.push(`<rect${day ? ' class="d"' : ''} x="${n(wx)}" y="${RAIL - CH + 3}" width="${DAY.w}" height="7" rx=".6" fill="${fill}"/>`);
+    }
     if (i === 0 || w.start.slice(0, 7) !== weeks[i - 1].start.slice(0, 7)) {
-      convoy.push(text(coachX(i, w.days[0].dow) + TAG_INSET, RAIL - CH - DY - 4, monthName(w.start).toUpperCase(), { size: 7, weight: 700, fill: p.muted, ls: 1 }));
+      train.push(text(x + TAG_INSET, RAIL - CH - DY - 4, monthName(w.start).toUpperCase(), { size: 7, weight: 700, fill: p.muted, ls: 1 }));
     }
   });
+  train.push(`<use href="#head" x="${n(coachX(weeks.length))}" y="${RAIL}"/>`);
 
   // Canopies, signs and the LED price board go over the trains
   const signText = 'COMMIT STREET';
@@ -376,7 +386,7 @@ export function metro(v, theme) {
     `<rect x="${n(pillX)}" y="16" width="${n(width('PURPLE LINE', 9, 0.8) + 16)}" height="16" rx="8" fill="${LINES.purple}"/>`,
     text(pillX + 8, 27.3, 'PURPLE LINE', { size: 9, weight: 700, fill: '#ffffff', ls: 0.8 }),
     text(W - 24, 28, `${total} CONTRIBUTIONS · ${weeks.length} WEEKS`, { size: 10, weight: 700, fill: p.muted, anchor: 'end', ls: 1 }),
-    text(24, 45, 'Each train is a week, each coach a day. Lit windows are commits.', { size: 9, fill: p.muted }),
+    text(24, 45, 'One coach per week, one window per day. Lit windows are commits.', { size: 9, fill: p.muted }),
   ];
   const sq = W - 24 - width('MANY', 7, 0.6) - 6 - 42;
   for (let lvl = 0; lvl < 5; lvl++) header.push(`<rect x="${sq + lvl * 9}" y="38.5" width="6" height="7" rx="1" fill="${p.win[lvl]}"/>`);
@@ -429,7 +439,7 @@ export function metro(v, theme) {
     ...sky,
     `<g class="fade"><g class="zoom">`,
     `<g class="city">${city.join('')}</g>`,
-    `<g class="pan">${line.join('')}<g class="run">${convoy.join('')}</g>${over.join('')}</g>`,
+    `<g class="pan">${line.join('')}<g class="run">${train.join('')}</g>${over.join('')}</g>`,
     '</g></g>',
     ...route,
     ...header,
@@ -438,8 +448,8 @@ export function metro(v, theme) {
   ].join('');
 
   const repos = stations.flatMap((s) => s.names).join(', ');
-  const title = `Commit Metro: my last ${weeks.length} weeks of GitHub contributions as Namma Metro trains on the purple line, one train per week and one coach per day, with lit windows for days I committed. ${total} contributions since ${fmtDate(weeks[0]?.start ?? today)}.`
-    + (repos ? ` The trains stop at a station for each of my busiest repos: ${repos}.` : '')
-    + ` This week's train ends next to Commit Street, where $${cfg.symbol} trades at ${rupees(v.price)}.`;
+  const title = `Commit Metro: my last ${weeks.length} weeks of GitHub contributions as one long Namma Metro train on the purple line, one coach per week and one window per day, lit for days I committed. ${total} contributions since ${fmtDate(weeks[0]?.start ?? today)}.`
+    + (repos ? ` The train stops at a station for each of my busiest repos: ${repos}.` : '')
+    + ` Its head pulls up at Commit Street, where $${cfg.symbol} trades at ${rupees(v.price)}.`;
   return svg({ w: W, h: H, theme, css, defs, body, title });
 }
