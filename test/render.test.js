@@ -11,7 +11,7 @@ const stats = steadyStats();
 const noAvatars = { owner: null, users: {} };
 
 function assertCleanSvgs(files) {
-  assert.equal(files.length, 2 * (7 + 4 + (cfg.buyMeACoffee ? 1 : 0)), 'seven panels, four order buttons and the coffee button per theme');
+  assert.equal(files.length, 2 * (8 + 4 + (cfg.buyMeACoffee ? 1 : 0)), 'eight panels, four order buttons and the coffee button per theme');
   for (const f of files) {
     assert.match(f.content, /^<svg [^>]*viewBox="0 0 \d+ \d+"/, f.path);
     assert.ok(f.content.endsWith('</svg>'), f.path);

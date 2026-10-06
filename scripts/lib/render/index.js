@@ -6,9 +6,10 @@ import { book } from './book.js';
 import { fundamentals } from './fundamentals.js';
 import { footer } from './footer.js';
 import { metro } from './metro.js';
+import { sign } from './sign.js';
 import { BUTTONS, button, coffeeButton } from './buttons.js';
 
-export const PANELS = { ticker, quote, chart, book, fundamentals, metro, footer };
+export const PANELS = { metro, sign, ticker, quote, chart, book, fundamentals, footer };
 
 /** Every SVG for both themes, as { path, content } relative to the repo root. */
 export function renderAll(view, avatars) {

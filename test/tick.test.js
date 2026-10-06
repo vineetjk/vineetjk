@@ -42,7 +42,7 @@ test('tick: list, queue an AMO before the bell, fill it at the open, then go qui
   assert.deepEqual(first.receipts.map((r) => [r.issue, r.close]), [[7, false]], 'queued orders stay open; non-orders are ignored');
   assert.match(first.receipts[0].body, /Queued/);
   assert.match(readFileSync(join(env.root, 'README.md'), 'utf8'), /assets\/dark\/quote\.[0-9a-f]{10}\.svg/);
-  assert.equal(readdirSync(join(env.root, 'assets/dark')).length, 11 + (cfg.buyMeACoffee ? 1 : 0));
+  assert.equal(readdirSync(join(env.root, 'assets/dark')).length, 12 + (cfg.buyMeACoffee ? 1 : 0));
 
   const second = run(env, `${MON}T09:17:00+05:30`, [buy, noise]);
   assert.match(second.message, /opening bell, 1 fill/);
@@ -50,7 +50,7 @@ test('tick: list, queue an AMO before the bell, fill it at the open, then go qui
   assert.deepEqual(second.receipts.map((r) => [r.issue, r.close]), [[7, true]], 'one closing receipt, no duplicate close');
   assert.match(second.receipts[0].body, /Filled/);
   // Old image versions are cleaned up, and every image the README links to exists.
-  assert.equal(readdirSync(join(env.root, 'assets/dark')).length, 11 + (cfg.buyMeACoffee ? 1 : 0));
+  assert.equal(readdirSync(join(env.root, 'assets/dark')).length, 12 + (cfg.buyMeACoffee ? 1 : 0));
   for (const [link] of readFileSync(join(env.root, 'README.md'), 'utf8').matchAll(/assets\/(dark|light)\/[\w.-]+\.svg/g)) {
     assert.ok(existsSync(join(env.root, link)), `${link} exists`);
   }

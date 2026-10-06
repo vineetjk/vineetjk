@@ -38,12 +38,13 @@ const STRETCH = 3; // world length / train length: how much faster the camera mo
 const ANCHOR = 352; // x in the frame where the train in focus sits (and the zoom pivot)
 const PIVOT_Y = RAIL - CH;
 const PARALLAX = 0.3;
-const ZOOM = { rest: 1.18, stop: 1.24, fastest: 0.78 };
+const ZOOM = { rest: 1.18, start: 1.24, pass: 1.1, fastest: 0.78 };
 const DURATION = 90; // seconds per loop
 const HOLD = 8; // % of the loop spent resting on today before the journey
 const START = 11.5; // % where the journey begins (after the fade)
-const DWELL = 1.8; // % of the loop each slow pass under a repo gantry lasts
-const CRAWL = 0.35; // weeks the train creeps forward during that slow pass
+const PASS = 2.2; // % of the loop each slower pass under a repo gantry lasts
+const SLOW = 0.45; // speed under a gantry, as a share of the cruising average
+const PEAK = 1.6; // top speed between gantries, as a share of the cruising average
 const LINE_Y = 290; // route map along the bottom
 
 export const LINES = { purple: '#8b3fa4', green: '#2f9e4f' };
@@ -71,9 +72,13 @@ const PALETTES = {
   },
 };
 
-// Accelerate out of a stop, then brake into the next one. The two curves meet at the same slope,
-// so the speed is continuous at the midpoint, which is also where the camera is zoomed out most.
-const EASE = { pullAway: 'cubic-bezier(.5,0,.9,.5)', brake: 'cubic-bezier(.1,.5,.5,1)', still: 'linear' };
+// Each hop between gantries speeds up from `from` to PEAK, then slows to `to` (speeds relative to
+// the hop's average). Hops share one average speed, so the curves join without a jolt.
+const EASE = {
+  speedUp: (from) => `cubic-bezier(.3,${n(0.3 * from)},.7,${n(1 - 0.3 * PEAK)})`,
+  slowDown: (to) => `cubic-bezier(.3,${n(0.3 * PEAK)},.7,${n(1 - 0.3 * to)})`,
+  steady: 'linear',
+};
 
 /** Calendar days grouped into Sunday-started weeks, oldest first. */
 export function weeksOf(calendar) {
@@ -421,34 +426,40 @@ export function metro(v, theme) {
   header.push(text(sq - 5, 45, 'NONE', { size: 7, fill: p.muted, anchor: 'end', ls: 0.6 }));
   header.push(text(W - 24, 45, 'MANY', { size: 7, fill: p.muted, anchor: 'end', ls: 0.6 }));
 
-  // The journey as keyframes: rest on today, fade, start a year back, then for each repo gantry
-  // speed up (zooming out), slow down (zooming back in), creep that week's coach under the sign,
-  // and finally brake to a stop at Commit Street.
+  // The journey as keyframes: rest on today, fade, start a year back, then run the whole line.
+  // Between gantries the train speeds up (camera zooms out); approaching one it eases down to SLOW
+  // and passes under the sign at that steady pace (camera zooms in a little), never stopping.
+  // The only stop is the final one, at Commit Street.
   const frames = [];
-  const add = (pct, u, zoom, ease = EASE.still) => frames.push({ pct, u, zoom, ease });
+  const add = (pct, u, zoom, ease = EASE.steady) => frames.push({ pct, u, zoom, ease });
   add(0, last, ZOOM.rest);
   add(HOLD, last, ZOOM.rest);
   add(9.59, last, ZOOM.rest);
-  add(9.6, 0, ZOOM.stop);
-  add(START, 0, ZOOM.stop, EASE.pullAway);
-  const stops = [...new Set([...stations.map((s) => s.i).filter((i) => i > 0 && i < last), last])].sort((a, b) => a - b);
-  const final = stops.length - 1;
-  const hops = stops.map((stop, k) => [k ? stops[k - 1] + CRAWL / 2 : 0, k === final ? stop : stop - CRAWL / 2]);
-  const weights = hops.map(([from, to]) => Math.max(to - from, 1.5) ** 0.75);
-  const unit = (100 - START - DWELL * (stops.length - 1)) / weights.reduce((sum, w) => sum + w, 0);
+  add(9.6, 0, ZOOM.start);
+  add(START, 0, ZOOM.start);
+  const gantryWeeks = [...new Set(stations.map((s) => s.i).filter((i) => i > 0 && i < last))].sort((a, b) => a - b);
+  // Hop time is proportional to distance, so every hop has the same average speed. The distance
+  // covered during a pass is chosen so its steady speed is exactly SLOW times that average.
+  const hopTime = 100 - START - PASS * gantryWeeks.length;
+  const passWeeks = (SLOW * PASS * last) / (hopTime + SLOW * PASS * gantryWeeks.length);
+  const hopWeeks = last - passWeeks * gantryWeeks.length;
+  const marks = [0, ...gantryWeeks.flatMap((i) => [i - passWeeks / 2, i + passWeeks / 2]), last];
   let t = START;
-  hops.forEach(([from, to], k) => {
-    const span = weights[k] * unit;
-    add(t + span / 2, (from + to) / 2, Math.max(ZOOM.fastest, 1 - 0.045 * (to - from)), EASE.brake);
+  for (let k = 0; k <= gantryWeeks.length; k++) {
+    const [from, to] = [marks[2 * k], marks[2 * k + 1]];
+    const span = ((to - from) / hopWeeks) * hopTime;
+    const final = k === gantryWeeks.length;
+    frames.at(-1).ease = EASE.speedUp(k === 0 ? 0 : SLOW);
+    add(t + span / 2, (from + to) / 2, Math.max(ZOOM.fastest, 1 - 0.045 * (to - from)), EASE.slowDown(final ? 0 : SLOW));
     t += span;
-    if (k === final) {
+    if (final) {
       add(100, to, ZOOM.rest);
     } else {
-      add(t, to, ZOOM.stop);
-      t += DWELL;
-      add(t, to + CRAWL, ZOOM.stop, EASE.pullAway);
+      add(t, to, ZOOM.pass);
+      t += PASS;
+      add(t, marks[2 * k + 2], ZOOM.pass);
     }
-  });
+  }
   const keyframes = (name, value) => `@keyframes ${name}{${frames.map((f) => `${f.pct.toFixed(3)}%{transform:${value(f)};animation-timing-function:${f.ease}}`).join('')}}`;
   const animate = (cls, value) => {
     const rest = value({ u: last, zoom: ZOOM.rest });

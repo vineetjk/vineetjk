@@ -1,3 +1,7 @@
+<p align="center">{{panel:metro}}</p>
+
+<p align="center">{{panel:sign}}</p>
+
 <p align="center">{{panel:ticker}}</p>
 
 <p align="center">{{panel:quote}}</p>
@@ -11,8 +15,6 @@
 <p align="center">{{panel:book}}</p>
 
 <p align="center">{{panel:fundamentals}}</p>
-
-<p align="center">{{panel:metro}}</p>
 
 <details>
 <summary>How does this work?</summary>

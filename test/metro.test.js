@@ -88,9 +88,9 @@ test('the journey keyframes run forward in time and crawl past each repo gantry'
   // Once the journey starts the camera only ever moves forward along the line
   const pans = frames.filter(([pct]) => pct >= 11.5).map(([, transform]) => Number(/-?[\d.]+/.exec(transform)[0]));
   for (let k = 1; k < pans.length; k++) assert.ok(pans[k] < pans[k - 1], 'the train never stops before Commit Street');
-  // Each gantry gets a zoomed-in slow pass: two frames at the stop zoom, around that week
+  // Each gantry gets a slower, slightly zoomed-in pass: two frames at the pass zoom, around that week
   const zoom = /@keyframes zoom\{((?:[\d.]+%\{[^}]*\})+)\}/.exec(out)[1];
-  const slow = [...zoom.matchAll(/([\d.]+)%\{transform:scale\(([\d.]+)\)/g)].filter(([, pct, z]) => +pct > 11.5 && +pct < 100 && +z === 1.24);
+  const slow = [...zoom.matchAll(/([\d.]+)%\{transform:scale\(([\d.]+)\)/g)].filter(([, pct, z]) => +pct > 11.5 && +pct < 100 && +z === 1.1);
   assert.equal(slow.length, 4);
   assert.match(out, /spring/);
   assert.match(out, /summer/);
