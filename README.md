@@ -1,6 +1,6 @@
-<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/ticker.17acfa4d00.svg"><img src="assets/light/ticker.dfb9506ec8.svg" width="100%" alt="$VJK ₹57.60 +4.54%. market open. Whale alert: @Santhu32144 buys 25 $VJK at ₹57.60"></picture></p>
+<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/ticker.2b7d509e32.svg"><img src="assets/light/ticker.749cd5c5e3.svg" width="100%" alt="$VJK ₹57.60 +4.54%. market open. Whale alert: @Santhu32144 buys 25 $VJK at ₹57.60"></picture></p>
 
-<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/quote.73ffc81bf2.svg"><img src="assets/light/quote.4d73824579.svg" width="100%" alt="$VJK at ₹57.60, +4.54% today, market open. Fair value from commits: ₹116.20. Circuit band ₹49.60 to ₹60.60."></picture></p>
+<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/quote.07562f4c76.svg"><img src="assets/light/quote.232190e562.svg" width="100%" alt="$VJK at ₹57.60, +4.54% today, market open. Fair value from commits: ₹117.25. Circuit band ₹49.60 to ₹60.60."></picture></p>
 
 <p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/chart.53e43215d2.svg"><img src="assets/light/chart.05f690c710.svg" width="100%" alt="Daily candlestick chart of $VJK over 71 sessions from 30 Jun, with the fair value implied by commit activity. Last price 57.60."></picture></p>
 
@@ -13,7 +13,7 @@
 
 <p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/book.c000a40434.svg"><img src="assets/light/book.974ec54cf2.svg" width="100%" alt="Largest shareholder: @Santhu32144 with 30 shares. Last trade: buy 25 at ₹57.60. Market is open. Orders go through within a minute."></picture></p>
 
-<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/fundamentals.d8c032c501.svg"><img src="assets/light/fundamentals.fb6d04da99.svg" width="100%" alt="Fundamentals from GitHub: 44 contributions in 30 days, 198 in a year, 3-day streak, 51 public repos, 19 stars, 16 followers, 21 merged PRs. Top languages: C, JavaScript, HTML."></picture></p>
+<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/fundamentals.2d276945dc.svg"><img src="assets/light/fundamentals.f7f15f5625.svg" width="100%" alt="Fundamentals from GitHub: 45 contributions in 30 days, 199 in a year, 3-day streak, 51 public repos, 19 stars, 16 followers, 21 merged PRs. Top languages: C, JavaScript, HTML."></picture></p>
 
 <details>
 <summary>How does this work?</summary>
@@ -22,7 +22,7 @@
 <p>During the day you move it. Every share bought pushes it up 0.15%, every share sold pushes it down, and you pay the price after your own push. So buying and selling straight away loses you a little.</p>
 <p>It can't go more than 10% above or below the previous close. Once it hits that limit, buying (or selling, if it's falling) stops until the next day.</p>
 <p>The market is open 09:15 to 15:30 IST, Monday to Friday. Orders placed outside those hours wait for the next morning. Close your issue if you change your mind.</p>
-<p>You start with ₹10,000 of play money. Up to 25 shares per order, one order every 10 minutes. Whenever one of my pull requests gets merged, everyone holding shares gets ₹2 per share. I can't buy my own stock.</p>
+<p>You start with ₹10,000 of play money. Up to 25 shares per order. Whenever one of my pull requests gets merged, everyone holding shares gets ₹2 per share. I can't buy my own stock.</p>
 <p>There's no server behind this. A GitHub Action runs at the open, at the close and whenever someone places an order, then redraws these images. Every trade is in <a href="data/market.json">data/market.json</a>.</p>
 </details>
 
