@@ -13,9 +13,9 @@
 
 <p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/book.16e9784188.svg"><img src="assets/light/book.bc7ff2459e.svg" width="100%" alt="Largest shareholder: @Santhu32144 with 30 shares. Last trade: buy 25 at ₹57.60. Market is closed. New orders go through at 09:15 IST on Wed 07 Oct."></picture></p>
 
-<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/fundamentals.c8e500babf.svg"><img src="assets/light/fundamentals.25047bfda5.svg" width="100%" alt="Fundamentals from GitHub: 47 contributions in 30 days, 201 in a year, 3-day streak, 51 public repos, 19 stars, 16 followers, 21 merged PRs. Top languages: C, JavaScript, HTML."></picture></p>
+<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/fundamentals.13973543ce.svg"><img src="assets/light/fundamentals.b0fd67cf33.svg" width="100%" alt="Fundamentals from GitHub: 47 contributions in 30 days, 201 in a year, 3-day streak, 51 public repos, 19 stars, 16 followers, 21 merged PRs. Top languages: C, JavaScript, HTML."></picture></p>
 
-<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/metro.576acdcf88.svg"><img src="assets/light/metro.4080f3034b.svg" width="100%" alt="Commit Metro: my last 53 weeks of GitHub contributions as Namma Metro trains on the purple line, one train per week and one coach per day, with lit windows for days I committed. 201 contributions since 05 Oct. Stations are my busiest repos: vfd-explorer, tripppyyy, Alpha-Fin, Vyuha-Network, AllergySafe. The line ends at Commit Street, where $VJK trades at ₹60.60."></picture></p>
+<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/metro.7c949bd06c.svg"><img src="assets/light/metro.eadcc31207.svg" width="100%" alt="Commit Metro: my last 53 weeks of GitHub contributions as Namma Metro trains on the purple line, one train per week and one coach per day, with lit windows for days I committed. 201 contributions since 05 Oct. My busiest repos ride on their busiest week's train: vfd-explorer, tripppyyy, Alpha-Fin, Vyuha-Network, AllergySafe. This week's train stops at Commit Street, where $VJK trades at ₹60.60."></picture></p>
 
 <details>
 <summary>How does this work?</summary>
