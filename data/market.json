@@ -1,20 +1,22 @@
 {
   "version": 1,
   "listedOn": "2026-10-06",
-  "price": 5760,
+  "price": 6060,
   "prevClose": 5510,
   "ath": 17470,
   "session": {
     "date": "2026-10-06",
-    "status": "open",
+    "status": "closed",
     "o": 5510,
-    "h": 5760,
+    "h": 6060,
     "l": 5510,
     "v": 30,
     "trades": 2,
-    "flags": []
+    "flags": [],
+    "c": 6060,
+    "fv": 11935
   },
-  "nextOpen": null,
+  "nextOpen": "2026-10-07",
   "candles": [
     {
       "d": "2026-06-30",
@@ -715,6 +717,15 @@
       "v": 0,
       "fv": 10125,
       "pre": true
+    },
+    {
+      "d": "2026-10-06",
+      "o": 5510,
+      "h": 6060,
+      "l": 5510,
+      "c": 6060,
+      "v": 30,
+      "fv": 11935
     }
   ],
   "holders": {
@@ -752,6 +763,10 @@
   ],
   "news": [
     {
+      "t": "2026-10-06T10:47:49.525Z",
+      "text": "Closing bell: $VJK ₹60.60 ▲ +9.98%, fair value ₹119.35"
+    },
+    {
       "t": "2026-10-06T06:10:01.739Z",
       "text": "Whale alert: @Santhu32144 buys 25 $VJK at ₹57.60"
     },
@@ -771,8 +786,8 @@
   ],
   "dividends": {
     "mergedPRs": 21,
-    "source": "public",
+    "source": "graphql",
     "perShare": 0
   },
-  "updatedAt": "2026-10-06T06:10:01.739Z"
+  "updatedAt": "2026-10-06T10:47:49.525Z"
 }
