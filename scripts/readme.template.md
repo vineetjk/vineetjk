@@ -13,19 +13,18 @@
 <p align="center">{{panel:fundamentals}}</p>
 
 <details>
-<summary><b>How does this market work?</b></summary>
+<summary>How does this work?</summary>
 <br>
-<ul>
-<li><b>My commits set the fair value.</b> At every closing bell, ${{symbol}} moves {{pull}}% of the way toward a fair value computed from my last 30 days of GitHub contributions: {{listing}} at {{baseline}} contributions, scaling with the square root. If I stop shipping, the stock bleeds.</li>
-<li><b>You move it during the day.</b> Every share you buy pushes the price up {{impact}}%, every share you sell pushes it down. You pay the price <i>after</i> your own impact, so a pump-and-dump always loses money.</li>
-<li><b>Circuit limits.</b> The price can't move more than ±{{circuit}}% from the previous close. Hit the upper circuit and buying stops for the day, just like on Dalal Street.</li>
-<li><b>Market hours.</b> {{open}}–{{close}} IST, Monday to Friday. Orders placed outside hours are after-market orders (AMOs) that fill at the next opening bell. Close your issue to cancel one.</li>
-<li><b>Dividends.</b> Every pull request of mine that gets merged pays {{dividend}} per share to everyone holding ${{symbol}}.</li>
-<li><b>Fair play.</b> One order every {{cooldownMinutes}} minutes, {{maxQty}} shares max. Bots and insiders (me) can't trade.</li>
-<li><b>Under the hood.</b> No servers. A GitHub Actions workflow wakes up for the opening bell, the closing bell and every new order issue, runs the market engine, redraws these SVGs and commits them. The full ledger is <a href="data/market.json"><code>data/market.json</code></a> and its git history.</li>
-</ul>
+<p>The price follows my GitHub activity. A normal month for me is around {{baseline}} contributions, and that's worth {{listing}} a share. If I stop coding for a month, that drops to half. When the market closes each day, the price moves {{pull}}% of the way toward whatever my last 30 days say it's worth.</p>
+<p>During the day you move it. Every share bought pushes it up {{impact}}%, every share sold pushes it down, and you pay the price after your own push. So buying and selling straight away loses you a little.</p>
+<p>It can't go more than {{circuit}}% above or below the previous close. Once it hits that limit, buying (or selling, if it's falling) stops until the next day.</p>
+<p>The market is open {{open}} to {{close}} IST, Monday to Friday. Orders placed outside those hours wait for the next morning. Close your issue if you change your mind.</p>
+<p>You start with {{startingCash}} of play money. Up to {{maxQty}} shares per order, one order every {{cooldownMinutes}} minutes. Whenever one of my pull requests gets merged, everyone holding shares gets {{dividend}} per share. I can't buy my own stock.</p>
+<p>There's no server behind this. A GitHub Action runs at the open, at the close and whenever someone places an order, then redraws these images. Every trade is in <a href="data/market.json">data/market.json</a>.</p>
 </details>
 
 <p align="center">{{panel:footer}}</p>
 
 {{coffee}}
+
+{{views}}

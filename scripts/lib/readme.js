@@ -59,6 +59,12 @@ export function renderReadme(cfg, files, { theme = 'auto', base = '' } = {}) {
       if (!cfg.buyMeACoffee) return '';
       return `<p align="center"><a href="https://buymeacoffee.com/${encodeURIComponent(cfg.buyMeACoffee)}">${image('coffee', 'height="44"')}</a></p>`;
     }
+    if (key === 'views') {
+      // Counted by komarev.com on every image load; GitHub's image proxy keeps visitors anonymous.
+      if (!cfg.viewCounter) return '';
+      const counter = `https://komarev.com/ghpvc/?username=${encodeURIComponent(cfg.login)}&label=Profile%20views&color=ff9933&style=flat-square`;
+      return `<p align="center"><img src="${attr(counter)}" alt="Profile views"></p>`;
+    }
     if (!(key in vars)) throw new Error(`Unknown README placeholder ${match}`);
     return String(vars[key]);
   });

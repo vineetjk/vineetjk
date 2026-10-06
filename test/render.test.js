@@ -39,15 +39,16 @@ test('a busy open market renders cleanly and the README links every asset', () =
   for (const f of files) assert.ok(readme.includes(`${f.path}?v=`), `README references ${f.path}`);
   assert.match(readme, /issues\/new\?title=BUY%205%20%24VJK&amp;body=/);
   assert.match(readme, /<a href="https:\/\/buymeacoffee\.com\/vineetjk"><picture>/);
+  assert.match(readme, /<img src="https:\/\/komarev\.com\/ghpvc\/\?username=vineetjk&amp;label=Profile%20views/);
 });
 
-test('without a Buy Me a Coffee id the button and its placeholder disappear', () => {
-  const plain = { ...cfg, buyMeACoffee: undefined };
+test('without a Buy Me a Coffee id or view counter, those extras disappear', () => {
+  const plain = { ...cfg, buyMeACoffee: undefined, viewCounter: false };
   const state = createState(plain, stats, ist(MON, '07:00'));
   const files = renderAll(marketView(state, stats, plain), noAvatars);
   assert.ok(!files.some((f) => f.path.endsWith('coffee.svg')));
   const readme = renderReadme(plain, files);
-  assert.doesNotMatch(readme, /buymeacoffee|\{\{/);
+  assert.doesNotMatch(readme, /buymeacoffee|komarev|\{\{/);
 });
 
 test('rendering is deterministic, so a quiet tick changes nothing', () => {
