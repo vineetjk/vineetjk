@@ -90,3 +90,18 @@ test('the journey keyframes run forward in time and dwell at each station', () =
   assert.match(out, /spring/);
   assert.match(out, /summer/);
 });
+
+test('repos that share a week share a station, with every name on its board', () => {
+  const repo = (name) => ({ name, color: '#555', stars: 0, commits: 3, week: '2026-07-05' });
+  const render = (names) => {
+    const stats = { ...steadyStats(), stations: names.map(repo) };
+    const state = createState(cfg, stats, ist(MON, '07:00'));
+    return metro(marketView(state, stats, cfg), THEMES.dark);
+  };
+  const three = render(['alpha', 'beta', 'gamma']);
+  for (const name of ['alpha', 'beta', 'gamma']) assert.match(three, new RegExp(`>${name}<`));
+  assert.match(three, />alpha \+2</, 'the route map names the first repo and counts the rest');
+  const five = render(['a1', 'b2', 'c3', 'd4', 'e5']);
+  assert.match(five, />\+3 more</);
+  assert.doesNotMatch(five, />c3</);
+});

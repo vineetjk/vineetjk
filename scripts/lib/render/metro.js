@@ -139,17 +139,23 @@ function coach(id, { windowFill, stripe, cab = null, lamp = null }, p) {
   return `<g id="${id}">${parts.join('')}</g>`;
 }
 
-/** A station canopy over the near track from x0 to x1, with its name board on top. */
-function station(x0, x1, name, p) {
+/**
+ * A station canopy over the near track from x0 to x1. Repos that share a week share the station,
+ * and its board stacks their names one per line (three at most, then "+N more").
+ */
+function station(x0, x1, names, p) {
   const bottom = RAIL - CH - DY - 14;
-  const signW = width(name, 8.5, 0.4) + 16;
+  const lines = (names.length > 3 ? [...names.slice(0, 2), `+${names.length - 2} more`] : names).map((name) => truncate(name, 20));
+  const signW = Math.max(...lines.map((line) => width(line, 8.5, 0.4))) + 16;
+  const signH = 13 + (lines.length - 1) * 12;
+  const signTop = bottom - DY - 4 - signH;
   const cx = (x0 + x1) / 2;
   return {
     back: [x0 + 3, x1 - 6].map((x) => `<rect x="${n(x)}" y="${bottom}" width="2.4" height="${RAIL - DY - bottom}" fill="${p.post}"/>`).join(''),
     front: `<polygon points="${pts([x0, bottom], [x1, bottom], [x1 + DX, bottom - DY], [x0 + DX, bottom - DY])}" fill="${p.canopyTop}"/>`
       + `<rect x="${n(x0)}" y="${bottom}" width="${n(x1 - x0)}" height="3" fill="${p.canopy}"/>`
-      + `<rect x="${n(cx - signW / 2)}" y="${bottom - DY - 17}" width="${n(signW)}" height="13" fill="${LINES.purple}"/>`
-      + text(cx, bottom - DY - 7.6, name, { size: 8.5, weight: 700, fill: '#ffffff', anchor: 'middle', ls: 0.4 }),
+      + `<rect x="${n(cx - signW / 2)}" y="${signTop}" width="${n(signW)}" height="${signH}" fill="${LINES.purple}"/>`
+      + lines.map((line, k) => text(cx, signTop + 9.4 + k * 12, line, { size: 8.5, weight: 700, fill: '#ffffff', anchor: 'middle', ls: 0.4 })).join(''),
   };
 }
 
@@ -170,7 +176,7 @@ export function metro(v, theme) {
     const i = weeks.findIndex((w) => w.start === s.week);
     if (i >= 0) byWeek.set(i, [...(byWeek.get(i) ?? []), s.name]);
   }
-  const stations = [...byWeek].sort((a, b) => a[0] - b[0]).map(([i, names]) => ({ i, name: truncate(names.join(' · '), 24) }));
+  const stations = [...byWeek].sort((a, b) => a[0] - b[0]).map(([i, names]) => ({ i, names }));
 
   // Coordinates. The convoy has the oldest train at 0 and runs to the right with this week's train
   // at the front. `world(u)` is where the camera looks when week u is in focus; since it grows
@@ -235,7 +241,7 @@ export function metro(v, theme) {
   ];
 
   // Repo stations, each where its week's train will be when the camera arrives
-  const boards = stations.map((s) => station(world(s.i) - TRAIN / 2 - 12, world(s.i) + TRAIN / 2 + 14, s.name, p));
+  const boards = stations.map((s) => station(world(s.i) - TRAIN / 2 - 12, world(s.i) + TRAIN / 2 + 14, s.names, p));
   line.push(...boards.map((b) => b.back));
 
   // Commit Street, just past this week's train: a canopy over both tracks and the green line train
@@ -301,7 +307,7 @@ export function metro(v, theme) {
   const rowFor = (x0, x1) => rows.findIndex((row) => row.every(([a, b]) => x1 < a - 8 || x0 > b + 8));
   for (const s of stations) {
     route.push(`<circle cx="${n(sx(s.i))}" cy="${LINE_Y}" r="3.4" fill="#ffffff" stroke="${LINES.purple}" stroke-width="1.8"/>`);
-    const name = truncate(s.name, 14);
+    const name = s.names.length > 1 ? `${truncate(s.names[0], 11)} +${s.names.length - 1}` : truncate(s.names[0], 14);
     const half = width(name, 7.5) / 2;
     const row = rowFor(sx(s.i) - half, sx(s.i) + half);
     if (row >= 0) {
@@ -381,7 +387,7 @@ export function metro(v, theme) {
     `<rect x=".5" y=".5" width="${W - 1}" height="${H - 1}" rx="12" fill="none" stroke="${theme.border}"/>`,
   ].join('');
 
-  const repos = stations.map((s) => s.name).join(', ');
+  const repos = stations.flatMap((s) => s.names).join(', ');
   const title = `Commit Metro: my last ${weeks.length} weeks of GitHub contributions as Namma Metro trains on the purple line, one train per week and one coach per day, with lit windows for days I committed. ${total} contributions since ${fmtDate(weeks[0]?.start ?? today)}.`
     + (repos ? ` The trains stop at a station for each of my busiest repos: ${repos}.` : '')
     + ` This week's train ends next to Commit Street, where $${cfg.symbol} trades at ${rupees(v.price)}.`;
