@@ -13,7 +13,7 @@
 
 <p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/book.16e9784188.svg"><img src="assets/light/book.bc7ff2459e.svg" width="100%" alt="Largest shareholder: @Santhu32144 with 30 shares. Last trade: buy 25 at ₹57.60. Market is closed. New orders go through at 09:15 IST on Wed 07 Oct."></picture></p>
 
-<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/fundamentals.27379c7e77.svg"><img src="assets/light/fundamentals.441af003ac.svg" width="100%" alt="Fundamentals from GitHub: 49 contributions in 30 days, 203 in a year, 3-day streak, 51 public repos, 19 stars, 16 followers, 21 merged PRs. Top languages: C, JavaScript, HTML."></picture></p>
+<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/fundamentals.b54697933c.svg"><img src="assets/light/fundamentals.f86da8a4f6.svg" width="100%" alt="Fundamentals from GitHub: 49 contributions in 30 days, 203 in a year, 3-day streak, 51 public repos, 19 stars, 16 followers, 21 merged PRs. Top languages: C, JavaScript, HTML."></picture></p>
 
 <p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/metro.4de6a5433c.svg"><img src="assets/light/metro.2ce3b7da07.svg" width="100%" alt="Commit Metro: my last 53 weeks of GitHub contributions as Namma Metro trains on the purple line, one train per week and one coach per day, with lit windows for days I committed. 203 contributions since 05 Oct. The trains stop at a station for each of my busiest repos: vfd-explorer, tripppyyy, Alpha-Fin, Vyuha-Network, AllergySafe. This week's train ends next to Commit Street, where $VJK trades at ₹60.60."></picture></p>
 
