@@ -67,3 +67,26 @@ test("a repo whose busiest week is this week gets a station before Commit Street
   const out = metro(marketView(state, stats, cfg), THEMES.dark);
   assert.ok(out.indexOf('this-week-repo') > 0 && out.indexOf('this-week-repo') < out.lastIndexOf('COMMIT STREET'));
 });
+
+test('the journey keyframes run forward in time and dwell at each station', () => {
+  const stats = {
+    ...steadyStats(),
+    stations: [
+      { name: 'spring', color: '#555', stars: 0, commits: 4, week: '2026-03-01' },
+      { name: 'summer', color: '#555', stars: 0, commits: 9, week: '2026-07-05' },
+    ],
+  };
+  const state = createState(cfg, stats, ist(MON, '07:00'));
+  const out = metro(marketView(state, stats, cfg), THEMES.dark);
+  const pan = /@keyframes pan\{((?:[\d.]+%\{[^}]*\})+)\}/.exec(out)[1];
+  const frames = [...pan.matchAll(/([\d.]+)%\{transform:([^;]+);/g)].map(([, pct, transform]) => [Number(pct), transform]);
+  assert.equal(frames[0][0], 0);
+  assert.equal(frames.at(-1)[0], 100);
+  assert.equal(frames[0][1], frames.at(-1)[1], 'the loop starts and ends on the same frame');
+  for (let k = 1; k < frames.length; k++) assert.ok(frames[k][0] > frames[k - 1][0], `keyframe ${k} moves forward`);
+  // Each station stop is a pair of frames holding the same position after the journey starts
+  const dwells = frames.filter((f, k) => k > 0 && f[0] > 11.5 && f[0] < 100 && f[1] === frames[k - 1][1]);
+  assert.equal(dwells.length, 2);
+  assert.match(out, /spring/);
+  assert.match(out, /summer/);
+});
