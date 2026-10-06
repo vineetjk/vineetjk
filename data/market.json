@@ -753,12 +753,13 @@
     }
   ],
   "processed": [
-    1
+    1,
+    2
   ],
   "dividends": {
     "mergedPRs": 21,
     "source": "public",
     "perShare": 0
   },
-  "updatedAt": "2026-10-06T05:25:55.099Z"
+  "updatedAt": "2026-10-06T05:35:15.970Z"
 }
