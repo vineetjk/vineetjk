@@ -27,6 +27,7 @@ const CH = 14; // coach side height
 const SNOUT = 5; // how far the bullet nose reaches past the cab coach (front + rear cabs fit in HITCH)
 const SNOUT_FROM = 13; // where along the cab coach the roof starts curving down into the nose
 const TAG_INSET = 6; // month tags sit this far in from a train's tail
+const BEAM = 28; // headlight beam length
 const RAIL = 226; // y where the near (purple) track's coaches sit
 const FAR = { dx: 16, dy: 13 }; // offset of the far (green) track
 const DECK = 9; // viaduct front face height
@@ -51,7 +52,7 @@ const PALETTES = {
     city: '#1b2536', cityLit: '#f0c75e', cityLitP: 0.09,
     deckTop: '#4a5464', deck: '#3b4453', deckEdge: '#5d6878', pillar: '#2d3542', pillarSide: '#232a35',
     ground: '#0a0f17', rail: '#6c7787',
-    body: '#a9b2bd', roof: '#c9d0d8', end: '#7f8996', nose: '#b9c1ca', glass: '#16202c',
+    body: '#a9b2bd', roof: '#c9d0d8', end: '#7f8996', nose: '#b9c1ca', glass: '#16202c', horn: '#3d4654', beam: 0.5,
     win: ['#1c2532', '#6b5823', '#a8852d', '#e0b33d', '#ffe37b'],
     canopy: '#566173', canopyTop: '#6c7889', post: '#465062',
     text: '#e6edf3', muted: '#8d99a6', tickOff: '#263142',
@@ -61,7 +62,7 @@ const PALETTES = {
     city: '#c4d1de', cityLit: '#f3cf72', cityLitP: 0.03,
     deckTop: '#c9d1da', deck: '#b5bec8', deckEdge: '#d9dfe6', pillar: '#a5afba', pillarSide: '#8f9aa6',
     ground: '#dde4ea', rail: '#8a95a2',
-    body: '#e8ecf0', roof: '#f8fafb', end: '#c3cad2', nose: '#e2e7ec', glass: '#2b3644',
+    body: '#e8ecf0', roof: '#f8fafb', end: '#c3cad2', nose: '#e2e7ec', glass: '#2b3644', horn: '#6f7a86', beam: 0.35,
     win: ['#55657a', '#c6a04b', '#dcae3e', '#efbf31', '#ffd23f'],
     canopy: '#8e99a6', canopyTop: '#a9b3be', post: '#7d8894',
     text: '#1f2328', muted: '#5b6670', tickOff: '#c5ced8',
@@ -104,7 +105,7 @@ const pts = (...xy) => xy.map(([x, y]) => `${n(x)},${n(y)}`).join(' ');
  * long convex curve that ends in a rounded snout, like a dolphin's. The same shape is mirrored
  * for either end; only the oblique depth (up and to the right) is never mirrored.
  */
-function bulletCab(side, { windowFill, stripe, lamp }, p) {
+function bulletCab(side, { windowFill, stripe, lamp, head = false }, p) {
   const top = -CH;
   const X = side === 'right' ? (x) => x : (x) => COACH - x;
   const at = (x, y) => [X(x), y];
@@ -143,7 +144,22 @@ function bulletCab(side, { windowFill, stripe, lamp }, p) {
   }
   // Line stripe, tapering into the tip
   parts.push(`<polygon points="${pts(at(0, -4.2), at(COACH - 2, -4.2), at(COACH + SNOUT - 1.5, -3.4), at(COACH + SNOUT - 1.5, -2.7), at(COACH - 2, -2.2), at(0, -2.2))}" fill="${stripe}"/>`);
-  if (lamp) {
+  if (head) {
+    const d = side === 'right' ? 1 : -1; // direction of travel
+    // A small horn on the roof, just behind where the nose starts curving down
+    const [hx, roof] = lift(at(SNOUT_FROM - 3, top), 0.5);
+    const hy = roof - 2.1;
+    parts.push(`<rect x="${n(hx - 0.4)}" y="${n(hy)}" width=".8" height="${n(roof - hy)}" fill="${p.horn}"/>`);
+    parts.push(`<polygon points="${pts([hx - 2.2 * d, hy - 0.3], [hx + d, hy - 0.45], [hx + 2.6 * d, hy - 1.4], [hx + 2.6 * d, hy + 1.4], [hx + d, hy + 0.45], [hx - 2.2 * d, hy + 0.3])}" fill="${p.horn}"/>`);
+    parts.push(`<ellipse cx="${n(hx + 2.6 * d)}" cy="${n(hy)}" rx=".4" ry="1.3" fill="${p.glass}"/>`);
+    // Two headlights, on the near and far side of the nose, each throwing a beam down the track
+    const near = at(COACH + SNOUT - 1.8, -4.4);
+    const lamps = [lift(near, 0.75), near];
+    for (const [lx, ly] of lamps) {
+      parts.push(`<polygon points="${pts([lx, ly - 0.6], [lx + BEAM * d, ly - 3.4], [lx + BEAM * d, ly + 2.4], [lx, ly + 0.6])}" fill="url(#beam-${side})"/>`);
+    }
+    for (const [lx, ly] of lamps) parts.push(`<ellipse cx="${n(lx)}" cy="${n(ly)}" rx="1.3" ry=".8" fill="${lamp}"/>`);
+  } else if (lamp) {
     const [lx, ly] = at(COACH + SNOUT - 4, -4.8);
     parts.push(`<ellipse cx="${n(lx)}" cy="${n(ly)}" rx="1.5" ry=".9" fill="${lamp}"/>`);
   }
@@ -154,13 +170,13 @@ function bulletCab(side, { windowFill, stripe, lamp }, p) {
  * One coach, origin at the bottom-left of its side face, standing on the rail.
  * `cab` puts a driver's cab on the 'left' or 'right' end.
  */
-function coach(id, { windowFill, stripe, cab = null, lamp = null }, p) {
+function coach(id, { windowFill, stripe, cab = null, lamp = null, head = false }, p) {
   const top = -CH;
   const roofTop = -CH - DY;
   const win = (x) => `<rect x="${x}" y="${top + 2.4}" width="5.4" height="5.4" rx=".7" fill="${windowFill}"/>`;
   const parts = [];
   if (cab) {
-    parts.push(...bulletCab(cab, { windowFill, stripe, lamp }, p));
+    parts.push(...bulletCab(cab, { windowFill, stripe, lamp, head }, p));
   } else {
     parts.push(`<polygon points="${pts([0, top], [COACH, top], [COACH + DX, roofTop], [DX, roofTop])}" fill="${p.roof}"/>`);
     parts.push(`<polygon points="${pts([COACH, 0], [COACH, top], [COACH + DX, roofTop], [COACH + DX, -DY])}" fill="${p.end}"/>`);
@@ -225,12 +241,14 @@ export function metro(v, theme) {
   const defs = [
     `<linearGradient id="sky" x2="0" y2="1"><stop offset="0" stop-color="${p.skyTop}"/><stop offset="1" stop-color="${p.skyBottom}"/></linearGradient>`,
     `<clipPath id="frame"><rect width="${W}" height="${H}" rx="12"/></clipPath>`,
+    ...['right', 'left'].map((side) => `<linearGradient id="beam-${side}"${side === 'left' ? ' x1="1" x2="0"' : ''}>`
+      + `<stop offset="0" stop-color="#fff3b0" stop-opacity="${p.beam}"/><stop offset="1" stop-color="#fff3b0" stop-opacity="0"/></linearGradient>`),
     ...p.win.flatMap((fill, lvl) => [
       coach(`c${lvl}`, { ...purple, windowFill: fill }, p),
-      coach(`h${lvl}`, { ...purple, windowFill: fill, cab: 'right', lamp: '#fff3b0' }, p),
+      coach(`h${lvl}`, { ...purple, windowFill: fill, cab: 'right', lamp: '#fff3b0', head: true }, p),
       coach(`t${lvl}`, { ...purple, windowFill: fill, cab: 'left', lamp: '#ff5a5a' }, p),
     ]),
-    coach('gl', { ...green, cab: 'left', lamp: '#fff3b0' }, p),
+    coach('gl', { ...green, cab: 'left', lamp: '#fff3b0', head: true }, p),
     coach('gm', green, p),
     coach('gr', { ...green, cab: 'right', lamp: '#ff5a5a' }, p),
     `<pattern id="pillars" patternUnits="userSpaceOnUse" width="72" height="${BELOW - RAIL}" y="${RAIL}">`
