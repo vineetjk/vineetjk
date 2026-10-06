@@ -24,8 +24,9 @@ const PITCH = TRAIN + HITCH;
 const DX = 6; // oblique depth: right…
 const DY = 5; // …and up
 const CH = 14; // coach side height
-const NOSE = 6; // how far the driver cab's nose slopes down
-const NOSE_EXT = 4; // how far the nose sticks out past the coach
+const SNOUT = 5; // how far the bullet nose reaches past the cab coach (front + rear cabs fit in HITCH)
+const SNOUT_FROM = 13; // where along the cab coach the roof starts curving down into the nose
+const TAG_INSET = 6; // month tags sit this far in from a train's tail
 const RAIL = 226; // y where the near (purple) track's coaches sit
 const FAR = { dx: 16, dy: 13 }; // offset of the far (green) track
 const DECK = 9; // viaduct front face height
@@ -99,36 +100,67 @@ function seeded(seedText) {
 const pts = (...xy) => xy.map(([x, y]) => `${n(x)},${n(y)}`).join(' ');
 
 /**
+ * A driver's cab with a bullet-train nose on the 'left' or 'right' end: the roof flows into a
+ * long convex curve that ends in a rounded snout, like a dolphin's. The same shape is mirrored
+ * for either end; only the oblique depth (up and to the right) is never mirrored.
+ */
+function bulletCab(side, { windowFill, stripe, lamp }, p) {
+  const top = -CH;
+  const X = side === 'right' ? (x) => x : (x) => COACH - x;
+  const at = (x, y) => [X(x), y];
+  const lift = ([x, y], k = 1) => [x + DX * k, y - DY * k];
+  const f = ([x, y]) => `${n(x)},${n(y)}`;
+  // The nose profile: flat roof until SNOUT_FROM, then one cubic curve down to the snout tip
+  const roofEnd = at(SNOUT_FROM, top);
+  const c1 = at(SNOUT_FROM + 6, top);
+  const c2 = at(COACH + SNOUT + 0.5, -9.1);
+  const tip = at(COACH + SNOUT, -2.6);
+  const chin = at(COACH - 2, 0);
+  const chinCtrl = at(COACH + SNOUT - 1, 0);
+  const curveAt = (t) => [0, 1].map((k) => (1 - t) ** 3 * roofEnd[k] + 3 * (1 - t) ** 2 * t * c1[k] + 3 * (1 - t) * t ** 2 * c2[k] + t ** 3 * tip[k]);
+
+  const parts = [];
+  // Nose skin: the curve swept back into depth
+  parts.push(`<path d="M${f(roofEnd)} C${f(c1)} ${f(c2)} ${f(tip)} L${f(lift(tip))} C${f(lift(c2))} ${f(lift(c1))} ${f(lift(roofEnd))} Z" fill="${p.nose}"/>`);
+  // Flat roof over the rest of the cab
+  parts.push(`<polygon points="${pts(at(0, top), roofEnd, lift(roofEnd), lift(at(0, top)))}" fill="${p.roof}"/>`);
+  if (side === 'right') {
+    // Windscreen wrapping over the top of the nose
+    const [a, b] = [curveAt(0.2), curveAt(0.48)];
+    parts.push(`<polygon points="${pts(lift(a, 0.15), lift(b, 0.15), lift(b, 0.8), lift(a, 0.8))}" fill="${p.glass}"/>`);
+  } else {
+    // The flat end of a rear cab faces the viewer's right, like any coach end
+    parts.push(`<polygon points="${pts([COACH, 0], [COACH, top], [COACH + DX, top - DY], [COACH + DX, -DY])}" fill="${p.end}"/>`);
+  }
+  // Side of the cab, following the nose down to its chin
+  parts.push(`<path d="M${f(at(0, 0))} L${f(chin)} Q${f(chinCtrl)} ${f(tip)} C${f(c2)} ${f(c1)} ${f(roofEnd)} L${f(at(0, top))} Z" fill="${p.body}"/>`);
+  // Driver's window, raked along the curve
+  parts.push(`<path d="M${f(at(SNOUT_FROM - 1, top + 2.2))} L${f(at(SNOUT_FROM + 3, top + 2.2))} Q${f(at(SNOUT_FROM + 8.5, top + 3))} ${f(at(SNOUT_FROM + 11, top + 7.6))} L${f(at(SNOUT_FROM - 1, top + 7.6))} Z" fill="${p.glass}"/>`);
+  // Two passenger windows lit for the day's commits
+  for (const x of [1.6, 7.2]) {
+    const [wx] = at(side === 'right' ? x : x + 4.6, 0);
+    parts.push(`<rect x="${n(wx)}" y="${top + 2.4}" width="4.6" height="5.4" rx=".7" fill="${windowFill}"/>`);
+  }
+  // Line stripe, tapering into the tip
+  parts.push(`<polygon points="${pts(at(0, -4.2), at(COACH - 2, -4.2), at(COACH + SNOUT - 1.5, -3.4), at(COACH + SNOUT - 1.5, -2.7), at(COACH - 2, -2.2), at(0, -2.2))}" fill="${stripe}"/>`);
+  if (lamp) {
+    const [lx, ly] = at(COACH + SNOUT - 4, -4.8);
+    parts.push(`<ellipse cx="${n(lx)}" cy="${n(ly)}" rx="1.5" ry=".9" fill="${lamp}"/>`);
+  }
+  return parts;
+}
+
+/**
  * One coach, origin at the bottom-left of its side face, standing on the rail.
- * `cab` puts a driver's cab (sloping nose, driver's window, lamp) on the 'left' or 'right' end.
+ * `cab` puts a driver's cab on the 'left' or 'right' end.
  */
 function coach(id, { windowFill, stripe, cab = null, lamp = null }, p) {
   const top = -CH;
   const roofTop = -CH - DY;
-  const slope = top + NOSE; // where the sloping nose meets the cab front
   const win = (x) => `<rect x="${x}" y="${top + 2.4}" width="5.4" height="5.4" rx=".7" fill="${windowFill}"/>`;
   const parts = [];
-  if (cab === 'right') {
-    const nose = COACH + NOSE_EXT;
-    parts.push(`<polygon points="${pts([0, top], [COACH - 1, top], [COACH - 1 + DX, roofTop], [DX, roofTop])}" fill="${p.roof}"/>`);
-    parts.push(`<polygon points="${pts([COACH - 1, top], [nose, slope], [nose + DX, slope - DY], [COACH - 1 + DX, roofTop])}" fill="${p.nose}"/>`);
-    parts.push(`<polygon points="${pts([nose, slope], [nose, 0], [nose + DX, -DY], [nose + DX, slope - DY])}" fill="${p.end}"/>`);
-    parts.push(`<polygon points="${pts([nose, -4.2], [nose, -2.2], [nose + DX, -2.2 - DY], [nose + DX, -4.2 - DY])}" fill="${stripe}"/>`);
-    parts.push(`<polygon points="${pts([0, 0], [nose, 0], [nose, slope], [COACH - 1, top], [0, top])}" fill="${p.body}"/>`);
-    parts.push(`<polygon points="${pts([COACH - 4.5, top + 2.2], [COACH - 0.6, top + 2.2], [nose - 0.8, slope - 0.4], [nose - 0.8, top + 8.2], [COACH - 4.5, top + 8.2])}" fill="${p.glass}"/>`);
-    parts.push(win(2.4), win(9.3));
-    parts.push(`<rect y="-4.2" width="${nose}" height="2" fill="${stripe}"/>`);
-    if (lamp) parts.push(`<circle cx="${n(nose + DX / 2)}" cy="${n(-6 - DY / 2)}" r="1.5" fill="${lamp}"/>`);
-  } else if (cab === 'left') {
-    const nose = -NOSE_EXT;
-    parts.push(`<polygon points="${pts([nose, slope], [1, top], [1 + DX, roofTop], [nose + DX, slope - DY])}" fill="${p.nose}"/>`);
-    parts.push(`<polygon points="${pts([1, top], [COACH, top], [COACH + DX, roofTop], [1 + DX, roofTop])}" fill="${p.roof}"/>`);
-    parts.push(`<polygon points="${pts([COACH, 0], [COACH, top], [COACH + DX, roofTop], [COACH + DX, -DY])}" fill="${p.end}"/>`);
-    parts.push(`<polygon points="${pts([nose, 0], [COACH, 0], [COACH, top], [1, top], [nose, slope])}" fill="${p.body}"/>`);
-    parts.push(`<polygon points="${pts([4.5, top + 2.2], [0.6, top + 2.2], [nose + 0.8, slope - 0.4], [nose + 0.8, top + 8.2], [4.5, top + 8.2])}" fill="${p.glass}"/>`);
-    parts.push(win(9.3), win(16.2));
-    parts.push(`<rect x="${nose}" y="-4.2" width="${COACH - nose}" height="2" fill="${stripe}"/>`);
-    if (lamp) parts.push(`<circle cx="${n(nose + 1.3)}" cy="-6" r="1.3" fill="${lamp}"/>`);
+  if (cab) {
+    parts.push(...bulletCab(cab, { windowFill, stripe, lamp }, p));
   } else {
     parts.push(`<polygon points="${pts([0, top], [COACH, top], [COACH + DX, roofTop], [DX, roofTop])}" fill="${p.roof}"/>`);
     parts.push(`<polygon points="${pts([COACH, 0], [COACH, top], [COACH + DX, roofTop], [COACH + DX, -DY])}" fill="${p.end}"/>`);
@@ -264,7 +296,7 @@ export function metro(v, theme) {
       convoy.push(`<use href="#${kind}${lightLevel(day.c, maxDay)}" x="${n(coachX(i, day.dow))}" y="${RAIL}"/>`);
     });
     if (i === 0 || w.start.slice(0, 7) !== weeks[i - 1].start.slice(0, 7)) {
-      convoy.push(text(coachX(i, w.days[0].dow) + NOSE, RAIL - CH - DY - 4, monthName(w.start).toUpperCase(), { size: 7, weight: 700, fill: p.muted, ls: 1 }));
+      convoy.push(text(coachX(i, w.days[0].dow) + TAG_INSET, RAIL - CH - DY - 4, monthName(w.start).toUpperCase(), { size: 7, weight: 700, fill: p.muted, ls: 1 }));
     }
   });
 
