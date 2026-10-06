@@ -89,13 +89,22 @@ test('the upper circuit locks out buyers for the rest of the day', () => {
   assert.equal(order(state, 'whale0', 'SELL 5 $VJK', ist(MON, '11:00')).status, 'filled', 'sellers can still trade');
 });
 
-test('one order per user per cooldown window', () => {
+test('a cooldown, when configured, allows one order per user per window', () => {
+  const strict = withDerived({ ...cfg, cooldownMinutes: 10 });
   const state = openMarket();
-  assert.equal(order(state, 'carol', 'BUY 1 $VJK', ist(MON, '10:00')).status, 'filled');
-  const again = order(state, 'carol', 'BUY 1 $VJK', ist(MON, '10:05'));
+  assert.equal(order(state, 'carol', 'BUY 1 $VJK', ist(MON, '10:00'), strict).status, 'filled');
+  const again = order(state, 'carol', 'BUY 1 $VJK', ist(MON, '10:05'), strict);
   assert.equal(again.status, 'rejected');
   assert.match(again.reason, /Try again in 5 min/);
-  assert.equal(order(state, 'carol', 'BUY 1 $VJK', ist(MON, '10:10')).status, 'filled');
+  assert.equal(order(state, 'carol', 'BUY 1 $VJK', ist(MON, '10:10'), strict).status, 'filled');
+});
+
+test('with no cooldown, back-to-back orders all go through', () => {
+  const open = withDerived({ ...cfg, cooldownMinutes: 0 });
+  const state = openMarket();
+  assert.equal(order(state, 'carol', 'BUY 1 $VJK', ist(MON, '10:00'), open).status, 'filled');
+  assert.equal(order(state, 'carol', 'BUY 2 $VJK', ist(MON, '10:00'), open).status, 'filled');
+  assert.equal(order(state, 'carol', 'SELL 3 $VJK', ist(MON, '10:00'), open).status, 'filled');
 });
 
 test('the owner cannot trade their own stock unless allowed', () => {

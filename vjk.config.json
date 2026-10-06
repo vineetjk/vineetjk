@@ -15,7 +15,7 @@
   "maxQty": 25,
   "whaleQty": 20,
   "startingCash": 10000,
-  "cooldownMinutes": 10,
+  "cooldownMinutes": 0,
   "dividendPerMergedPR": 2,
   "allowOwnerTrading": false,
   "backfillSessions": 70,

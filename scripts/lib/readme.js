@@ -45,7 +45,7 @@ export function renderReadme(cfg, files, { theme = 'auto', base = '' } = {}) {
     symbol: cfg.symbol,
     startingCash: `₹${cfg.startingCash.toLocaleString('en-IN')}`,
     maxQty: cfg.maxQty,
-    cooldownMinutes: cfg.cooldownMinutes,
+    cooldown: cfg.cooldownMinutes > 0 ? ` One order every ${cfg.cooldownMinutes} minutes.` : '',
     open: cfg.market.open,
     close: cfg.market.close,
     circuit: Math.round(cfg.circuit * 100),
