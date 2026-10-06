@@ -10,6 +10,12 @@ const TEMPLATE = new URL('../readme.template.md', import.meta.url);
 
 export const contentHash = (content) => createHash('sha1').update(content).digest('hex').slice(0, 10);
 
+/**
+ * Where an image is written and linked from: the content hash goes in the file name. A `?v=` query
+ * doesn't work, because GitHub's /raw/ redirect drops it and browsers keep the old copy for minutes.
+ */
+export const assetPath = ({ path, content }) => path.replace(/\.svg$/, `.${contentHash(content)}.svg`);
+
 const attr = (s) => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
 
 /** Alt text comes straight from each SVG's <title>, so there's one description per image. */
@@ -27,7 +33,7 @@ export function renderReadme(cfg, files, { theme = 'auto', base = '' } = {}) {
   const src = (t, name) => {
     const path = `assets/${t}/${name}.svg`;
     if (!byPath.has(path)) throw new Error(`README references missing asset ${path}`);
-    return `${base}${path}?v=${contentHash(byPath.get(path))}`;
+    return base + assetPath({ path, content: byPath.get(path) });
   };
   const image = (name, attrs) => {
     const alt = attr(altOf(byPath.get(`assets/light/${name}.svg`) ?? ''));

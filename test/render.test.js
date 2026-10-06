@@ -4,7 +4,7 @@ import { createState, advance, placeOrder } from '../scripts/lib/engine.js';
 import { parseOrder } from '../scripts/lib/orders.js';
 import { marketView } from '../scripts/lib/render/view.js';
 import { renderAll } from '../scripts/lib/render/index.js';
-import { renderReadme } from '../scripts/lib/readme.js';
+import { renderReadme, assetPath } from '../scripts/lib/readme.js';
 import { cfg, steadyStats, ist, issue, MON } from './helpers.js';
 
 const stats = steadyStats();
@@ -36,7 +36,8 @@ test('a busy open market renders cleanly and the README links every asset', () =
 
   const readme = renderReadme(cfg, files);
   assert.doesNotMatch(readme, /\{\{/);
-  for (const f of files) assert.ok(readme.includes(`${f.path}?v=`), `README references ${f.path}`);
+  for (const f of files) assert.ok(readme.includes(assetPath(f)), `README links ${f.path} by its hashed name`);
+  assert.doesNotMatch(readme, /\.svg\?v=/, 'no query-string versions: GitHub drops them');
   assert.match(readme, /issues\/new\?title=BUY%205%20%24VJK&amp;body=/);
   assert.match(readme, /<a href="https:\/\/buymeacoffee\.com\/vineetjk"><picture>/);
   assert.match(readme, /<img src="https:\/\/komarev\.com\/ghpvc\/\?username=vineetjk&amp;label=Profile%20views/);

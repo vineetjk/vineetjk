@@ -3,7 +3,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
-import { mkdtempSync, readFileSync, writeFileSync, readdirSync } from 'node:fs';
+import { mkdtempSync, readFileSync, writeFileSync, readdirSync, existsSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -41,7 +41,7 @@ test('tick: list, queue an AMO before the bell, fill it at the open, then go qui
   assert.deepEqual(first.state.amo.map((a) => a.issue), [7]);
   assert.deepEqual(first.receipts.map((r) => [r.issue, r.close]), [[7, false]], 'queued orders stay open; non-orders are ignored');
   assert.match(first.receipts[0].body, /Queued/);
-  assert.ok(readFileSync(join(env.root, 'README.md'), 'utf8').includes('assets/dark/quote.svg?v='));
+  assert.match(readFileSync(join(env.root, 'README.md'), 'utf8'), /assets\/dark\/quote\.[0-9a-f]{10}\.svg/);
   assert.equal(readdirSync(join(env.root, 'assets/dark')).length, 10 + (cfg.buyMeACoffee ? 1 : 0));
 
   const second = run(env, `${MON}T09:17:00+05:30`, [buy, noise]);
@@ -49,6 +49,11 @@ test('tick: list, queue an AMO before the bell, fill it at the open, then go qui
   assert.equal(second.state.holders.zed.shares, 5);
   assert.deepEqual(second.receipts.map((r) => [r.issue, r.close]), [[7, true]], 'one closing receipt, no duplicate close');
   assert.match(second.receipts[0].body, /Filled/);
+  // Old image versions are cleaned up, and every image the README links to exists.
+  assert.equal(readdirSync(join(env.root, 'assets/dark')).length, 10 + (cfg.buyMeACoffee ? 1 : 0));
+  for (const [link] of readFileSync(join(env.root, 'README.md'), 'utf8').matchAll(/assets\/(dark|light)\/[\w.-]+\.svg/g)) {
+    assert.ok(existsSync(join(env.root, link)), `${link} exists`);
+  }
 
   // Same moment, issue now closed by the bot: nothing to do and nothing should change.
   const snapshot = readFileSync(join(env.root, 'data/market.json'), 'utf8');

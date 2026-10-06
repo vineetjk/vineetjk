@@ -6,7 +6,7 @@
 // Local knobs: VJK_NOW (pretend time), VJK_ROOT (output dir), VJK_STATS_FILE / VJK_ORDERS_FILE
 // (fixtures instead of the API), VJK_OFFLINE=1 (no network for orders or avatars).
 
-import { mkdirSync, readFileSync, writeFileSync, existsSync } from 'node:fs';
+import { mkdirSync, readFileSync, writeFileSync, existsSync, readdirSync, rmSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { loadConfig } from './lib/config.js';
@@ -17,7 +17,7 @@ import { parseOrder, isOrderTitle } from './lib/orders.js';
 import { toReceipt } from './lib/receipts.js';
 import { marketView } from './lib/render/view.js';
 import { renderAll } from './lib/render/index.js';
-import { renderReadme } from './lib/readme.js';
+import { renderReadme, assetPath } from './lib/readme.js';
 import { rupees, signed, arrow, pct } from './lib/money.js';
 
 // Each order costs two API writes (comment + close); GitHub throttles bots at ~80 a minute.
@@ -129,7 +129,13 @@ const bell = listing
 
 const view = marketView(state, stats, cfg);
 const files = renderAll(view, await loadAvatars(state, stats));
-for (const f of files) write(f.path, f.content);
+// Every image lives at a content-hashed name, so clear out the previous versions first.
+// Unchanged images get the same name back, so git sees no difference for them.
+for (const dir of new Set(files.map((f) => dirname(f.path)))) {
+  if (!existsSync(at(dir))) continue;
+  for (const name of readdirSync(at(dir))) if (name.endsWith('.svg')) rmSync(join(at(dir), name));
+}
+for (const f of files) write(assetPath(f), f.content);
 write('README.md', renderReadme(cfg, files));
 writeJson('data/market.json', state);
 writeJson('data/stats.json', stats);

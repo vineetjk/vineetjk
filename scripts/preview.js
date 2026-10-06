@@ -20,7 +20,7 @@ import { toReceipt } from './lib/receipts.js';
 import { addDays, isTradingDay, marketClock } from './lib/time.js';
 import { marketView } from './lib/render/view.js';
 import { renderAll } from './lib/render/index.js';
-import { renderReadme } from './lib/readme.js';
+import { renderReadme, assetPath } from './lib/readme.js';
 
 const OUT = fileURLToPath(new URL('../preview/', import.meta.url));
 const TRADERS = [
@@ -98,7 +98,8 @@ const owner = realStats.avatarUrl ? await fetchDataUri(`${realStats.avatarUrl}&s
 const files = renderAll(marketView(state, stats, cfg), { owner, users: {} });
 for (const f of files) {
   mkdirSync(dirname(join(OUT, f.path)), { recursive: true });
-  writeFileSync(join(OUT, f.path), f.content);
+  writeFileSync(join(OUT, f.path), f.content); // plain name, handy for screenshots
+  writeFileSync(join(OUT, assetPath(f)), f.content); // hashed name, what the README links
 }
 
 const page = (theme) => {
