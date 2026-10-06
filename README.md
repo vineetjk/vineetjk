@@ -1,10 +1,10 @@
-<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/metro.2dbde463ea.svg"><img src="assets/light/metro.4c70a942f3.svg" width="100%" alt="Commit Metro: my last 53 weeks of GitHub contributions as one long Namma Metro train on the purple line, one coach per week and one window per day, lit for days I committed. 211 contributions since 05 Oct. It slows under a sign for each of my busiest repos: vfd-explorer, tripppyyy, Alpha-Fin, Vyuha-Network, AllergySafe. Its head pulls up at Commit Street, where $VJK trades at ₹60.60."></picture></p>
+<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/metro.6f2202f70a.svg"><img src="assets/light/metro.685a5b263c.svg" width="100%" alt="Commit Metro: my last 53 weeks of GitHub contributions as one long Namma Metro train on the purple line, one coach per week and one window per day, lit for days I committed. 212 contributions since 05 Oct. It slows under a sign for each of my busiest repos: vfd-explorer, tripppyyy, Alpha-Fin, Vyuha-Network, AllergySafe. Its head pulls up at Commit Street, where $VJK trades at ₹60.60."></picture></p>
 
-<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/sign.cf0c3e649f.svg"><img src="assets/light/sign.af50bafb51.svg" width="100%" alt="COMMIT STREET, in golden lights"></picture></p>
+<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/sign.90d0700d59.svg"><img src="assets/light/sign.b77fdf4d5a.svg" width="100%" alt="COMMIT STREET, in golden lights"></picture></p>
 
-<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/ticker.d7b82dfc6b.svg"><img src="assets/light/ticker.b22c5b4b7c.svg" width="100%" alt="$VJK ₹60.60 +9.98%. market closed. Closing bell: $VJK ₹60.60 ▲ +9.98%, fair value ₹119.35"></picture></p>
+<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/ticker.0a08f4e43d.svg"><img src="assets/light/ticker.6e0ac8197c.svg" width="100%" alt="$VJK ₹60.60 +9.98%. market closed. Closing bell: $VJK ₹60.60 ▲ +9.98%, fair value ₹119.35"></picture></p>
 
-<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/quote.34fbfd0e29.svg"><img src="assets/light/quote.673fcdabbc.svg" width="100%" alt="$VJK at ₹60.60, +9.98% at last close, market closed. Fair value from commits: ₹129.40. Circuit band ₹49.60 to ₹60.60."></picture></p>
+<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/quote.01153a69c9.svg"><img src="assets/light/quote.b8d965fefb.svg" width="100%" alt="$VJK at ₹60.60, +9.98% at last close, market closed. Fair value from commits: ₹130.40. Circuit band ₹49.60 to ₹60.60."></picture></p>
 
 <p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/chart.385af7eb10.svg"><img src="assets/light/chart.f05bfc84f8.svg" width="100%" alt="Daily candlestick chart of $VJK over 71 sessions from 30 Jun, with the fair value implied by commit activity. Last price 60.60."></picture></p>
 
@@ -17,7 +17,7 @@
 
 <p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/book.16e9784188.svg"><img src="assets/light/book.bc7ff2459e.svg" width="100%" alt="Largest shareholder: @Santhu32144 with 30 shares. Last trade: buy 25 at ₹57.60. Market is closed. New orders go through at 09:15 IST on Wed 07 Oct."></picture></p>
 
-<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/fundamentals.4308cae710.svg"><img src="assets/light/fundamentals.7246082858.svg" width="100%" alt="Fundamentals from GitHub: 57 contributions in 30 days, 211 in a year, 3-day streak, 51 public repos, 19 stars, 16 followers, 21 merged PRs. Top languages: C, JavaScript, HTML."></picture></p>
+<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/fundamentals.da57411c2a.svg"><img src="assets/light/fundamentals.db401a4a11.svg" width="100%" alt="Fundamentals from GitHub: 58 contributions in 30 days, 212 in a year, 3-day streak, 51 public repos, 19 stars, 16 followers, 21 merged PRs. Top languages: C, JavaScript, HTML."></picture></p>
 
 <details>
 <summary>How does this work?</summary>
