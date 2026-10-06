@@ -62,14 +62,14 @@ test('the metro still renders before any station data exists', () => {
   assert.doesNotMatch(metro(marketView(state, stats, cfg), THEMES.dark), /NaN|undefined/);
 });
 
-test("a repo whose busiest week is this week gets a station before Commit Street", () => {
+test("a repo whose busiest week is this week gets a board at the Commit Street platform", () => {
   const stats = { ...steadyStats(), stations: [{ name: 'this-week-repo', color: '#555', stars: 0, commits: 9, week: '2026-10-04' }] };
   const state = createState(cfg, stats, ist(MON, '07:00'));
   const out = metro(marketView(state, stats, cfg), THEMES.dark);
   assert.ok(out.indexOf('this-week-repo') > 0 && out.indexOf('this-week-repo') < out.lastIndexOf('COMMIT STREET'));
 });
 
-test('the journey keyframes run forward in time and dwell at each station', () => {
+test('the journey keyframes run forward in time and crawl past each repo gantry', () => {
   const stats = {
     ...steadyStats(),
     stations: [
@@ -85,9 +85,13 @@ test('the journey keyframes run forward in time and dwell at each station', () =
   assert.equal(frames.at(-1)[0], 100);
   assert.equal(frames[0][1], frames.at(-1)[1], 'the loop starts and ends on the same frame');
   for (let k = 1; k < frames.length; k++) assert.ok(frames[k][0] > frames[k - 1][0], `keyframe ${k} moves forward`);
-  // Each station stop is a pair of frames holding the same position after the journey starts
-  const dwells = frames.filter((f, k) => k > 0 && f[0] > 11.5 && f[0] < 100 && f[1] === frames[k - 1][1]);
-  assert.equal(dwells.length, 2);
+  // Once the journey starts the camera only ever moves forward along the line
+  const pans = frames.filter(([pct]) => pct >= 11.5).map(([, transform]) => Number(/-?[\d.]+/.exec(transform)[0]));
+  for (let k = 1; k < pans.length; k++) assert.ok(pans[k] < pans[k - 1], 'the train never stops before Commit Street');
+  // Each gantry gets a zoomed-in slow pass: two frames at the stop zoom, around that week
+  const zoom = /@keyframes zoom\{((?:[\d.]+%\{[^}]*\})+)\}/.exec(out)[1];
+  const slow = [...zoom.matchAll(/([\d.]+)%\{transform:scale\(([\d.]+)\)/g)].filter(([, pct, z]) => +pct > 11.5 && +pct < 100 && +z === 1.24);
+  assert.equal(slow.length, 4);
   assert.match(out, /spring/);
   assert.match(out, /summer/);
 });

@@ -1,15 +1,16 @@
 // Commit Metro: the contribution graph as one long Namma Metro train. Each coach is a week and
 // its seven windows are the days (Sunday first), so the train is GitHub's grid turned on its
-// side: the oldest week rides at the tail and this week right behind the driver's cab. Stations
-// are my busiest repos, and the line ends at Commit Street, the interchange where the green line
-// carries $VJK.
+// side: the oldest week rides at the tail and this week right behind the driver's cab. My busiest
+// repos hang on sign gantries over the line, and the line ends at Commit Street, the interchange
+// where the green line carries $VJK.
 //
 // Both the camera and the train move. The line is stretched longer than the train, so the camera
-// travels along it from tail to head while the train runs forward along the viaduct. Each station
-// is built exactly where its week's coach will be when the camera reaches it: the train brakes
-// into the station, the camera zooms in, then it pulls away and the camera zooms out at speed.
-// The journey ends with this week's coach in focus next to Commit Street, which is also the
-// resting frame that static renderers and reduced motion see.
+// travels along it from tail to head while the train runs forward along the viaduct. Each gantry
+// stands exactly where its week's coach will be when the camera reaches it: the train slows to a
+// crawl as that coach passes under the sign and the camera zooms in, then it speeds up and the
+// camera zooms out. Gantries aren't platforms, so nothing suggests the head should stop there;
+// the only stop is Commit Street, where the driver's cab pulls up at the front of the platform.
+// That arrival is also the resting frame that static renderers and reduced motion see.
 
 import { svg, text, width, n, truncate } from './common.js';
 import { rupees, signed, arrow } from '../money.js';
@@ -41,7 +42,8 @@ const ZOOM = { rest: 1.18, stop: 1.24, fastest: 0.78 };
 const DURATION = 90; // seconds per loop
 const HOLD = 8; // % of the loop spent resting on today before the journey
 const START = 11.5; // % where the journey begins (after the fade)
-const DWELL = 1.8; // % of the loop each station stop lasts
+const DWELL = 1.8; // % of the loop each slow pass under a repo gantry lasts
+const CRAWL = 0.35; // weeks the train creeps forward during that slow pass
 const LINE_Y = 290; // route map along the bottom
 
 export const LINES = { purple: '#8b3fa4', green: '#2f9e4f' };
@@ -192,23 +194,38 @@ function coach(id, { windowFill, stripe, cab = null, lamp = null, head = false }
   return `<g id="${id}">${parts.join('')}</g>`;
 }
 
+/** Repo names for a board, one per line: at most `max` lines, the last one "+N more" if needed. */
+const boardLines = (names, max) =>
+  (names.length > max ? [...names.slice(0, max - 1), `+${names.length - max + 1} more`] : names).map((name) => truncate(name, 20));
+
+const boardSize = (lines) => ({ w: Math.max(...lines.map((line) => width(line, 8.5, 0.4))) + 16, h: 13 + (lines.length - 1) * 12 });
+
+/** A purple name board centred on cx with its top edge at `top`. */
+function board(cx, top, lines) {
+  const { w, h } = boardSize(lines);
+  return `<rect x="${n(cx - w / 2)}" y="${n(top)}" width="${n(w)}" height="${h}" rx="1" fill="${LINES.purple}"/>`
+    + lines.map((line, k) => text(cx, top + 9.4 + k * 12, line, { size: 8.5, weight: 700, fill: '#ffffff', anchor: 'middle', ls: 0.4 })).join('');
+}
+
 /**
- * A station canopy over the near track from x0 to x1. Repos that share a week share the station,
- * and its board stacks their names one per line (three at most, then "+N more").
+ * A cantilever sign gantry over the coach at cx: a post behind the far track, an arm reaching out
+ * over the near track, and the repos that peaked that week on a board hanging from it. The post
+ * goes behind the train (`back`); the arm and board are drawn over it (`front`).
  */
-function station(x0, x1, names, p) {
-  const bottom = RAIL - CH - DY - 14;
-  const lines = (names.length > 3 ? [...names.slice(0, 2), `+${names.length - 2} more`] : names).map((name) => truncate(name, 20));
-  const signW = Math.max(...lines.map((line) => width(line, 8.5, 0.4))) + 16;
-  const signH = 13 + (lines.length - 1) * 12;
-  const signTop = bottom - DY - 4 - signH;
-  const cx = (x0 + x1) / 2;
+function gantry(cx, names, p) {
+  const lines = boardLines(names, 3);
+  const { w, h } = boardSize(lines);
+  const top = RAIL - CH - DY - 10 - h;
+  const beamY = top - 5;
+  const [x0, x1] = [cx - w / 2 - 4, cx + w / 2 + 4];
+  const post = { x: x1 + FAR.dx + DX + 4, top: beamY - FAR.dy - DY - 4 };
+  const backEdge = RAIL - FAR.dy - DY - 3;
   return {
-    back: [x0 + 3, x1 - 6].map((x) => `<rect x="${n(x)}" y="${bottom}" width="2.4" height="${RAIL - DY - bottom}" fill="${p.post}"/>`).join(''),
-    front: `<polygon points="${pts([x0, bottom], [x1, bottom], [x1 + DX, bottom - DY], [x0 + DX, bottom - DY])}" fill="${p.canopyTop}"/>`
-      + `<rect x="${n(x0)}" y="${bottom}" width="${n(x1 - x0)}" height="3" fill="${p.canopy}"/>`
-      + `<rect x="${n(cx - signW / 2)}" y="${signTop}" width="${n(signW)}" height="${signH}" fill="${LINES.purple}"/>`
-      + lines.map((line, k) => text(cx, signTop + 9.4 + k * 12, line, { size: 8.5, weight: 700, fill: '#ffffff', anchor: 'middle', ls: 0.4 })).join(''),
+    back: `<rect x="${n(post.x - 1.6)}" y="${n(post.top)}" width="3.2" height="${n(backEdge - post.top)}" fill="${p.post}"/>`,
+    front: `<line x1="${n(x1)}" y1="${n(beamY)}" x2="${n(post.x)}" y2="${n(post.top)}" stroke="${p.post}" stroke-width="2.6"/>`
+      + `<rect x="${n(x0)}" y="${n(beamY - 1.3)}" width="${n(x1 - x0)}" height="2.6" fill="${p.post}"/>`
+      + [x0 + 8, x1 - 8].map((x) => `<line x1="${n(x)}" y1="${n(beamY)}" x2="${n(x)}" y2="${n(top)}" stroke="${p.post}"/>`).join('')
+      + board(cx, top, lines),
   };
 }
 
@@ -294,17 +311,19 @@ export function metro(v, theme) {
     `<rect y="${RAIL}" width="${n(xEnd)}" height="1.2" fill="${p.deckEdge}"/>`,
   ];
 
-  // Repo stations, each where its week's coach will be when the camera arrives
-  const boards = stations.map((s) => station(world(s.i) - COACH * 1.15, world(s.i) + COACH * 1.15 + DX, s.names, p));
-  line.push(...boards.map((b) => b.back));
+  // Repo gantries, each where its week's coach will be when the camera arrives. A repo that peaked
+  // this week gets a board under the Commit Street canopy instead (see below).
+  const gantries = stations.filter((s) => s.i < last).map((s) => gantry(world(s.i), s.names, p));
+  line.push(...gantries.map((g) => g.back));
 
-  // Commit Street, just past the head of the train: a canopy over both tracks and the green line train
-  const cs = { x0: world(last) + COACH * 1.5 + SNOUT + 30, x1: world(last) + COACH * 1.5 + SNOUT + 330 };
+  // Commit Street: a platform over both tracks long enough that the train's last coaches and the
+  // driver's cab pull in under it, with the green line train waiting past the front end
+  const cs = { x0: world(last) - COACH * 1.8, x1: world(last) + COACH * 1.5 + SNOUT + 220 };
   const canopyBottom = RAIL - FAR.dy - CH - DY - 18;
   const depth = FAR.dx + DX;
   const rise = FAR.dy + DY + 2;
   line.push(...[cs.x0 + 3, cs.x1 - 6].map((x) => `<rect x="${n(x)}" y="${canopyBottom}" width="2.4" height="${RAIL - DY - canopyBottom}" fill="${p.post}"/>`));
-  const greenX = cs.x1 - 3 * PITCH - 40 + FAR.dx;
+  const greenX = cs.x1 - 3 * PITCH - 26 + FAR.dx;
   ['gl', 'gm', 'gr'].forEach((id, k) => line.push(`<use href="#${id}" x="${n(greenX + k * PITCH)}" y="${RAIL - FAR.dy}"/>`));
 
   // The train: tail cab, one coach per week with a window per day, then the driver's cab
@@ -337,8 +356,9 @@ export function metro(v, theme) {
   const ledW = width(quote, 8, 0.3) + 14;
   const ledX = cs.x1 - ledW - 14;
   const ledY = canopyBottom + 5;
+  const thisWeek = stations.find((s) => s.i === last);
   const over = [
-    ...boards.map((b) => b.front),
+    ...gantries.map((g) => g.front),
     `<polygon points="${pts([cs.x0, canopyBottom], [cs.x1, canopyBottom], [cs.x1 + depth, canopyBottom - rise], [cs.x0 + depth, canopyBottom - rise])}" fill="${p.canopyTop}"/>`,
     `<rect x="${n(cs.x0)}" y="${canopyBottom}" width="${n(cs.x1 - cs.x0)}" height="3" fill="${p.canopy}"/>`,
     `<rect x="${n(signX)}" y="${signY}" width="${n(signW / 2)}" height="14" fill="${LINES.purple}"/>`,
@@ -348,6 +368,14 @@ export function metro(v, theme) {
     `<rect x="${n(ledX)}" y="${ledY}" width="${n(ledW)}" height="12" rx="1.5" fill="#0b0b0c" stroke="#30343a"/>`,
     text(ledX + ledW / 2, ledY + 8.6, quote, { size: 8, weight: 700, fill: '#ffb21a', anchor: 'middle', ls: 0.3 }),
   ];
+  if (thisWeek) {
+    // This week's repos hang from the platform canopy, over this week's coach
+    const lines = boardLines(thisWeek.names, 2);
+    const top = canopyBottom + 6;
+    const { w } = boardSize(lines);
+    over.push(...[world(last) - w / 2 + 8, world(last) + w / 2 - 8].map((x) => `<line x1="${n(x)}" y1="${canopyBottom + 3}" x2="${n(x)}" y2="${top}" stroke="${p.post}"/>`));
+    over.push(board(world(last), top, lines));
+  }
 
   // Route map along the bottom: the whole year at a glance, with a marker for the week in focus
   const sx0 = 36;
@@ -393,8 +421,9 @@ export function metro(v, theme) {
   header.push(text(sq - 5, 45, 'NONE', { size: 7, fill: p.muted, anchor: 'end', ls: 0.6 }));
   header.push(text(W - 24, 45, 'MANY', { size: 7, fill: p.muted, anchor: 'end', ls: 0.6 }));
 
-  // The journey as keyframes: rest on today, fade, start a year back, then for each station pull
-  // away (zooming out with speed), brake in (zooming back in) and dwell, ending on today again.
+  // The journey as keyframes: rest on today, fade, start a year back, then for each repo gantry
+  // speed up (zooming out), slow down (zooming back in), creep that week's coach under the sign,
+  // and finally brake to a stop at Commit Street.
   const frames = [];
   const add = (pct, u, zoom, ease = EASE.still) => frames.push({ pct, u, zoom, ease });
   add(0, last, ZOOM.rest);
@@ -403,7 +432,8 @@ export function metro(v, theme) {
   add(9.6, 0, ZOOM.stop);
   add(START, 0, ZOOM.stop, EASE.pullAway);
   const stops = [...new Set([...stations.map((s) => s.i).filter((i) => i > 0 && i < last), last])].sort((a, b) => a - b);
-  const hops = stops.map((to, k) => [k ? stops[k - 1] : 0, to]);
+  const final = stops.length - 1;
+  const hops = stops.map((stop, k) => [k ? stops[k - 1] + CRAWL / 2 : 0, k === final ? stop : stop - CRAWL / 2]);
   const weights = hops.map(([from, to]) => Math.max(to - from, 1.5) ** 0.75);
   const unit = (100 - START - DWELL * (stops.length - 1)) / weights.reduce((sum, w) => sum + w, 0);
   let t = START;
@@ -411,12 +441,12 @@ export function metro(v, theme) {
     const span = weights[k] * unit;
     add(t + span / 2, (from + to) / 2, Math.max(ZOOM.fastest, 1 - 0.045 * (to - from)), EASE.brake);
     t += span;
-    if (k === hops.length - 1) {
+    if (k === final) {
       add(100, to, ZOOM.rest);
     } else {
       add(t, to, ZOOM.stop);
       t += DWELL;
-      add(t, to, ZOOM.stop, EASE.pullAway);
+      add(t, to + CRAWL, ZOOM.stop, EASE.pullAway);
     }
   });
   const keyframes = (name, value) => `@keyframes ${name}{${frames.map((f) => `${f.pct.toFixed(3)}%{transform:${value(f)};animation-timing-function:${f.ease}}`).join('')}}`;
@@ -449,7 +479,7 @@ export function metro(v, theme) {
 
   const repos = stations.flatMap((s) => s.names).join(', ');
   const title = `Commit Metro: my last ${weeks.length} weeks of GitHub contributions as one long Namma Metro train on the purple line, one coach per week and one window per day, lit for days I committed. ${total} contributions since ${fmtDate(weeks[0]?.start ?? today)}.`
-    + (repos ? ` The train stops at a station for each of my busiest repos: ${repos}.` : '')
+    + (repos ? ` It slows under a sign for each of my busiest repos: ${repos}.` : '')
     + ` Its head pulls up at Commit Street, where $${cfg.symbol} trades at ${rupees(v.price)}.`;
   return svg({ w: W, h: H, theme, css, defs, body, title });
 }
