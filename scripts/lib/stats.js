@@ -4,6 +4,9 @@
 
 import { graphql, rest } from './github.js';
 import { windowSum } from './engine.js';
+import { weekStart, addDays } from './time.js';
+
+const MAX_STATIONS = 6;
 
 const QUERY = `query($login: String!) {
   user(login: $login) {
@@ -63,6 +66,68 @@ async function viaGraphQL(login, token) {
   };
 }
 
+// Stations on the Commit Metro: the repos I committed to most this year, each at its busiest week.
+const STATIONS_QUERY = `query($login: String!) {
+  user(login: $login) {
+    contributionsCollection {
+      commitContributionsByRepository(maxRepositories: 25) {
+        repository { name isPrivate stargazerCount primaryLanguage { name color } }
+        contributions(first: 100) { nodes { occurredAt commitCount } }
+      }
+    }
+  }
+}`;
+
+/** Most-committed public repos (the profile repo itself is Commit Street, so it's left out). */
+export function stationsFromContributions(byRepository, login) {
+  return byRepository
+    .filter((r) => r.repository && !r.repository.isPrivate && r.repository.name.toLowerCase() !== login.toLowerCase())
+    .map((r) => {
+      const weeks = new Map();
+      for (const { occurredAt, commitCount } of r.contributions.nodes) {
+        const week = weekStart(occurredAt.slice(0, 10));
+        weeks.set(week, (weeks.get(week) ?? 0) + commitCount);
+      }
+      const [week] = [...weeks].sort((a, b) => b[1] - a[1] || (a[0] < b[0] ? 1 : -1))[0] ?? [];
+      return {
+        name: r.repository.name,
+        color: r.repository.primaryLanguage?.color ?? '#8b949e',
+        stars: r.repository.stargazerCount,
+        commits: [...weeks.values()].reduce((sum, c) => sum + c, 0),
+        week,
+      };
+    })
+    .filter((s) => s.week)
+    .sort((a, b) => b.commits - a.commits)
+    .slice(0, MAX_STATIONS)
+    .sort((a, b) => (a.week < b.week ? -1 : 1));
+}
+
+/** Fallback without per-repo commit data: recently pushed repos, each at the week of its last push. */
+export function stationsFromRepos(repos, login, today = new Date().toISOString().slice(0, 10)) {
+  const yearAgo = addDays(today, -364);
+  return repos
+    .filter((r) => !r.fork && !r.private && r.name.toLowerCase() !== login.toLowerCase() && r.pushed_at?.slice(0, 10) >= yearAgo)
+    .sort((a, b) => (a.pushed_at < b.pushed_at ? 1 : -1))
+    .slice(0, MAX_STATIONS)
+    .map((r) => ({ name: r.name, color: '#8b949e', stars: r.stargazers_count, commits: null, week: weekStart(r.pushed_at.slice(0, 10)) }))
+    .sort((a, b) => (a.week < b.week ? -1 : 1));
+}
+
+async function stationsViaGraphQL(login, token, log) {
+  try {
+    const { user } = await graphql(token, STATIONS_QUERY, { login });
+    return stationsFromContributions(user.contributionsCollection.commitContributionsByRepository, login);
+  } catch (err) {
+    log(`Per-repo commits failed, using recently pushed repos for stations: ${err.message}`);
+    try {
+      return stationsFromRepos(await rest(`/users/${login}/repos?per_page=100&type=owner`, { token }), login);
+    } catch {
+      return [];
+    }
+  }
+}
+
 /** Parses the public contribution calendar HTML (the same grid you see on a profile). */
 export function parseCalendarHtml(html) {
   const tips = new Map();
@@ -103,6 +168,7 @@ async function viaPublicPages(login) {
     mergedPRs: prs.total_count,
     languages: topLanguages(sizes),
     calendar,
+    stations: stationsFromRepos(repos, login, calendar.at(-1).d),
   };
 }
 
@@ -110,7 +176,8 @@ async function viaPublicPages(login) {
 export async function fetchStats(login, token, log = console.warn) {
   if (token) {
     try {
-      return await viaGraphQL(login, token);
+      const stats = await viaGraphQL(login, token);
+      return { ...stats, stations: await stationsViaGraphQL(login, token, log) };
     } catch (err) {
       log(`GraphQL stats failed, trying public pages: ${err.message}`);
     }

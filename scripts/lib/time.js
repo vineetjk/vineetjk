@@ -25,6 +25,9 @@ export function addDays(date, n) {
 
 export const weekday = (date) => new Date(`${date}T00:00:00Z`).getUTCDay();
 
+/** The Sunday that starts `date`'s week, matching the columns of GitHub's contribution graph. */
+export const weekStart = (date) => addDays(date, -weekday(date));
+
 export function isTradingDay(date, market) {
   const day = weekday(date);
   return day !== 0 && day !== 6 && !market.holidays.includes(date);

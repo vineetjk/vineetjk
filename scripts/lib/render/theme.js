@@ -3,6 +3,7 @@
 
 export const THEMES = {
   dark: {
+    scheme: 'dark',
     panel: '#0f151d',
     panel2: '#17202b',
     border: '#253140',
@@ -16,6 +17,7 @@ export const THEMES = {
     onAccent: '#0f151d',
   },
   light: {
+    scheme: 'light',
     panel: '#fbfcfd',
     panel2: '#f0f3f6',
     border: '#d5dce3',

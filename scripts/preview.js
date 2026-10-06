@@ -13,8 +13,8 @@ import { fileURLToPath } from 'node:url';
 import { execFileSync } from 'node:child_process';
 import { loadConfig } from './lib/config.js';
 import { createState, advance, placeOrder, markProcessed, shareholders } from './lib/engine.js';
-import { fetchStats } from './lib/stats.js';
-import { fetchDataUri } from './lib/github.js';
+import { fetchStats, stationsFromRepos } from './lib/stats.js';
+import { fetchDataUri, rest } from './lib/github.js';
 import { parseOrder } from './lib/orders.js';
 import { toReceipt } from './lib/receipts.js';
 import { addDays, isTradingDay, marketClock } from './lib/time.js';
@@ -31,6 +31,8 @@ const TRADERS = [
 const cfg = loadConfig();
 const statsFile = fileURLToPath(new URL('../data/stats.json', import.meta.url));
 const realStats = existsSync(statsFile) ? JSON.parse(readFileSync(statsFile, 'utf8')) : await fetchStats(cfg.login);
+// Snapshots from before the metro have no stations; borrow them from the public repo list.
+realStats.stations ??= stationsFromRepos(await rest(`/users/${cfg.login}/repos?per_page=100&type=owner`), cfg.login, realStats.calendar.at(-1).d);
 
 // Seeded, so every rehearsal tells the same story.
 let seed = 20261006;

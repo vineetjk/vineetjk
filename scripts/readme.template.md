@@ -12,6 +12,8 @@
 
 <p align="center">{{panel:fundamentals}}</p>
 
+<p align="center">{{panel:metro}}</p>
+
 <details>
 <summary>How does this work?</summary>
 <br>
