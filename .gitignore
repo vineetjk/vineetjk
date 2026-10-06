@@ -1,0 +1,4 @@
+node_modules/
+.vjk/
+preview/
+.DS_Store

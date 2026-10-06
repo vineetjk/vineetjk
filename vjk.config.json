@@ -1,0 +1,29 @@
+{
+  "login": "vineetjk",
+  "repo": "vineetjk/vineetjk",
+  "displayName": "Vineet J K",
+  "buyMeACoffee": "vineetjk",
+  "symbol": "VJK",
+  "exchangeName": "Commit Street",
+  "listingPrice": 100,
+  "baseline30": 30,
+  "pullToFairValue": 0.2,
+  "impactPerShare": 0.0015,
+  "circuit": 0.1,
+  "tick": 0.05,
+  "maxQty": 25,
+  "whaleQty": 20,
+  "startingCash": 10000,
+  "cooldownMinutes": 10,
+  "dividendPerMergedPR": 2,
+  "allowOwnerTrading": false,
+  "backfillSessions": 70,
+  "chartSessions": 80,
+  "keepCandles": 400,
+  "market": {
+    "utcOffsetMinutes": 330,
+    "open": "09:15",
+    "close": "15:30",
+    "holidays": []
+  }
+}

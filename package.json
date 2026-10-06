@@ -1,0 +1,14 @@
+{
+  "name": "commit-street",
+  "private": true,
+  "description": "My GitHub profile, listed as a stock. Commits set the fair value, visitors set the price.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "tick": "node scripts/tick.js",
+    "preview": "node scripts/preview.js",
+    "test": "node --test test/"
+  }
+}
