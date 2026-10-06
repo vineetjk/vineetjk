@@ -1,47 +1,47 @@
 {
-  "source": "public",
+  "source": "graphql",
   "login": "vineetjk",
   "name": "Vineet J Karni",
-  "avatarUrl": "https://avatars.githubusercontent.com/u/42497152?v=4",
+  "avatarUrl": "https://avatars.githubusercontent.com/u/42497152?u=56bd4a2e2e27f41492a6e8e676c9c680ddb89e01&v=4",
   "followers": 16,
   "repos": 51,
   "stars": 19,
   "mergedPRs": 21,
   "languages": [
     {
-      "name": "HTML",
-      "color": "#e34c26",
-      "size": 492971
+      "name": "C",
+      "color": "#555555",
+      "size": 8475611
     },
     {
       "name": "JavaScript",
       "color": "#f1e05a",
-      "size": 175338
+      "size": 4880188
     },
     {
-      "name": "SCSS",
-      "color": "#c6538c",
-      "size": 6255
+      "name": "HTML",
+      "color": "#e34c26",
+      "size": 2667238
+    },
+    {
+      "name": "CSS",
+      "color": "#663399",
+      "size": 1159820
     },
     {
       "name": "TypeScript",
       "color": "#3178c6",
-      "size": 3137
+      "size": 215407
     },
     {
-      "name": "Kotlin",
-      "color": "#A97BFF",
-      "size": 2796
-    },
-    {
-      "name": "C",
-      "color": "#555555",
-      "size": 1312
+      "name": "SCSS",
+      "color": "#c6538c",
+      "size": 176872
     },
     {
       "name": "Other",
       "color": "#8b949e",
-      "size": 1832
+      "size": 359523
     }
   ],
   "calendar": [
@@ -1511,8 +1511,8 @@
     },
     {
       "d": "2026-10-06",
-      "c": 0
+      "c": 12
     }
   ],
-  "fetchedAt": "2026-10-06T02:40:01.213Z"
+  "fetchedAt": "2026-10-06T04:37:07.008Z"
 }
