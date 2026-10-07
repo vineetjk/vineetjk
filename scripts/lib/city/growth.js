@@ -47,8 +47,15 @@ export function cityPlan(contributions, rules = DEFAULT_RULES) {
   };
 }
 
-/** The city's high-water mark: the peak only ever goes up. */
-export function nextPeak(previous, contributions) {
-  const peak = Math.max(previous?.peak ?? 0, contributions ?? 0);
-  return previous?.peak === peak ? previous : { peak };
+/** data/city.json after a tick: the highest all-time total seen (it only goes up) and the light. */
+export const cityState = (previous, contributions, phase) => ({ peak: Math.max(previous?.peak ?? 0, contributions ?? 0), phase });
+
+/** What changed in the city between two ticks, for the commit message. */
+export function cityNews(before, after, rules) {
+  if (!before) return [];
+  const built = cityPlan(after.peak, rules).buildings - cityPlan(before.peak ?? 0, rules).buildings;
+  const news = [];
+  if (built > 0) news.push(built === 1 ? 'a new building' : `${built} new buildings`);
+  if (before.phase && before.phase !== after.phase) news.push(after.phase);
+  return news;
 }

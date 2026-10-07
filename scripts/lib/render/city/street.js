@@ -14,8 +14,8 @@ export function streetDefs(p) {
   const pillarH = Y.median + 3 - RAIL_Y;
   const lampTop = 334;
   const glow = p.lit
-    ? `<polygon points="${pts([150, lampTop + 6], [158, lampTop + 6], [176, Y.nearOuter - 2], [128, Y.nearOuter - 2])}" fill="${p.lamp}" opacity="${n(0.07 + 0.06 * p.phase.lights)}"/>`
-      + `<ellipse cx="152" cy="${Y.nearInner + 3}" rx="30" ry="7" fill="${p.lamp}" opacity="${n(0.1 + 0.08 * p.phase.lights)}"/>`
+    ? `<polygon points="${pts([150, lampTop + 6], [158, lampTop + 6], [176, Y.lanes.nearOuter - 2], [128, Y.lanes.nearOuter - 2])}" fill="${p.lamp}" opacity="${n(0.07 + 0.06 * p.phase.lights)}"/>`
+      + `<ellipse cx="152" cy="${Y.lanes.nearInner + 3}" rx="30" ry="7" fill="${p.lamp}" opacity="${n(0.1 + 0.08 * p.phase.lights)}"/>`
       + `<circle cx="153" cy="${lampTop + 5}" r="9" fill="url(#glow)" opacity=".55"/>`
     : '';
   return [

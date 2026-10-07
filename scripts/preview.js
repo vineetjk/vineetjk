@@ -1,11 +1,13 @@
 #!/usr/bin/env node
 // Dress rehearsal: replays a few weeks of made-up trading through the real engine, then renders
-// the README and every SVG into ./preview (git-ignored) so you can eyeball it before pushing.
+// both READMEs and every SVG into ./preview (git-ignored) so you can eyeball them before pushing.
 //
-//   node scripts/preview.js          simulate and write preview/{dark,light}.html
-//   node scripts/preview.js --shots  also screenshot both pages with headless Chrome
+//   node scripts/preview.js          simulate and write preview/{dark,light}.html (Commit City)
+//                                    and preview/market-{dark,light}.html (the $VJK market)
+//   node scripts/preview.js --shots  also screenshot every page with headless Chrome
 //
-// VJK_NOW sets the moment the rehearsal ends (default: 13:05 IST today, mid-session).
+// VJK_NOW sets the moment the rehearsal ends (default: 13:05 IST today, mid-session), which also
+// sets the light over Commit City.
 
 import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
@@ -97,14 +99,14 @@ state.updatedAt = end.toISOString();
 // Render exactly what the real tick would, into ./preview
 rmSync(OUT, { recursive: true, force: true });
 const owner = realStats.avatarUrl ? await fetchDataUri(`${realStats.avatarUrl}&s=112`) : null;
-const files = renderAll(marketView(state, stats, cfg), { owner, users: {} });
+const files = renderAll(marketView(state, stats, cfg, { now: end }), { owner, users: {} });
 for (const f of files) {
   mkdirSync(dirname(join(OUT, f.path)), { recursive: true });
   writeFileSync(join(OUT, f.path), f.content); // plain name, handy for screenshots
   writeFileSync(join(OUT, assetPath(f)), f.content); // hashed name, what the README links
 }
 
-const page = (theme) => {
+const page = (theme, template = 'readme') => {
   const dark = theme === 'dark';
   return `<!doctype html><meta charset="utf-8"><title>${cfg.symbol} preview (${theme})</title>
 <style>
@@ -115,11 +117,15 @@ p{margin:0 0 16px} img{max-width:100%} a{color:${dark ? '#4493f8' : '#0969da'}}
 details{margin-bottom:16px} ul{padding-left:2em} li{margin:.25em 0} sub{font-size:75%}
 </style>
 <div class="readme">
-${renderReadme(cfg, files, { theme })}
+${renderReadme(cfg, files, { theme, template, base: template === 'market' ? '../' : '' })}
 </div>`;
 };
 writeFileSync(join(OUT, 'dark.html'), page('dark'));
 writeFileSync(join(OUT, 'light.html'), page('light'));
+// The market page links its images from ../assets, as market/README.md does on GitHub
+mkdirSync(join(OUT, 'market'), { recursive: true });
+writeFileSync(join(OUT, 'market', 'dark.html'), page('dark', 'market'));
+writeFileSync(join(OUT, 'market', 'light.html'), page('light', 'market'));
 
 // One receipt of each kind, to read the bot's comments before anyone else does
 const samples = new Map();
@@ -132,12 +138,12 @@ console.log(`Top holder: ${shareholders(state)[0]?.login ?? 'none'} · price ₹
 
 if (process.argv.includes('--shots')) {
   const chrome = process.env.CHROME ?? '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
-  for (const theme of ['dark', 'light']) {
+  for (const name of ['dark', 'light', 'market/dark', 'market/light']) {
     execFileSync(chrome, [
       '--headless=new', '--disable-gpu', '--hide-scrollbars', '--force-device-scale-factor=1',
-      '--window-size=900,2700', '--virtual-time-budget=8000',
-      `--screenshot=${join(OUT, `${theme}.png`)}`, `file://${join(OUT, `${theme}.html`)}`,
+      `--window-size=900,${name.startsWith('market') ? 2700 : 1100}`, '--virtual-time-budget=3000',
+      `--screenshot=${join(OUT, `${name}.png`)}`, `file://${join(OUT, `${name}.html`)}`,
     ], { stdio: 'ignore' });
   }
-  console.log(`Screenshots: ${join(OUT, 'dark.png')}, ${join(OUT, 'light.png')}`);
+  console.log(`Screenshots: ${join(OUT, '{dark,light}.png')} and ${join(OUT, 'market/{dark,light}.png')}`);
 }
