@@ -16,7 +16,7 @@
     {
       "name": "JavaScript",
       "color": "#f1e05a",
-      "size": 4925541
+      "size": 5039794
     },
     {
       "name": "HTML",
@@ -1555,5 +1555,527 @@
       "week": "2026-10-04"
     }
   ],
-  "fetchedAt": "2026-10-07T10:35:36.576Z"
+  "lifetime": {
+    "total": 925,
+    "since": 2018
+  },
+  "repoList": [
+    {
+      "name": "AllergySafe",
+      "color": "#3178c6",
+      "stars": 0,
+      "pushed": "2026-10-04",
+      "created": "2026-10-04",
+      "size": 3047,
+      "commits": 29
+    },
+    {
+      "name": "FireCrash",
+      "color": "#b07219",
+      "stars": 0,
+      "pushed": "2022-08-30",
+      "created": "2022-08-22",
+      "size": 408,
+      "commits": 0
+    },
+    {
+      "name": "H11",
+      "color": "#8b949e",
+      "stars": 0,
+      "pushed": "2024-10-03",
+      "created": "2024-10-01",
+      "size": 1,
+      "commits": 0
+    },
+    {
+      "name": "InstaTrackr",
+      "color": "#8b949e",
+      "stars": 0,
+      "pushed": "2024-01-01",
+      "created": "2024-01-01",
+      "size": 0,
+      "commits": 0
+    },
+    {
+      "name": "IoT-App",
+      "color": "#00B4AB",
+      "stars": 3,
+      "pushed": "2019-11-26",
+      "created": "2019-11-23",
+      "size": 56,
+      "commits": 0
+    },
+    {
+      "name": "ML-VI-sem",
+      "color": "#e34c26",
+      "stars": 0,
+      "pushed": "2020-02-26",
+      "created": "2020-02-14",
+      "size": 4348,
+      "commits": 0
+    },
+    {
+      "name": "Sanvich",
+      "color": "#663399",
+      "stars": 1,
+      "pushed": "2019-05-07",
+      "created": "2019-05-07",
+      "size": 487,
+      "commits": 0
+    },
+    {
+      "name": "SnapSelect",
+      "color": "#3178c6",
+      "stars": 0,
+      "pushed": "2025-12-25",
+      "created": "2024-01-01",
+      "size": 44,
+      "commits": 0
+    },
+    {
+      "name": "Voltcore-BMS",
+      "color": "#8b949e",
+      "stars": 0,
+      "pushed": "2026-05-11",
+      "created": "2026-05-11",
+      "size": 0,
+      "commits": 0
+    },
+    {
+      "name": "anglerfox-tasks",
+      "color": "#e34c26",
+      "stars": 0,
+      "pushed": "2021-06-09",
+      "created": "2021-06-09",
+      "size": 1435,
+      "commits": 0
+    },
+    {
+      "name": "bnb",
+      "color": "#e34c26",
+      "stars": 0,
+      "pushed": "2022-06-09",
+      "created": "2020-11-03",
+      "size": 58968,
+      "commits": 0
+    },
+    {
+      "name": "chatApp",
+      "color": "#A97BFF",
+      "stars": 3,
+      "pushed": "2019-10-06",
+      "created": "2019-10-06",
+      "size": 129,
+      "commits": 0
+    },
+    {
+      "name": "codejaan-web",
+      "color": "#e34c26",
+      "stars": 1,
+      "pushed": "2019-10-10",
+      "created": "2019-09-29",
+      "size": 12,
+      "commits": 0
+    },
+    {
+      "name": "coin-sorter",
+      "color": "#555555",
+      "stars": 1,
+      "pushed": "2019-05-15",
+      "created": "2019-05-15",
+      "size": 0,
+      "commits": 0
+    },
+    {
+      "name": "colorZ",
+      "color": "#A97BFF",
+      "stars": 1,
+      "pushed": "2019-11-09",
+      "created": "2019-11-09",
+      "size": 2535,
+      "commits": 0
+    },
+    {
+      "name": "colorZ-arduino",
+      "color": "#f34b7d",
+      "stars": 0,
+      "pushed": "2019-11-09",
+      "created": "2019-11-09",
+      "size": 2,
+      "commits": 0
+    },
+    {
+      "name": "coursera-practice",
+      "color": "#e34c26",
+      "stars": 0,
+      "pushed": "2022-12-05",
+      "created": "2020-04-05",
+      "size": 493,
+      "commits": 0
+    },
+    {
+      "name": "covid-resources",
+      "color": "#e34c26",
+      "stars": 0,
+      "pushed": "2021-08-23",
+      "created": "2021-08-23",
+      "size": 10,
+      "commits": 0
+    },
+    {
+      "name": "dolphin-dwr",
+      "color": "#e34c26",
+      "stars": 0,
+      "pushed": "2020-10-17",
+      "created": "2020-10-15",
+      "size": 1939,
+      "commits": 0
+    },
+    {
+      "name": "dsp",
+      "color": "#3572A5",
+      "stars": 0,
+      "pushed": "2019-10-02",
+      "created": "2019-10-02",
+      "size": 51,
+      "commits": 0
+    },
+    {
+      "name": "dsp-doc",
+      "color": "#f1e05a",
+      "stars": 0,
+      "pushed": "2021-06-16",
+      "created": "2021-06-15",
+      "size": 6323,
+      "commits": 0
+    },
+    {
+      "name": "email-marketting",
+      "color": "#e34c26",
+      "stars": 0,
+      "pushed": "2020-12-20",
+      "created": "2020-12-20",
+      "size": 6,
+      "commits": 0
+    },
+    {
+      "name": "face-recognition",
+      "color": "#3572A5",
+      "stars": 0,
+      "pushed": "2020-01-28",
+      "created": "2020-01-28",
+      "size": 2,
+      "commits": 0
+    },
+    {
+      "name": "facetrack",
+      "color": "#3572A5",
+      "stars": 0,
+      "pushed": "2019-12-09",
+      "created": "2019-12-06",
+      "size": 136,
+      "commits": 0
+    },
+    {
+      "name": "first-flutter-app",
+      "color": "#00B4AB",
+      "stars": 0,
+      "pushed": "2019-11-19",
+      "created": "2019-11-19",
+      "size": 91,
+      "commits": 0
+    },
+    {
+      "name": "flutter-flow-test",
+      "color": "#8b949e",
+      "stars": 0,
+      "pushed": "2021-10-15",
+      "created": "2021-10-15",
+      "size": 3281,
+      "commits": 0
+    },
+    {
+      "name": "git-with-pm",
+      "color": "#f1e05a",
+      "stars": 0,
+      "pushed": "2019-09-11",
+      "created": "2019-09-11",
+      "size": 0,
+      "commits": 0
+    },
+    {
+      "name": "github-demo",
+      "color": "#8b949e",
+      "stars": 0,
+      "pushed": "2019-09-08",
+      "created": "2019-09-08",
+      "size": 0,
+      "commits": 0
+    },
+    {
+      "name": "iot-gateway",
+      "color": "#555555",
+      "stars": 0,
+      "pushed": "2026-06-16",
+      "created": "2026-05-16",
+      "size": 831,
+      "commits": 0
+    },
+    {
+      "name": "iot-gateway-bl",
+      "color": "#555555",
+      "stars": 0,
+      "pushed": "2026-05-17",
+      "created": "2026-05-16",
+      "size": 481,
+      "commits": 0
+    },
+    {
+      "name": "issue-tracker",
+      "color": "#8b949e",
+      "stars": 0,
+      "pushed": "2026-04-02",
+      "created": "2026-04-02",
+      "size": 0,
+      "commits": 0
+    },
+    {
+      "name": "karresultsbyname-api",
+      "color": "#f1e05a",
+      "stars": 0,
+      "pushed": "2020-07-30",
+      "created": "2020-07-24",
+      "size": 12394,
+      "commits": 0
+    },
+    {
+      "name": "markdown-cover-letter",
+      "color": "#8b949e",
+      "stars": 0,
+      "pushed": "2021-11-28",
+      "created": "2021-11-28",
+      "size": 0,
+      "commits": 0
+    },
+    {
+      "name": "matlab-workshop",
+      "color": "#8b949e",
+      "stars": 0,
+      "pushed": "2020-02-11",
+      "created": "2020-02-11",
+      "size": 19,
+      "commits": 0
+    },
+    {
+      "name": "maze-solver",
+      "color": "#f34b7d",
+      "stars": 1,
+      "pushed": "2019-09-24",
+      "created": "2019-09-23",
+      "size": 3,
+      "commits": 0
+    },
+    {
+      "name": "next-shadcn",
+      "color": "#3178c6",
+      "stars": 0,
+      "pushed": "2023-11-06",
+      "created": "2023-11-04",
+      "size": 17,
+      "commits": 0
+    },
+    {
+      "name": "prom-grafana-loki",
+      "color": "#3178c6",
+      "stars": 0,
+      "pushed": "2023-09-19",
+      "created": "2023-09-19",
+      "size": 29,
+      "commits": 0
+    },
+    {
+      "name": "quanratine-code",
+      "color": "#8b949e",
+      "stars": 0,
+      "pushed": "2020-04-04",
+      "created": "2020-03-31",
+      "size": 964,
+      "commits": 0
+    },
+    {
+      "name": "react-profile-card",
+      "color": "#663399",
+      "stars": 4,
+      "pushed": "2020-05-01",
+      "created": "2020-05-01",
+      "size": 582,
+      "commits": 0
+    },
+    {
+      "name": "rit-course-reg",
+      "color": "#e34c26",
+      "stars": 4,
+      "pushed": "2020-08-29",
+      "created": "2020-08-28",
+      "size": 1361,
+      "commits": 0
+    },
+    {
+      "name": "sanvich-web",
+      "color": "#8b949e",
+      "stars": 0,
+      "pushed": "2019-05-07",
+      "created": "2019-05-07",
+      "size": 0,
+      "commits": 0
+    },
+    {
+      "name": "sslcscrapin",
+      "color": "#3572A5",
+      "stars": 0,
+      "pushed": "2020-02-26",
+      "created": "2019-12-16",
+      "size": 14,
+      "commits": 0
+    },
+    {
+      "name": "supertiles",
+      "color": "#e34c26",
+      "stars": 0,
+      "pushed": "2024-02-21",
+      "created": "2020-10-02",
+      "size": 424372,
+      "commits": 0
+    },
+    {
+      "name": "testamatic",
+      "color": "#c6538c",
+      "stars": 0,
+      "pushed": "2020-11-08",
+      "created": "2020-11-08",
+      "size": 6255,
+      "commits": 0
+    },
+    {
+      "name": "threejs-try",
+      "color": "#f1e05a",
+      "stars": 0,
+      "pushed": "2021-01-04",
+      "created": "2021-01-04",
+      "size": 156325,
+      "commits": 0
+    },
+    {
+      "name": "tictactoe-online",
+      "color": "#A97BFF",
+      "stars": 0,
+      "pushed": "2019-09-17",
+      "created": "2019-09-16",
+      "size": 132,
+      "commits": 0
+    },
+    {
+      "name": "tripppyyy",
+      "color": "#f1e05a",
+      "stars": 0,
+      "pushed": "2026-03-16",
+      "created": "2026-03-16",
+      "size": 134,
+      "commits": 4
+    },
+    {
+      "name": "unico",
+      "color": "#e34c26",
+      "stars": 0,
+      "pushed": "2019-09-22",
+      "created": "2019-09-22",
+      "size": 0,
+      "commits": 0
+    },
+    {
+      "name": "vfd-explorer",
+      "color": "#e34c26",
+      "stars": 0,
+      "pushed": "2026-03-02",
+      "created": "2026-03-02",
+      "size": 27,
+      "commits": 3
+    },
+    {
+      "name": "wordle-react",
+      "color": "#f1e05a",
+      "stars": 0,
+      "pushed": "2022-09-10",
+      "created": "2022-09-10",
+      "size": 162,
+      "commits": 0
+    }
+  ],
+  "prs": [
+    {
+      "repo": "tripppyyy",
+      "number": 1,
+      "merged": "2026-03-16"
+    },
+    {
+      "repo": "tripppyyy",
+      "number": 2,
+      "merged": "2026-03-16"
+    },
+    {
+      "repo": "tripppyyy",
+      "number": 3,
+      "merged": "2026-03-16"
+    },
+    {
+      "repo": "Alpha-Fin",
+      "number": 2,
+      "merged": "2026-07-13"
+    },
+    {
+      "repo": "Alpha-Fin",
+      "number": 3,
+      "merged": "2026-07-13"
+    },
+    {
+      "repo": "Alpha-Fin",
+      "number": 5,
+      "merged": "2026-07-13"
+    },
+    {
+      "repo": "Alpha-Fin",
+      "number": 6,
+      "merged": "2026-07-13"
+    },
+    {
+      "repo": "Alpha-Fin",
+      "number": 8,
+      "merged": "2026-07-13"
+    },
+    {
+      "repo": "Alpha-Fin",
+      "number": 9,
+      "merged": "2026-07-13"
+    },
+    {
+      "repo": "Alpha-Fin",
+      "number": 10,
+      "merged": "2026-07-13"
+    }
+  ],
+  "posts": [
+    {
+      "title": "I turned my GitHub contribution graph into a Metro train",
+      "published": "2026-10-06"
+    },
+    {
+      "title": "I IPO'd my GitHub profile. You can buy shares in me.",
+      "published": "2026-10-06"
+    },
+    {
+      "title": "Can Prithvi Eat This? A Food Companion I Built for My Friend Living in a PG",
+      "published": "2026-10-04"
+    }
+  ],
+  "fetchedAt": "2026-10-07T12:10:38.748Z"
 }

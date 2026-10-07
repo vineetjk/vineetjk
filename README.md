@@ -1,4 +1,14 @@
-<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/metro.08ea9b4dc4.svg"><img src="assets/light/metro.c45d5a917a.svg" width="100%" alt="Commit Metro: my last 53 weeks of GitHub contributions as one long Namma Metro train on the purple line, one coach per week and one window per day, lit for days I committed. 215 contributions since 05 Oct. It slows under a sign for each of my busiest repos: vfd-explorer, tripppyyy, Alpha-Fin, Vyuha-Network, AllergySafe. Its head pulls up at Commit Street, where $VJK trades at ₹60.60."></picture></p>
+<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/city.944f28c179.svg"><img src="assets/light/city.b2f97f1d3c.svg" width="100%" alt="Commit City: a Bengaluru that grows with my GitHub contributions, 925 so far since 2018. It has 15 buildings, one for each of my public repos (AllergySafe, tripppyyy, vfd-explorer, iot-gateway, iot-gateway-bl and 10 more). Commit Soudha, the town hall, is 18% built and opens at 1,500 contributions. 10 BMTC buses carry the pull requests I merged this year. Banner planes fly my DEV posts. The Commit Metro train runs through it with my last 53 weeks, one coach per week and one window per day, lit for days I committed, and stops at Commit Street, where $VJK trades at ₹60.60. It's day in Bengaluru."></picture></p>
+
+<details>
+<summary>How Commit City works</summary>
+<br>
+<p>Everything in this city comes from my GitHub activity, and it grows as I commit. The first building cost 25 contributions and each one after costs 5 more, so it filled in quickly at first and grows slower now. It never shrinks.</p>
+<p>Each building is one of my public repos. Repos I pushed to in the last four months are glass towers, the ones from the last two years are apartment blocks, and older ones are tile-roof houses. The more I committed to a repo this year, the taller it is.</p>
+<p>The metro is my contribution graph: one coach per week and one window per day, lit on days I committed. The street under each coach is as busy as that week was. BMTC buses are pull requests merged this year, with the repo and PR number on the side, and the planes carry my DEV posts.</p>
+<p>Commit Soudha, the town hall, starts going up at 800 contributions and opens at 1,500. There's a new tree for every 20.</p>
+<p>The sky follows the time in Bengaluru. A GitHub Action redraws the city a few times a day, so there's no server and nothing to update by hand.</p>
+</details>
 
 <p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/sign.7bbc92792e.svg"><img src="assets/light/sign.6c69be064b.svg" width="100%" alt="COMMIT STREET, in golden lights"></picture></p>
 
@@ -17,7 +27,7 @@
 
 <p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/book.7e94457395.svg"><img src="assets/light/book.20ec3fe961.svg" width="100%" alt="Largest shareholder: @Santhu32144 with 30 shares. Last trade: buy 25 at ₹57.60. Market is closed. New orders go through at 09:15 IST on Thu 08 Oct."></picture></p>
 
-<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/fundamentals.b57ea8efeb.svg"><img src="assets/light/fundamentals.ebe3182c1f.svg" width="100%" alt="Fundamentals from GitHub: 61 contributions in 30 days, 215 in a year, 4-day streak, 51 public repos, 19 stars, 16 followers, 21 merged PRs. Top languages: C, JavaScript, HTML."></picture></p>
+<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/fundamentals.15226d1dc9.svg"><img src="assets/light/fundamentals.c3eead2326.svg" width="100%" alt="Fundamentals from GitHub: 61 contributions in 30 days, 215 in a year, 4-day streak, 51 public repos, 19 stars, 16 followers, 21 merged PRs. Top languages: C, JavaScript, HTML."></picture></p>
 
 <details>
 <summary>How does this work?</summary>
