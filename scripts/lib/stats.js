@@ -210,14 +210,15 @@ export function parseYearTotal(html) {
 }
 
 async function lifetimeFromPages(login, firstYear, lastYear) {
-  const years = Array.from({ length: lastYear - firstYear + 1 }, (_, k) => firstYear + k);
-  const counts = await Promise.all(years.map(async (y) => {
+  // One page at a time: github.com is slow to serve these when asked for many at once
+  const counts = [];
+  for (let y = firstYear; y <= lastYear; y++) {
     const r = await fetch(`https://github.com/users/${login}/contributions?from=${y}-01-01&to=${y}-12-31`, { signal: AbortSignal.timeout(20_000) });
     if (!r.ok) throw new Error(`contributions ${y} → ${r.status}`);
     const total = parseYearTotal(await r.text());
     if (total == null) throw new Error(`no total on the ${y} contributions page`);
-    return [y, total];
-  }));
+    counts.push([y, total]);
+  }
   return lifetimeOf(counts);
 }
 
@@ -240,45 +241,17 @@ export function parseCalendarHtml(html) {
     .sort((a, b) => (a.d < b.d ? -1 : 1));
 }
 
-async function viaPublicPages(login, log = console.warn) {
-  const [user, repos, prs, html] = await Promise.all([
-    rest(`/users/${login}`),
-    rest(`/users/${login}/repos?per_page=100&type=owner`),
-    rest(`/search/issues?q=${encodeURIComponent(`author:${login} type:pr is:merged`)}&per_page=50&sort=created&order=desc`),
-    fetch(`https://github.com/users/${login}/contributions`, { signal: AbortSignal.timeout(20_000) }).then((r) => {
-      if (!r.ok) throw new Error(`contributions page → ${r.status}`);
-      return r.text();
-    }),
-  ]);
-  const own = repos.filter((r) => !r.fork);
-  const sizes = new Map();
-  for (const r of own) {
-    if (!r.language) continue;
-    const lang = sizes.get(r.language) ?? { name: r.language, color: COLORS[r.language] ?? '#8b949e', size: 0 };
-    lang.size += r.size;
-    sizes.set(r.language, lang);
-  }
-  const calendar = parseCalendarHtml(html);
-  if (calendar.length < 300) throw new Error(`contribution calendar looks wrong (${calendar.length} days)`);
-  const today = calendar.at(-1).d;
+const MERGED_PRS = (login) => `/search/issues?q=${encodeURIComponent(`author:${login} type:pr is:merged`)}&per_page=50&sort=created&order=desc`;
+
+/** The city's extras from the REST API and the yearly contribution pages. */
+async function cityFromRest(login, today, { user, repos, prs }, log) {
   const lifetime = await lifetimeFromPages(login, Number(user.created_at.slice(0, 4)), Number(today.slice(0, 4))).catch((err) => {
     log(`Yearly contribution pages failed, keeping the previous lifetime total: ${err.message}`);
     return undefined;
   });
   return {
-    source: 'public',
-    login: user.login,
-    name: user.name,
-    avatarUrl: user.avatar_url,
-    followers: user.followers,
-    repos: own.length,
-    stars: own.reduce((sum, r) => sum + r.stargazers_count, 0),
-    mergedPRs: prs.total_count,
-    languages: topLanguages(sizes),
-    calendar,
-    stations: stationsFromRepos(repos, login, today),
     lifetime,
-    repoList: repoListOf(own.filter((r) => !r.private).map((r) => ({
+    repoList: repoListOf(repos.filter((r) => !r.fork && !r.private).map((r) => ({
       name: r.name,
       color: COLORS[r.language] ?? '#8b949e',
       stars: r.stargazers_count,
@@ -295,13 +268,68 @@ async function viaPublicPages(login, log = console.warn) {
   };
 }
 
+/** Fallback for when the GraphQL city query fails: the same extras over REST. */
+async function cityViaRest(login, token, today, log) {
+  try {
+    const [user, repos, prs] = await Promise.all([
+      rest(`/users/${login}`, { token }),
+      rest(`/users/${login}/repos?per_page=100&type=owner`, { token }),
+      rest(MERGED_PRS(login), { token }),
+    ]);
+    return await cityFromRest(login, today, { user, repos, prs }, log);
+  } catch (err) {
+    log(`City stats over REST failed too, keeping the previous ones: ${err.message}`);
+    return {};
+  }
+}
+
+async function viaPublicPages(login, log = console.warn) {
+  const [user, repos, prs, html] = await Promise.all([
+    rest(`/users/${login}`),
+    rest(`/users/${login}/repos?per_page=100&type=owner`),
+    rest(MERGED_PRS(login)),
+    fetch(`https://github.com/users/${login}/contributions`, { signal: AbortSignal.timeout(20_000) }).then((r) => {
+      if (!r.ok) throw new Error(`contributions page → ${r.status}`);
+      return r.text();
+    }),
+  ]);
+  const own = repos.filter((r) => !r.fork);
+  const sizes = new Map();
+  for (const r of own) {
+    if (!r.language) continue;
+    const lang = sizes.get(r.language) ?? { name: r.language, color: COLORS[r.language] ?? '#8b949e', size: 0 };
+    lang.size += r.size;
+    sizes.set(r.language, lang);
+  }
+  const calendar = parseCalendarHtml(html);
+  if (calendar.length < 300) throw new Error(`contribution calendar looks wrong (${calendar.length} days)`);
+  const today = calendar.at(-1).d;
+  return {
+    source: 'public',
+    login: user.login,
+    name: user.name,
+    avatarUrl: user.avatar_url,
+    followers: user.followers,
+    repos: own.length,
+    stars: own.reduce((sum, r) => sum + r.stargazers_count, 0),
+    mergedPRs: prs.total_count,
+    languages: topLanguages(sizes),
+    calendar,
+    stations: stationsFromRepos(repos, login, today),
+    ...(await cityFromRest(login, today, { user, repos, prs }, log)),
+  };
+}
+
 /** Fresh stats, trying GraphQL first, then public pages. Throws only if both fail. */
 export async function fetchStats(login, token, log = console.warn) {
   if (token) {
     try {
       const stats = await viaGraphQL(login, token);
       const { stations, commits } = await stationsViaGraphQL(login, token, log);
-      return { ...stats, stations, ...(await cityViaGraphQL(login, token, commits, stats.calendar.at(-1).d, log)) };
+      const today = stats.calendar.at(-1).d;
+      let city = await cityViaGraphQL(login, token, commits, today, log);
+      if (!city.lifetime) city = { ...(await cityViaRest(login, token, today, log)), ...city };
+      return { ...stats, stations, ...city };
     } catch (err) {
       log(`GraphQL stats failed, trying public pages: ${err.message}`);
     }

@@ -12,7 +12,6 @@
 
 import { svg, text, width, n, seeded } from './common.js';
 import { rupees } from '../money.js';
-import { fmtDate } from '../time.js';
 import { cityRules, cityPlan } from '../city/growth.js';
 import { PALETTES, CH, LINES, weeksOf, stationsOf, lineOf, trainDefs, trainOf, viaduct, gantry, commitStreet, journey, animator, FADE, routeMap } from './metro.js';
 import { KN, kn, knWidth } from './kannada.js';
@@ -86,7 +85,8 @@ export function city(v, theme) {
   const spots = { darshini: bayStart(A + 30), stairs: A + 236, busStop: bayStart(A - 140) + 3 };
   const reserved = [[spots.darshini, spots.darshini + 134], [spots.stairs - 26, spots.stairs + 64], [spots.busStop - 4, spots.busStop + 60], [A - 470, A - 130]];
   const thisWeek = weeks.at(-1)?.days.reduce((sum, d) => sum + d.c, 0) ?? 0;
-  const moving = traffic({ weeks, prs: stats.prs, plan, p, A, xEnd, world, frames: journey(geo, stations, ZOOM), busStop: spots.busStop });
+  const frames = journey(geo, stations, ZOOM);
+  const moving = traffic({ weeks, prs: stats.prs, plan, p, A, xEnd, world, frames, busStop: spots.busStop });
   const near = [
     ...backStreet(xEnd, p),
     parkLawn(A - 470, A - 130, p),
@@ -112,7 +112,6 @@ export function city(v, theme) {
   const total = plan.contributions;
   const header = cityHeader(p, plan, stats);
 
-  const frames = journey(geo, stations, ZOOM);
   const animate = animator(frames, { u: last, zoom: ZOOM.rest });
   const css = [
     `.zoom{transform-origin:${ANCHOR}px ${RAIL_Y - CH}px}`,

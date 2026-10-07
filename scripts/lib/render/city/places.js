@@ -2,7 +2,7 @@
 // Park's lawn and trees around Commit Soudha, and the trees along the road (one per 20
 // contributions, each always in the same spot, so new ones never shuffle the old).
 
-import { n, pts, esc, seeded } from '../common.js';
+import { n, pts, seeded } from '../common.js';
 import { KN, kn, knWidth } from '../kannada.js';
 import { mix } from './palette.js';
 import { Y } from './layout.js';
