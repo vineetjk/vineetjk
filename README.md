@@ -1,4 +1,4 @@
-<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/city.b20d460993.svg"><img src="assets/light/city.7326170c10.svg" width="100%" alt="Commit City: a Bengaluru that grows with my GitHub contributions, 933 so far since 2018. It has 15 buildings, one for each of my public repos (AllergySafe, tripppyyy, vfd-explorer, iot-gateway, iot-gateway-bl and 10 more). Commit Soudha, the town hall, is 19% built and opens at 1,500 contributions. 10 BMTC buses carry the pull requests I merged this year. Banner planes fly my DEV posts. The Commit Metro train runs through it with my last 53 weeks, one coach per week and one window per day, lit for days I committed, and stops at Commit Street, where $VJK trades at ₹60.60. It's night in Bengaluru."></picture></p>
+<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/city.c95b97c495.svg"><img src="assets/light/city.8942f9b872.svg" width="100%" alt="Commit City: a Bengaluru that grows with my GitHub contributions, 934 so far since 2018. It has 15 buildings, one for each of my public repos (AllergySafe, tripppyyy, vfd-explorer, iot-gateway, iot-gateway-bl and 10 more). Commit Soudha, the town hall, is 19% built and opens at 1,500 contributions. 10 BMTC buses carry the pull requests I merged this year. Banner planes fly my DEV posts. The Commit Metro train runs through it with my last 53 weeks, one coach per week and one window per day, lit for days I committed, and stops at Commit Street, where $VJK trades at ₹60.60. It's night in Bengaluru."></picture></p>
 
 <details>
 <summary>How Commit City works</summary>
@@ -12,9 +12,9 @@
 
 <p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/sign.7bbc92792e.svg"><img src="assets/light/sign.6c69be064b.svg" width="100%" alt="COMMIT STREET, in golden lights"></picture></p>
 
-<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/ticker.50beb6a537.svg"><img src="assets/light/ticker.746581fb3f.svg" width="100%" alt="$VJK ₹60.60 +9.98%. market closed. Closing bell: $VJK ₹60.60 ▲ +9.98%, fair value ₹119.35"></picture></p>
+<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/ticker.3166e8ff02.svg"><img src="assets/light/ticker.c4f3e55424.svg" width="100%" alt="$VJK ₹60.60 +9.98%. market closed. Closing bell: $VJK ₹60.60 ▲ +9.98%, fair value ₹119.35"></picture></p>
 
-<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/quote.5cbe91eee9.svg"><img src="assets/light/quote.7543515bfd.svg" width="100%" alt="$VJK at ₹60.60, +9.98% at last close, market closed. Fair value from commits: ₹140.55. Circuit band ₹49.60 to ₹60.60."></picture></p>
+<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/quote.6653cf76dc.svg"><img src="assets/light/quote.6607a704aa.svg" width="100%" alt="$VJK at ₹60.60, +9.98% at last close, market closed. Fair value from commits: ₹141.40. Circuit band ₹49.60 to ₹60.60."></picture></p>
 
 <p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/chart.385af7eb10.svg"><img src="assets/light/chart.f05bfc84f8.svg" width="100%" alt="Daily candlestick chart of $VJK over 71 sessions from 30 Jun, with the fair value implied by commit activity. Last price 60.60."></picture></p>
 
@@ -27,7 +27,7 @@
 
 <p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/book.7e94457395.svg"><img src="assets/light/book.20ec3fe961.svg" width="100%" alt="Largest shareholder: @Santhu32144 with 30 shares. Last trade: buy 25 at ₹57.60. Market is closed. New orders go through at 09:15 IST on Thu 08 Oct."></picture></p>
 
-<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/fundamentals.004eb1ca53.svg"><img src="assets/light/fundamentals.dc0d8210d8.svg" width="100%" alt="Fundamentals from GitHub: 69 contributions in 30 days, 223 in a year, 4-day streak, 51 public repos, 19 stars, 16 followers, 21 merged PRs. Top languages: C, JavaScript, HTML."></picture></p>
+<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/fundamentals.2d91206076.svg"><img src="assets/light/fundamentals.55104e37f3.svg" width="100%" alt="Fundamentals from GitHub: 70 contributions in 30 days, 224 in a year, 4-day streak, 51 public repos, 19 stars, 16 followers, 21 merged PRs. Top languages: C, JavaScript, HTML."></picture></p>
 
 <details>
 <summary>How does this work?</summary>
