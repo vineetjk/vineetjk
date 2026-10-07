@@ -151,7 +151,6 @@ for (const dir of new Set(files.map((f) => dirname(f.path)))) {
 }
 for (const f of files) write(assetPath(f), f.content);
 write('README.md', renderReadme(cfg, files));
-write('market/README.md', renderReadme(cfg, files, { template: 'market', base: '../' }));
 writeJson('data/market.json', state);
 writeJson('data/stats.json', stats);
 writeJson('data/city.json', city);

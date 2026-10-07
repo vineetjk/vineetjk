@@ -1,16 +1,15 @@
 # Commit City and Commit Street
 
-The engine behind my GitHub profile: Commit City on the front page, and the `$VJK` stock market
-on [market/README.md](../market/README.md). Plain Node (20+), no dependencies.
+The engine behind my GitHub profile: Commit City on top, and the `$VJK` stock market under it.
+Plain Node (20+), no dependencies.
 
 ```
 vjk.config.json          every tunable: the market's symbol, prices and hours, the city's growth rules
 scripts/
-  tick.js                one tick: stats → bells → orders → SVGs → both READMEs
+  tick.js                one tick: stats → bells → orders → SVGs → README
   settle.js              comments receipts on order issues and closes them (after the push)
   preview.js             replays fake trading into ./preview to eyeball the design
-  readme.template.md     the profile (Commit City); edit this, not README.md
-  market.template.md     the market page; edit this, not market/README.md
+  readme.template.md     edit this, not README.md (it's regenerated every tick)
   lib/engine.js          the market as a pure state machine
   lib/city/growth.js     how many buildings, trees and extras a contribution total buys
   lib/render/            one file per SVG panel, dark + light
@@ -39,7 +38,8 @@ Kannada (wght 700) with fontTools, and measure its width in a browser.
 
 ```sh
 npm test                       # rules, rendering and the tick end to end
-node scripts/preview.js --shots  # fake traders → preview/{dark,light}.html and preview/market/ (+ PNGs via Chrome)
+node scripts/preview.js --shots  # fake traders → preview/dark.html, light.html (+ PNGs via Chrome)
+node scripts/preview.js --phases # also preview/phases.html: Commit City at dawn, day, dusk and night
 node scripts/tick.js           # a real tick against public GitHub data (no token needed)
 ```
 
@@ -47,6 +47,6 @@ node scripts/tick.js           # a real tick against public GitHub data (no toke
 
 1. Copy `scripts/`, `.github/`, `package.json` and `vjk.config.json` into your `<username>/<username>` repo.
 2. In `vjk.config.json`, set `login`, `repo`, `displayName` and `symbol` (and set `baseline30` to roughly your usual 30-day contribution count). Change the `'VJK'` in the workflow's `if:` to your symbol too. Set `devUsername` for banner planes, or remove it.
-3. Adjust `scripts/readme.template.md` and `scripts/market.template.md` if you want different text around the panels.
+3. Adjust `scripts/readme.template.md` if you want different text around the panels.
 4. Delete `data/` (yours is created on the first tick), push, then run the workflow once from the Actions tab.
 5. Optional: add a `PROFILE_TOKEN` secret (fine-grained, read-only) to count private contributions.

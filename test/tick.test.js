@@ -42,7 +42,7 @@ test('tick: list, queue an AMO before the bell, fill it at the open, then go qui
   assert.deepEqual(first.receipts.map((r) => [r.issue, r.close]), [[7, false]], 'queued orders stay open; non-orders are ignored');
   assert.match(first.receipts[0].body, /Queued/);
   assert.match(readFileSync(join(env.root, 'README.md'), 'utf8'), /assets\/dark\/city\.[0-9a-f]{10}\.svg/);
-  assert.match(readFileSync(join(env.root, 'market/README.md'), 'utf8'), /\.\.\/assets\/dark\/quote\.[0-9a-f]{10}\.svg/);
+  assert.match(readFileSync(join(env.root, 'README.md'), 'utf8'), /assets\/dark\/quote\.[0-9a-f]{10}\.svg/);
   assert.deepEqual(JSON.parse(readFileSync(join(env.root, 'data/city.json'), 'utf8')), { peak: 365, phase: 'day' });
   assert.equal(readdirSync(join(env.root, 'assets/dark')).length, 12 + (cfg.buyMeACoffee ? 1 : 0));
 
@@ -53,10 +53,8 @@ test('tick: list, queue an AMO before the bell, fill it at the open, then go qui
   assert.match(second.receipts[0].body, /Filled/);
   // Old image versions are cleaned up, and every image the README links to exists.
   assert.equal(readdirSync(join(env.root, 'assets/dark')).length, 12 + (cfg.buyMeACoffee ? 1 : 0));
-  for (const page of ['README.md', 'market/README.md']) {
-    for (const [link] of readFileSync(join(env.root, page), 'utf8').matchAll(/assets\/(dark|light)\/[\w.-]+\.svg/g)) {
-      assert.ok(existsSync(join(env.root, link)), `${page} links ${link}, which exists`);
-    }
+  for (const [link] of readFileSync(join(env.root, 'README.md'), 'utf8').matchAll(/assets\/(dark|light)\/[\w.-]+\.svg/g)) {
+    assert.ok(existsSync(join(env.root, link)), `${link} exists`);
   }
 
   // Same moment, issue now closed by the bot: nothing to do and nothing should change.

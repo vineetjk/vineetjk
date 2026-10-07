@@ -1,6 +1,5 @@
-// Builds README.md (Commit City) from scripts/readme.template.md and market/README.md (the $VJK
-// stock market) from scripts/market.template.md. Edit the templates, not the READMEs: every tick
-// regenerates them so image hashes and alt text stay in sync.
+// Builds README.md from scripts/readme.template.md. Edit the template, not the README:
+// every tick regenerates the README so image hashes and alt text stay in sync.
 
 import { readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
@@ -8,7 +7,7 @@ import { orderUrl } from './orders.js';
 import { BUTTONS } from './render/buttons.js';
 import { cityRules } from './city/growth.js';
 
-const TEMPLATES = new URL('../', import.meta.url);
+const TEMPLATE = new URL('../readme.template.md', import.meta.url);
 
 export const contentHash = (content) => createHash('sha1').update(content).digest('hex').slice(0, 10);
 
@@ -28,11 +27,9 @@ const altOf = (svg) => {
 
 /**
  * @param files  [{ path, content }] from renderAll()
- * @param theme     'auto' emits <picture> pairs; 'dark' / 'light' pins one theme (used by the local preview)
- * @param base      prefix for links into the repo: '../' for market/README.md
- * @param template  'readme' (the profile) or 'market'
+ * @param theme  'auto' emits <picture> pairs; 'dark' / 'light' pins one theme (used by the local preview)
  */
-export function renderReadme(cfg, files, { theme = 'auto', base = '', template = 'readme' } = {}) {
+export function renderReadme(cfg, files, { theme = 'auto', base = '' } = {}) {
   const byPath = new Map(files.map((f) => [f.path, f.content]));
   const src = (t, name) => {
     const path = `assets/${t}/${name}.svg`;
@@ -59,9 +56,6 @@ export function renderReadme(cfg, files, { theme = 'auto', base = '', template =
     dividend: `₹${cfg.dividendPerMergedPR}`,
     baseline: cfg.baseline30,
     listing: `₹${cfg.listingPrice}`,
-    root: base,
-    profileUrl: `https://github.com/${cfg.login}`,
-    marketUrl: `https://github.com/${cfg.repo}/blob/HEAD/market/README.md`,
     cityFirst: city.buildingBase,
     cityStep: city.buildingStep,
     treeEvery: city.treeEvery,
@@ -69,7 +63,7 @@ export function renderReadme(cfg, files, { theme = 'auto', base = '', template =
     soudhaDone: city.soudha.done.toLocaleString('en-IN'),
   };
 
-  return readFileSync(new URL(`${template}.template.md`, TEMPLATES), 'utf8').replace(/\{\{(\w+)(?::([\w-]+))?\}\}/g, (match, key, arg) => {
+  return readFileSync(TEMPLATE, 'utf8').replace(/\{\{(\w+)(?::([\w-]+))?\}\}/g, (match, key, arg) => {
     if (key === 'panel') return image(arg, 'width="100%"');
     if (key === 'buttons') {
       return BUTTONS.map((b) => `<a href="${attr(orderUrl(cfg, b.side, b.qty))}">${image(b.id, 'width="180"')}</a>`).join('\n');
