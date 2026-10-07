@@ -5,6 +5,7 @@ import { readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { orderUrl } from './orders.js';
 import { BUTTONS } from './render/buttons.js';
+import { cityRules } from './city/growth.js';
 
 const TEMPLATE = new URL('../readme.template.md', import.meta.url);
 
@@ -41,6 +42,7 @@ export function renderReadme(cfg, files, { theme = 'auto', base = '' } = {}) {
     return `<picture><source media="(prefers-color-scheme: dark)" srcset="${src('dark', name)}"><img src="${src('light', name)}" ${attrs} alt="${alt}"></picture>`;
   };
 
+  const city = cityRules(cfg);
   const vars = {
     symbol: cfg.symbol,
     startingCash: `₹${cfg.startingCash.toLocaleString('en-IN')}`,
@@ -54,6 +56,11 @@ export function renderReadme(cfg, files, { theme = 'auto', base = '' } = {}) {
     dividend: `₹${cfg.dividendPerMergedPR}`,
     baseline: cfg.baseline30,
     listing: `₹${cfg.listingPrice}`,
+    cityFirst: city.buildingBase,
+    cityStep: city.buildingStep,
+    treeEvery: city.treeEvery,
+    soudhaStart: city.soudha.start.toLocaleString('en-IN'),
+    soudhaDone: city.soudha.done.toLocaleString('en-IN'),
   };
 
   return readFileSync(TEMPLATE, 'utf8').replace(/\{\{(\w+)(?::([\w-]+))?\}\}/g, (match, key, arg) => {

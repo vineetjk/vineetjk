@@ -4,6 +4,7 @@
   "displayName": "Vineet J K",
   "buyMeACoffee": "vineetjk",
   "viewCounter": true,
+  "devUsername": "vineetjk",
   "symbol": "VJK",
   "exchangeName": "Commit Street",
   "listingPrice": 100,
@@ -26,5 +27,14 @@
     "open": "09:15",
     "close": "15:30",
     "holidays": []
+  },
+  "city": {
+    "maxBuildings": 40,
+    "buildingBase": 25,
+    "buildingStep": 5,
+    "treeEvery": 20,
+    "maxTrees": 120,
+    "unlock": { "darshini": 100, "autos": 300, "buses": 500, "planes": 600 },
+    "soudha": { "start": 800, "done": 1500 }
   }
 }

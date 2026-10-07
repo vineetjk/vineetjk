@@ -11,7 +11,9 @@ import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { loadConfig } from './lib/config.js';
 import { createState, advance, placeOrder, cancelClosedAmos, markProcessed, shareholders, STATE_VERSION } from './lib/engine.js';
-import { fetchStats } from './lib/stats.js';
+import { fetchStats, fetchPosts, derive } from './lib/stats.js';
+import { cityRules, cityState, cityNews } from './lib/city/growth.js';
+import { dayPhase } from './lib/time.js';
 import { listOrderIssues, fetchDataUri } from './lib/github.js';
 import { parseOrder, isOrderTitle } from './lib/orders.js';
 import { toReceipt } from './lib/receipts.js';
@@ -39,11 +41,18 @@ const repo = process.env.GITHUB_REPOSITORY || cfg.repo;
 const token = process.env.GITHUB_TOKEN || undefined;
 const offline = Boolean(process.env.VJK_OFFLINE);
 
+// Commit City's extras load separately; one that fails keeps its last good value
+const EXTRAS = ['lifetime', 'repoList', 'prs', 'posts'];
+
 async function loadStats() {
   if (process.env.VJK_STATS_FILE) return JSON.parse(readFileSync(process.env.VJK_STATS_FILE, 'utf8'));
   const previous = readJson('data/stats.json');
   try {
     const fresh = await fetchStats(cfg.login, process.env.PROFILE_TOKEN || token);
+    if (cfg.devUsername) {
+      fresh.posts = await fetchPosts(cfg.devUsername).catch((err) => console.warn(`DEV posts failed, keeping the previous ones: ${err.message}`));
+    }
+    for (const key of EXTRAS) fresh[key] ??= previous?.[key];
     // Only bump fetchedAt when the numbers moved, so a quiet tick produces no commit.
     const { fetchedAt, ...unchanged } = previous ?? {};
     if (previous && JSON.stringify(unchanged) === JSON.stringify(fresh)) return previous;
@@ -84,11 +93,11 @@ async function loadAvatars(state, stats) {
   return { owner, users };
 }
 
-function commitMessage(state, outcomes, bell) {
+function commitMessage(state, outcomes, bell, news = []) {
   const change = pct(state.prevClose, state.price);
   const fills = outcomes.filter((o) => o.status === 'filled' || o.status === 'partial').length;
   const queued = outcomes.filter((o) => o.status === 'queued').length;
-  const notes = [bell, fills && `${fills} fill${fills > 1 ? 's' : ''}`, queued && `${queued} queued`].filter(Boolean);
+  const notes = [bell, fills && `${fills} fill${fills > 1 ? 's' : ''}`, queued && `${queued} queued`, ...news].filter(Boolean);
   return `${arrow(change)} $${cfg.symbol} ${rupees(state.price)} (${signed(change)}%) · ${notes.join(', ') || 'tick'}\n`;
 }
 
@@ -127,7 +136,12 @@ const bell = listing
   ? 'listing day'
   : sessionAfter === sessionBefore ? null : state.session?.status === 'open' ? 'opening bell' : 'closing bell';
 
-const view = marketView(state, stats, cfg);
+// Commit City is planned from the highest all-time total seen, so it never shrinks
+const cityBefore = readJson('data/city.json');
+const city = cityState(cityBefore, Math.max(stats.lifetime?.total ?? 0, derive(stats).total), dayPhase(now, cfg.market));
+const news = cityNews(cityBefore, city, cityRules(cfg));
+
+const view = marketView(state, stats, cfg, { now, city });
 const files = renderAll(view, await loadAvatars(state, stats));
 // Every image lives at a content-hashed name, so clear out the previous versions first.
 // Unchanged images get the same name back, so git sees no difference for them.
@@ -139,9 +153,10 @@ for (const f of files) write(assetPath(f), f.content);
 write('README.md', renderReadme(cfg, files));
 writeJson('data/market.json', state);
 writeJson('data/stats.json', stats);
+writeJson('data/city.json', city);
 const more = (orders?.issues ?? []).some((i) => !state.processed.includes(i.number));
 writeJson('.vjk/receipts.json', { more, receipts: [...outcomes.map((o) => toReceipt(o, cfg)), ...closeOnly] });
-write('.vjk/commit-message.txt', commitMessage(state, outcomes, bell));
+write('.vjk/commit-message.txt', commitMessage(state, outcomes, bell, news));
 
 const summary = outcomes.map((o) => `#${o.issue} ${o.status}`).join(', ') || 'no orders';
-console.log(`${commitMessage(state, outcomes, bell).trim()} | ${summary} | stats via ${stats.source}`);
+console.log(`${commitMessage(state, outcomes, bell, news).trim()} | ${summary} | stats via ${stats.source}`);

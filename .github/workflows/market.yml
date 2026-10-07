@@ -8,6 +8,11 @@ on:
     - cron: "17,47 4-9 * * 1-5" # every 30 min, 09:47 to 15:17 IST
     - cron: "3 10 * * 1-5" # 15:33 IST, just after the closing bell
     - cron: "33 10 * * 1-5" # 16:03 IST, backup closing bell
+    # Commit City's sky follows Bengaluru's, so redraw it as the light changes, every day
+    - cron: "5 0 * * *" # 05:35 IST, dawn
+    - cron: "35 1 * * *" # 07:05 IST, day
+    - cron: "20 12 * * *" # 17:50 IST, dusk
+    - cron: "35 13 * * *" # 19:05 IST, night
   # Redraw right away when the market code or config changes. The bot's own pushes never trigger this.
   push:
     branches: [master]

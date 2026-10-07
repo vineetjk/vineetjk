@@ -38,7 +38,11 @@ test('a busy open market renders cleanly and the README links every asset', () =
   assert.doesNotMatch(readme, /\{\{/);
   for (const f of files) assert.ok(readme.includes(assetPath(f)), `README links ${f.path} by its hashed name`);
   assert.doesNotMatch(readme, /\.svg\?v=/, 'no query-string versions: GitHub drops them');
+  // Commit City on top, then the market as before
+  assert.ok(readme.indexOf('assets/dark/city.') < readme.indexOf('assets/dark/sign.'), 'the city comes first');
+  assert.ok(readme.indexOf('How Commit City works') < readme.indexOf('assets/dark/ticker.'));
   assert.match(readme, /issues\/new\?title=BUY%205%20%24VJK&amp;body=/);
+  assert.match(readme, /href="data\/market\.json"/);
   assert.match(readme, /<a href="https:\/\/buymeacoffee\.com\/vineetjk"><picture>/);
   assert.match(readme, /<img src="https:\/\/komarev\.com\/ghpvc\/\?username=vineetjk&amp;label=Profile%20views/);
 });

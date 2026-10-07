@@ -41,7 +41,9 @@ test('tick: list, queue an AMO before the bell, fill it at the open, then go qui
   assert.deepEqual(first.state.amo.map((a) => a.issue), [7]);
   assert.deepEqual(first.receipts.map((r) => [r.issue, r.close]), [[7, false]], 'queued orders stay open; non-orders are ignored');
   assert.match(first.receipts[0].body, /Queued/);
+  assert.match(readFileSync(join(env.root, 'README.md'), 'utf8'), /assets\/dark\/city\.[0-9a-f]{10}\.svg/);
   assert.match(readFileSync(join(env.root, 'README.md'), 'utf8'), /assets\/dark\/quote\.[0-9a-f]{10}\.svg/);
+  assert.deepEqual(JSON.parse(readFileSync(join(env.root, 'data/city.json'), 'utf8')), { peak: 365, phase: 'day' });
   assert.equal(readdirSync(join(env.root, 'assets/dark')).length, 12 + (cfg.buyMeACoffee ? 1 : 0));
 
   const second = run(env, `${MON}T09:17:00+05:30`, [buy, noise]);
@@ -62,6 +64,15 @@ test('tick: list, queue an AMO before the bell, fill it at the open, then go qui
   assert.deepEqual(third.receipts, []);
   assert.equal(readFileSync(join(env.root, 'data/market.json'), 'utf8'), snapshot);
   assert.equal(readFileSync(join(env.root, 'README.md'), 'utf8'), readme);
+
+  // After the closing bell, an evening tick only changes the light over Commit City, and says so
+  assert.match(run(env, `${MON}T16:05:00+05:30`, []).message, /closing bell$/m);
+  const closed = readFileSync(join(env.root, 'data/market.json'), 'utf8');
+  const afternoon = readFileSync(join(env.root, 'README.md'), 'utf8');
+  const evening = run(env, `${MON}T18:10:00+05:30`, []);
+  assert.match(evening.message, /· dusk$/m);
+  assert.notEqual(readFileSync(join(env.root, 'README.md'), 'utf8'), afternoon);
+  assert.equal(readFileSync(join(env.root, 'data/market.json'), 'utf8'), closed);
 });
 
 test('tick: an issue settled earlier but still open gets closed without a second fill', () => {

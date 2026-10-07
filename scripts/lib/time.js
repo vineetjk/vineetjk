@@ -69,3 +69,20 @@ export function fmtStamp(iso, market) {
   const { date } = marketClock(new Date(iso), market);
   return `${fmtDate(date)} ${date.slice(0, 4)}, ${fmtClock(iso, market)} IST`;
 }
+
+// Commit City's light follows the real sky over Bengaluru: sunrise is around 06:00–06:45 and
+// sunset around 18:00–18:50 all year, so these windows cover both with a little to spare.
+export const PHASES = [
+  ['05:30', 'dawn'],
+  ['07:00', 'day'],
+  ['17:45', 'dusk'],
+  ['19:00', 'night'],
+];
+
+/** 'dawn', 'day', 'dusk' or 'night' at `now`, by the market's (IST) wall clock. */
+export function dayPhase(now, market) {
+  const { minutes } = marketClock(now, market);
+  let phase = PHASES.at(-1)[1];
+  for (const [from, name] of PHASES) if (minutes >= toMinutes(from)) phase = name;
+  return phase;
+}
