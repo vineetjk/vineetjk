@@ -740,9 +740,29 @@
       "orders": 2,
       "joinedAt": "2026-10-06T05:25:55.099Z",
       "lastOrderAt": "2026-10-06T06:10:01.739Z"
+    },
+    "Dev2023-Op": {
+      "id": 152665582,
+      "avatar": "https://avatars.githubusercontent.com/u/152665582?v=4",
+      "cash": 1000000,
+      "shares": 0,
+      "cost": 0,
+      "realized": 0,
+      "dividends": 0,
+      "orders": 0,
+      "joinedAt": "2026-10-07T23:46:21.970Z",
+      "lastOrderAt": "2026-10-07T23:46:21.970Z"
     }
   },
-  "amo": [],
+  "amo": [
+    {
+      "issue": 4,
+      "login": "Dev2023-Op",
+      "side": "buy",
+      "qty": 5,
+      "placedAt": "2026-10-07T23:46:21.970Z"
+    }
+  ],
   "tape": [
     {
       "t": "2026-10-06T06:10:01.739Z",
@@ -782,12 +802,13 @@
   "processed": [
     1,
     2,
-    3
+    3,
+    4
   ],
   "dividends": {
     "mergedPRs": 21,
     "source": "graphql",
     "perShare": 0
   },
-  "updatedAt": "2026-10-07T10:35:36.576Z"
+  "updatedAt": "2026-10-07T23:46:21.970Z"
 }

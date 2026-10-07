@@ -2065,6 +2065,11 @@
   ],
   "posts": [
     {
+      "title": "I built a city on my GitHub profile. It grows every time I commit.",
+      "published": "2026-10-07",
+      "url": "https://dev.to/vineetjk/i-built-a-city-on-my-github-profile-it-grows-every-time-i-commit-1944"
+    },
+    {
       "title": "I turned my GitHub contribution graph into a Metro train",
       "published": "2026-10-06",
       "url": "https://dev.to/vineetjk/i-turned-my-github-contribution-graph-into-a-metro-train-4m50"
@@ -2080,5 +2085,5 @@
       "url": "https://dev.to/vineetjk/can-prithvi-eat-this-a-food-companion-i-built-for-my-friend-living-in-a-pg-2nf"
     }
   ],
-  "fetchedAt": "2026-10-07T20:55:46.084Z"
+  "fetchedAt": "2026-10-07T23:46:21.970Z"
 }
