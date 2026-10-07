@@ -13,10 +13,10 @@ export const mix = (a, b, t) => toHex(rgb(a).map((v, i) => v + (rgb(b)[i] - v) *
 export const PHASES = {
   dawn: {
     label: 'DAWN',
-    sky: ['#29305f', '#7c6896', '#f1b089'],
-    ambient: ['#2a2c5c', 0.36],
+    sky: ['#3b4b88', '#9e8ab9', '#f7cba6'],
+    ambient: ['#2f3466', 0.3],
     lights: 0.45, // share of windows lit, and whether lamps are on
-    sun: { x: 120, y: 236, r: 19, color: '#ffd2a1', glow: '#ff9d6e' },
+    sun: { x: 412, y: 200, r: 12, color: '#fff0d6', glow: '#ffc9a3' }, // in the gap between the Soudha and the station
     stars: 0.3,
     cloud: '#f2c3c4',
     text: '#f6f2fa',
@@ -39,10 +39,10 @@ export const PHASES = {
   },
   dusk: {
     label: 'DUSK',
-    sky: ['#251f4c', '#94506f', '#f39a5c'],
-    ambient: ['#3a1e3c', 0.42],
+    sky: ['#1f1745', '#8c3a60', '#f2843f'],
+    ambient: ['#3a1e3c', 0.44],
     lights: 0.75,
-    sun: { x: 762, y: 240, r: 23, color: '#ffab5e', glow: '#ff6b3d' },
+    sun: { x: 438, y: 206, r: 17, color: '#ff9a4a', glow: '#ff5e3a' },
     stars: 0.15,
     cloud: '#f2a07f',
     text: '#fff3ec',

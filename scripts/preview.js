@@ -5,6 +5,8 @@
 //   node scripts/preview.js          simulate and write preview/{dark,light}.html (Commit City)
 //                                    and preview/market-{dark,light}.html (the $VJK market)
 //   node scripts/preview.js --shots  also screenshot every page with headless Chrome
+//   node scripts/preview.js --phases also write preview/phases.html: Commit City at dawn, day,
+//                                    dusk and night, one above the other
 //
 // VJK_NOW sets the moment the rehearsal ends (default: 13:05 IST today, mid-session), which also
 // sets the light over Commit City.
@@ -15,13 +17,15 @@ import { fileURLToPath } from 'node:url';
 import { execFileSync } from 'node:child_process';
 import { loadConfig } from './lib/config.js';
 import { createState, advance, placeOrder, markProcessed, shareholders } from './lib/engine.js';
-import { fetchStats, stationsFromRepos } from './lib/stats.js';
+import { fetchStats, fetchPosts, stationsFromRepos } from './lib/stats.js';
 import { fetchDataUri, rest } from './lib/github.js';
 import { parseOrder } from './lib/orders.js';
 import { toReceipt } from './lib/receipts.js';
 import { addDays, isTradingDay, marketClock } from './lib/time.js';
 import { marketView } from './lib/render/view.js';
 import { renderAll } from './lib/render/index.js';
+import { city } from './lib/render/city.js';
+import { THEMES } from './lib/render/theme.js';
 import { renderReadme, assetPath } from './lib/readme.js';
 
 const OUT = fileURLToPath(new URL('../preview/', import.meta.url));
@@ -35,6 +39,12 @@ const statsFile = fileURLToPath(new URL('../data/stats.json', import.meta.url));
 const realStats = existsSync(statsFile) ? JSON.parse(readFileSync(statsFile, 'utf8')) : await fetchStats(cfg.login);
 // Snapshots from before the metro have no stations; borrow them from the public repo list.
 realStats.stations ??= stationsFromRepos(await rest(`/users/${cfg.login}/repos?per_page=100&type=owner`), cfg.login, realStats.calendar.at(-1).d);
+// Snapshots from before Commit City have none of its numbers; fetch them from public pages.
+if (!realStats.lifetime) {
+  const fresh = await fetchStats(cfg.login).catch(() => ({}));
+  for (const key of ['lifetime', 'repoList', 'prs']) realStats[key] ??= fresh[key];
+}
+if (cfg.devUsername && !realStats.posts) realStats.posts = await fetchPosts(cfg.devUsername).catch(() => undefined);
 
 // Seeded, so every rehearsal tells the same story.
 let seed = 20261006;
@@ -131,6 +141,19 @@ writeFileSync(join(OUT, 'market', 'light.html'), page('light', 'market'));
 const samples = new Map();
 for (const o of outcomes) if (!samples.has(o.status)) samples.set(o.status, toReceipt(o, cfg));
 writeFileSync(join(OUT, 'receipts.md'), [...samples].map(([status, r]) => `<!-- ${status} -->\n${r.body}`).join('\n\n---\n\n'));
+
+if (process.argv.includes('--phases')) {
+  // The same city in each light, animated, to judge the palettes side by side. Each is its own
+  // file shown as an <img>, as on GitHub (inline, their ids would clash).
+  const view = marketView(state, stats, cfg, { now: end });
+  const phases = ['dawn', 'day', 'dusk', 'night'];
+  mkdirSync(join(OUT, 'phases'), { recursive: true });
+  for (const phase of phases) writeFileSync(join(OUT, 'phases', `${phase}.svg`), city({ ...view, phase }, THEMES.dark));
+  writeFileSync(join(OUT, 'phases.html'), `<!doctype html><meta charset="utf-8"><title>Commit City in every light</title>
+<style>body{margin:0;padding:24px;background:#0d1117;color:#e6edf3;font:14px -apple-system,Segoe UI,Helvetica,Arial,sans-serif}h2{font-weight:600;text-transform:capitalize;margin:24px auto 8px;max-width:880px}img{display:block;margin:auto;max-width:100%}</style>
+${phases.map((phase) => `<h2>${phase}</h2><img src="phases/${phase}.svg" width="880" alt="Commit City at ${phase}">`).join('\n')}`);
+  console.log(`Every light: ${join(OUT, 'phases.html')}`);
+}
 
 const counts = outcomes.reduce((acc, o) => ({ ...acc, [o.status]: (acc[o.status] ?? 0) + 1 }), {});
 console.log(`Rehearsed ${start} → ${endDate}: ${JSON.stringify(counts)}`);
