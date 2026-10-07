@@ -1,7 +1,8 @@
 // The sky over Commit City: it stays put while the city moves under it. Sun, moon and stars by
 // phase, clouds drifting by in daylight, and a banner plane for each of my DEV posts.
 
-import { n, esc, width, truncate } from '../common.js';
+import { n, esc, width } from '../common.js';
+import { bannerTitle } from '../flights.js';
 
 export const SKY_BOTTOM = 340;
 
@@ -92,7 +93,7 @@ export function planes(posts, p, W) {
   const list = posts.slice(0, 4);
   const period = 96;
   const parts = list.map((post, k) => {
-    const title = truncate(post.title.replace(/[‘’]/g, "'").replace(/[“”]/g, '"').replace(/[^\x20-\x7e]/g, ''), 46);
+    const title = bannerTitle(post.title, 46);
     const tw = width(title, 7.5, 0.3) + 16;
     const y = [84, 104, 94, 78][k];
     const x = 400 - tw / 2;

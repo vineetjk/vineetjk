@@ -13,13 +13,14 @@ import { loadConfig } from './lib/config.js';
 import { createState, advance, placeOrder, cancelClosedAmos, markProcessed, shareholders, STATE_VERSION } from './lib/engine.js';
 import { fetchStats, fetchPosts, derive } from './lib/stats.js';
 import { cityRules, cityState, cityNews } from './lib/city/growth.js';
-import { dayPhase } from './lib/time.js';
+import { dayPhase, marketClock } from './lib/time.js';
+import { LIGHTS } from './lib/render/lights.js';
 import { listOrderIssues, fetchDataUri } from './lib/github.js';
 import { parseOrder, isOrderTitle } from './lib/orders.js';
 import { toReceipt } from './lib/receipts.js';
 import { marketView } from './lib/render/view.js';
-import { renderAll } from './lib/render/index.js';
-import { renderReadme, assetPath } from './lib/readme.js';
+import { renderAll, renderViews } from './lib/render/index.js';
+import { renderReadme, renderViewPage, assetPath } from './lib/readme.js';
 import { rupees, signed, arrow, pct } from './lib/money.js';
 
 // Each order costs two API writes (comment + close); GitHub throttles bots at ~80 a minute.
@@ -151,6 +152,26 @@ for (const dir of new Set(files.map((f) => dirname(f.path)))) {
 }
 for (const f of files) write(assetPath(f), f.content);
 write('README.md', renderReadme(cfg, files));
+
+// Commit City at every time of day, for the buttons under it. Each picture is a ~280 KB file the
+// repo keeps forever, so these are redrawn once a day (and whenever one is missing), not every tick.
+const VIEWS = 'assets/views';
+const today = marketClock(now, cfg.market).date;
+const drawn = existsSync(at(VIEWS)) ? readdirSync(at(VIEWS)).filter((name) => name.endsWith('.svg')) : [];
+let views = LIGHTS.map((phase) => {
+  const name = drawn.find((file) => file.startsWith(`city-${phase}.`));
+  return name && { phase, path: `${VIEWS}/city-${phase}.svg`, content: readFileSync(join(at(VIEWS), name), 'utf8') };
+});
+if (cityBefore?.views !== today || views.some((v) => !v)) {
+  for (const name of drawn) rmSync(join(at(VIEWS), name));
+  views = renderViews(view);
+  for (const v of views) write(assetPath(v), v.content);
+  city.views = today;
+} else {
+  city.views = cityBefore.views;
+}
+for (const v of views) write(`views/${v.phase}.md`, renderViewPage(cfg, files, { phase: v.phase, view: v, date: city.views }));
+
 writeJson('data/market.json', state);
 writeJson('data/stats.json', stats);
 writeJson('data/city.json', city);

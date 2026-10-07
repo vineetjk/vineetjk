@@ -14,10 +14,14 @@ scripts/
   lib/city/growth.js     how many buildings, trees and extras a contribution total buys
   lib/render/            one file per SVG panel, dark + light
   lib/render/city/       Commit City's layers: sky, skyline, buildings, Soudha, street, traffic
+  lib/render/lights.js   the dawn / day / dusk / night buttons under the city
+  lib/render/flights.js  a clickable banner for each DEV post flying over the city
   fonts/                 JetBrains Mono, a Noto ₹ glyph and the city's Kannada signs, subset small
 data/market.json         the ledger (prices, holders, orders); its git history is the audit log
 data/stats.json          the GitHub (and DEV) numbers everything is drawn from
-data/city.json           the highest all-time contribution total seen, so the city never shrinks
+data/city.json           the highest all-time contribution total seen (the city never shrinks), and when the views were drawn
+views/                   the city at each time of day, one page per button; redrawn once a day
+assets/views/            the pictures for those pages (dark frame only, to keep the repo small)
 .github/workflows/market.yml
 ```
 
@@ -30,9 +34,13 @@ up at the `unlock` totals, there's a tree per `treeEvery` contributions, and Com
 between `soudha.start` and `soudha.done`. The light follows `market.utcOffsetMinutes` (IST): dawn
 05:30, day 07:00, dusk 17:45, night 19:00. The workflow has a cron for each.
 
-Kannada text is drawn with a subset font that only has the glyphs of the strings in
-`lib/render/kannada.js`. To add a sign, add its string there, rebuild the subset from Noto Sans
-Kannada (wght 700) with fontTools, and measure its width in a browser.
+Kannada text is drawn with Noto Sans Kannada Bold cut down to the Kannada block. Keep the whole
+block when rebuilding it: cut down to just the signs' letters, conjuncts with the RA subscript (ಶ್ರೀ,
+ಸ್ಟ್ರೀಟ್, ಮೆಟ್ರೋ) stop shaping. Kannada isn't monospaced, so a new sign also needs its width measured
+in a browser and added to `lib/render/kannada.js`.
+
+GitHub can't run scripts in a README or link part of an image. So the time-of-day buttons open
+pages in `views/`, and the planes' DEV posts get banners under the city instead of clickable planes.
 
 ## Run it locally
 

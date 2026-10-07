@@ -11,7 +11,7 @@ const stats = steadyStats();
 const noAvatars = { owner: null, users: {} };
 
 function assertCleanSvgs(files) {
-  assert.equal(files.length, 2 * (8 + 4 + (cfg.buyMeACoffee ? 1 : 0)), 'eight panels, four order buttons and the coffee button per theme');
+  assert.equal(files.length, 2 * (8 + 4 + (cfg.buyMeACoffee ? 1 : 0) + 4), 'eight panels, four order buttons, the coffee button and four time-of-day buttons per theme');
   for (const f of files) {
     assert.match(f.content, /^<svg [^>]*viewBox="0 0 \d+ \d+"/, f.path);
     assert.ok(f.content.endsWith('</svg>'), f.path);
@@ -43,6 +43,10 @@ test('a busy open market renders cleanly and the README links every asset', () =
   assert.ok(readme.indexOf('How Commit City works') < readme.indexOf('assets/dark/ticker.'));
   assert.match(readme, /issues\/new\?title=BUY%205%20%24VJK&amp;body=/);
   assert.match(readme, /href="data\/market\.json"/);
+  for (const phase of ['dawn', 'day', 'dusk', 'night']) {
+    assert.match(readme, new RegExp(`<a href="https://github\\.com/vineetjk/vineetjk/blob/HEAD/views/${phase}\\.md"><picture>`));
+  }
+  assert.doesNotMatch(readme, /flight-|fly over the city/, 'no banners without DEV posts');
   assert.match(readme, /<a href="https:\/\/buymeacoffee\.com\/vineetjk"><picture>/);
   assert.match(readme, /<img src="https:\/\/komarev\.com\/ghpvc\/\?username=vineetjk&amp;label=Profile%20views/);
 });

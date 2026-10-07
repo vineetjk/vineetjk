@@ -7,7 +7,7 @@ import { mkdtempSync, readFileSync, writeFileSync, readdirSync, existsSync } fro
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { cfg, steadyStats, MON } from './helpers.js';
+import { cfg, steadyStats, MON, TUE } from './helpers.js';
 
 const TICK = fileURLToPath(new URL('../scripts/tick.js', import.meta.url));
 
@@ -43,8 +43,16 @@ test('tick: list, queue an AMO before the bell, fill it at the open, then go qui
   assert.match(first.receipts[0].body, /Queued/);
   assert.match(readFileSync(join(env.root, 'README.md'), 'utf8'), /assets\/dark\/city\.[0-9a-f]{10}\.svg/);
   assert.match(readFileSync(join(env.root, 'README.md'), 'utf8'), /assets\/dark\/quote\.[0-9a-f]{10}\.svg/);
-  assert.deepEqual(JSON.parse(readFileSync(join(env.root, 'data/city.json'), 'utf8')), { peak: 365, phase: 'day' });
-  assert.equal(readdirSync(join(env.root, 'assets/dark')).length, 12 + (cfg.buyMeACoffee ? 1 : 0));
+  assert.deepEqual(JSON.parse(readFileSync(join(env.root, 'data/city.json'), 'utf8')), { peak: 365, phase: 'day', views: MON });
+  // The city at each time of day, with a page for each
+  assert.equal(readdirSync(join(env.root, 'assets/views')).length, 4);
+  for (const phase of ['dawn', 'day', 'dusk', 'night']) {
+    const page = readFileSync(join(env.root, `views/${phase}.md`), 'utf8');
+    const [, img] = /<img src="\.\.\/(assets\/views\/city-[\w]+\.[0-9a-f]{10}\.svg)"/.exec(page);
+    assert.ok(existsSync(join(env.root, img)), `${phase} page shows ${img}`);
+    assert.match(page, new RegExp(`Commit City at ${phase}, drawn on 05 Oct`));
+  }
+  assert.equal(readdirSync(join(env.root, 'assets/dark')).length, 12 + (cfg.buyMeACoffee ? 1 : 0) + 4);
 
   const second = run(env, `${MON}T09:17:00+05:30`, [buy, noise]);
   assert.match(second.message, /opening bell, 1 fill/);
@@ -52,7 +60,7 @@ test('tick: list, queue an AMO before the bell, fill it at the open, then go qui
   assert.deepEqual(second.receipts.map((r) => [r.issue, r.close]), [[7, true]], 'one closing receipt, no duplicate close');
   assert.match(second.receipts[0].body, /Filled/);
   // Old image versions are cleaned up, and every image the README links to exists.
-  assert.equal(readdirSync(join(env.root, 'assets/dark')).length, 12 + (cfg.buyMeACoffee ? 1 : 0));
+  assert.equal(readdirSync(join(env.root, 'assets/dark')).length, 12 + (cfg.buyMeACoffee ? 1 : 0) + 4);
   for (const [link] of readFileSync(join(env.root, 'README.md'), 'utf8').matchAll(/assets\/(dark|light)\/[\w.-]+\.svg/g)) {
     assert.ok(existsSync(join(env.root, link)), `${link} exists`);
   }
@@ -69,10 +77,15 @@ test('tick: list, queue an AMO before the bell, fill it at the open, then go qui
   assert.match(run(env, `${MON}T16:05:00+05:30`, []).message, /closing bell$/m);
   const closed = readFileSync(join(env.root, 'data/market.json'), 'utf8');
   const afternoon = readFileSync(join(env.root, 'README.md'), 'utf8');
+  const views = readdirSync(join(env.root, 'assets/views')).sort();
   const evening = run(env, `${MON}T18:10:00+05:30`, []);
   assert.match(evening.message, /· dusk$/m);
   assert.notEqual(readFileSync(join(env.root, 'README.md'), 'utf8'), afternoon);
   assert.equal(readFileSync(join(env.root, 'data/market.json'), 'utf8'), closed);
+  assert.deepEqual(readdirSync(join(env.root, 'assets/views')).sort(), views, 'the time-of-day views wait for the next day');
+  run(env, `${TUE}T07:30:00+05:30`, []);
+  assert.notDeepEqual(readdirSync(join(env.root, 'assets/views')).sort(), views, 'and are redrawn then');
+  assert.equal(JSON.parse(readFileSync(join(env.root, 'data/city.json'), 'utf8')).views, TUE);
 });
 
 test('tick: an issue settled earlier but still open gets closed without a second fill', () => {

@@ -229,7 +229,7 @@ export async function fetchPosts(username) {
     signal: AbortSignal.timeout(20_000),
   });
   if (!r.ok) throw new Error(`dev.to articles → ${r.status}`);
-  return (await r.json()).map((a) => ({ title: a.title, published: a.published_at.slice(0, 10) }));
+  return (await r.json()).map((a) => ({ title: a.title, published: a.published_at.slice(0, 10), url: a.url }));
 }
 
 /** Parses the public contribution calendar HTML (the same grid you see on a profile). */

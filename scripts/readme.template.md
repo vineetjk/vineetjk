@@ -1,5 +1,9 @@
 <p align="center">{{panel:city}}</p>
 
+{{lights}}
+
+{{flights}}
+
 <details>
 <summary>How Commit City works</summary>
 <br>

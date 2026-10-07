@@ -64,7 +64,7 @@ export function metroStairs(x0, p) {
     + `<path d="${steps.join('')}" stroke="${m.deckEdge}" stroke-width="1"/>`
     + `<line x1="${n(x0)}" y1="${n(foot - 9)}" x2="${n(x0 + run)}" y2="${n(topY - 9)}" stroke="${m.post}" stroke-width="1.2"/>`
     + `<rect x="${n(x0 - 14)}" y="${foot - 30}" width="2" height="30" fill="${p.pole}"/>`
-    + `<rect x="${n(x0 - 24)}" y="${foot - 42}" width="22" height="14" rx="1.5" fill="${'#8b3fa4'}"/>`
+    + `<rect x="${n(x0 - 28)}" y="${foot - 42}" width="30" height="14" rx="1.5" fill="#8b3fa4"/>`
     + kn(x0 - 13, foot - 33.2, KN.metro, { size: 6, fill: '#ffffff', anchor: 'middle' })
     + `<text x="${n(x0 - 13)}" y="${foot - 29.6}" font-size="3.6" font-weight="700" fill="#ffffff" text-anchor="middle" letter-spacing=".2">METRO</text>`;
 }

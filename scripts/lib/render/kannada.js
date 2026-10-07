@@ -1,7 +1,7 @@
-// Kannada signs for Commit City. The embedded font (scripts/fonts/kannada-700.woff2) is a subset
-// of Noto Sans Kannada Bold holding only these strings' glyphs, so a new sign means adding it here
-// and rebuilding the subset. Kannada isn't monospaced: EM holds each string's width in em,
-// measured in Chrome with that font.
+// Kannada signs for Commit City. The embedded font (scripts/fonts/kannada-700.woff2) is Noto Sans
+// Kannada Bold cut down to the Kannada block. It keeps the whole block on purpose: with only the
+// signs' own letters, the RA subscript in ಶ್ರೀ, ಸ್ಟ್ರೀಟ್ and ಮೆಟ್ರೋ stops shaping. Kannada isn't
+// monospaced, so EM holds each sign's width in em, measured in Chrome with that font.
 
 import { text } from './common.js';
 
@@ -20,16 +20,16 @@ export const KN = {
 const EM = {
   [KN.bengaluru]: 4.855,
   [KN.city]: 5.628,
-  [KN.street]: 6.636,
+  [KN.street]: 6.162,
   [KN.soudha]: 5.55,
-  [KN.darshini]: 8.341,
+  [KN.darshini]: 7.926,
   [KN.menu]: 4.961,
   [KN.bmtc]: 4.044,
   [KN.motto]: 11.337,
-  [KN.metro]: 2.266,
+  [KN.metro]: 3.527,
 };
 
 export const knWidth = (s, size) => EM[s] * size;
 
-/** A Kannada sign line. Only strings from KN render: the font has no other glyphs. */
+/** A Kannada sign line. Any Kannada renders, but only strings in EM can be measured. */
 export const kn = (x, y, s, o = {}) => text(x, y, s, { weight: 700, ...o, cls: 'kn' });

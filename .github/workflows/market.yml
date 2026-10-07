@@ -58,7 +58,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           for attempt in 1 2 3; do
             node scripts/tick.js
-            git add README.md assets data
+            git add README.md assets data views
             if git diff --cached --quiet; then
               echo "Nothing changed."
               exit 0

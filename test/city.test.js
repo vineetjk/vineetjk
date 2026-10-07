@@ -6,6 +6,8 @@ import { parseYearTotal, lifetimeOf, prsOf, repoListOf } from '../scripts/lib/st
 import { rankRepos, styleOf } from '../scripts/lib/render/city/buildings.js';
 import { builtTo } from '../scripts/lib/render/city/soudha.js';
 import { city } from '../scripts/lib/render/city.js';
+import { renderAll, renderViews } from '../scripts/lib/render/index.js';
+import { renderReadme, renderViewPage } from '../scripts/lib/readme.js';
 import { KN } from '../scripts/lib/render/kannada.js';
 import { THEMES } from '../scripts/lib/render/theme.js';
 import { createState } from '../scripts/lib/engine.js';
@@ -115,7 +117,7 @@ test('the city renders cleanly in every light, with its data on the signs', () =
   assert.match(out, />75 TO GO</);
   assert.match(out, />#10 Alpha-Fin</, 'the latest merged PR waits at the bus stop');
   assert.match(out, />#2 Alpha-Fin</);
-  assert.match(out, />I turned my GitHub contribution graph into a …</, 'a banner plane for the DEV post');
+  assert.match(out, />I turned my GitHub contribution graph into a…</, 'a banner plane for the DEV post');
   assert.match(out, />18% BUILT · OPENS AT 1,500</);
   assert.match(out, />925 CONTRIBUTIONS · 15 BUILDINGS</);
   assert.equal(out, city(cityView(), THEMES.dark), 'deterministic, so a quiet tick changes nothing');
@@ -136,4 +138,39 @@ test('the city copes with no repos, PRs or posts at all', () => {
   const out = city(cityView({ repoList: [], prs: [], posts: [] }), THEMES.light);
   assert.doesNotMatch(out, /NaN|undefined|Infinity/);
   assert.match(out, />NEXT: NEW BUILDING</);
+});
+
+test('DEV posts get clickable banners under the city, linking to each post', () => {
+  const posts = [
+    { title: 'I turned my GitHub contribution graph into a Metro train', published: '2026-10-06', url: 'https://dev.to/vineetjk/metro' },
+    { title: 'Can Prithvi Eat This? A Food Companion I Built for My Friend Living in a PG', published: '2026-10-04', url: 'https://dev.to/vineetjk/prithvi' },
+  ];
+  const files = renderAll(cityView({ posts }), { owner: null, users: {} });
+  const flights = files.filter((f) => f.path.includes('/flight-'));
+  assert.deepEqual(flights.map((f) => [f.path, f.href]), [
+    ['assets/dark/flight-0.svg', 'https://dev.to/vineetjk/metro'],
+    ['assets/dark/flight-1.svg', 'https://dev.to/vineetjk/prithvi'],
+    ['assets/light/flight-0.svg', 'https://dev.to/vineetjk/metro'],
+    ['assets/light/flight-1.svg', 'https://dev.to/vineetjk/prithvi'],
+  ]);
+  assert.match(flights[1].content, />Can Prithvi Eat This\? A Food Companion I Built for My…</, 'long titles are cut at a word to fit');
+  for (const f of flights) assert.doesNotMatch(f.content, /NaN|undefined/);
+  const readme = renderReadme(cfg, files);
+  assert.match(readme, /<a href="https:\/\/dev\.to\/vineetjk\/metro"><picture><source[^>]+flight-0\.[0-9a-f]{10}\.svg/);
+  assert.match(readme, /Click a banner to read one/);
+  // No planes in a young city, so no banners either
+  assert.ok(!renderAll(cityView({ posts, lifetime: 300 }), { owner: null, users: {} }).some((f) => f.path.includes('/flight-')));
+});
+
+test('each time of day has a page with the city, buttons to switch and a way back', () => {
+  const v = cityView();
+  const files = renderAll(v, { owner: null, users: {} });
+  const views = renderViews(v);
+  assert.deepEqual(views.map((x) => x.phase), ['dawn', 'day', 'dusk', 'night']);
+  assert.match(views[2].content, new RegExp(`· DUSK<`));
+  const page = renderViewPage(cfg, files, { phase: 'dusk', view: views[2], date: '2026-10-08' });
+  assert.match(page, /<a href="https:\/\/github\.com\/vineetjk">← Back to the live city<\/a>/);
+  assert.match(page, /<img src="\.\.\/assets\/views\/city-dusk\.[0-9a-f]{10}\.svg" width="100%" alt="Commit City: /);
+  for (const phase of ['dawn', 'day', 'dusk', 'night']) assert.match(page, new RegExp(`<a href="${phase}\\.md"><picture><source media="\\(prefers-color-scheme: dark\\)" srcset="\\.\\./assets/dark/light-${phase}\\.`));
+  assert.match(page, /Commit City at dusk, drawn on 08 Oct\./);
 });
