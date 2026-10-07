@@ -1,10 +1,10 @@
-<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/metro.e8d9cfaba9.svg"><img src="assets/light/metro.87dc57872a.svg" width="100%" alt="Commit Metro: my last 53 weeks of GitHub contributions as one long Namma Metro train on the purple line, one coach per week and one window per day, lit for days I committed. 213 contributions since 05 Oct. It slows under a sign for each of my busiest repos: vfd-explorer, tripppyyy, Alpha-Fin, Vyuha-Network, AllergySafe. Its head pulls up at Commit Street, where $VJK trades at ₹60.60."></picture></p>
+<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/metro.08ea9b4dc4.svg"><img src="assets/light/metro.c45d5a917a.svg" width="100%" alt="Commit Metro: my last 53 weeks of GitHub contributions as one long Namma Metro train on the purple line, one coach per week and one window per day, lit for days I committed. 215 contributions since 05 Oct. It slows under a sign for each of my busiest repos: vfd-explorer, tripppyyy, Alpha-Fin, Vyuha-Network, AllergySafe. Its head pulls up at Commit Street, where $VJK trades at ₹60.60."></picture></p>
 
 <p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/sign.7bbc92792e.svg"><img src="assets/light/sign.6c69be064b.svg" width="100%" alt="COMMIT STREET, in golden lights"></picture></p>
 
-<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/ticker.f2c9ae3f19.svg"><img src="assets/light/ticker.3ae2933e49.svg" width="100%" alt="$VJK ₹60.60 +9.98%. market closed. Closing bell: $VJK ₹60.60 ▲ +9.98%, fair value ₹119.35"></picture></p>
+<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/ticker.1c853b16c9.svg"><img src="assets/light/ticker.92e5e3b796.svg" width="100%" alt="$VJK ₹60.60 +9.98%. market closed. Closing bell: $VJK ₹60.60 ▲ +9.98%, fair value ₹119.35"></picture></p>
 
-<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/quote.8e54e9a224.svg"><img src="assets/light/quote.530c934c8b.svg" width="100%" alt="$VJK at ₹60.60, +9.98% at last close, market closed. Fair value from commits: ₹131.35. Circuit band ₹49.60 to ₹60.60."></picture></p>
+<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/quote.65d88f76c2.svg"><img src="assets/light/quote.090a6a22c2.svg" width="100%" alt="$VJK at ₹60.60, +9.98% at last close, market closed. Fair value from commits: ₹133.25. Circuit band ₹49.60 to ₹60.60."></picture></p>
 
 <p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/chart.385af7eb10.svg"><img src="assets/light/chart.f05bfc84f8.svg" width="100%" alt="Daily candlestick chart of $VJK over 71 sessions from 30 Jun, with the fair value implied by commit activity. Last price 60.60."></picture></p>
 
@@ -15,9 +15,9 @@
 
 <p align="center"><sub>Buttons open a pre-filled issue. Hit <b>Create</b> to place your order.</sub></p>
 
-<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/book.16e9784188.svg"><img src="assets/light/book.bc7ff2459e.svg" width="100%" alt="Largest shareholder: @Santhu32144 with 30 shares. Last trade: buy 25 at ₹57.60. Market is closed. New orders go through at 09:15 IST on Wed 07 Oct."></picture></p>
+<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/book.7e94457395.svg"><img src="assets/light/book.20ec3fe961.svg" width="100%" alt="Largest shareholder: @Santhu32144 with 30 shares. Last trade: buy 25 at ₹57.60. Market is closed. New orders go through at 09:15 IST on Thu 08 Oct."></picture></p>
 
-<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/fundamentals.56c599f0f6.svg"><img src="assets/light/fundamentals.bcb75a149d.svg" width="100%" alt="Fundamentals from GitHub: 59 contributions in 30 days, 213 in a year, 3-day streak, 51 public repos, 19 stars, 16 followers, 21 merged PRs. Top languages: C, JavaScript, HTML."></picture></p>
+<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/fundamentals.b57ea8efeb.svg"><img src="assets/light/fundamentals.ebe3182c1f.svg" width="100%" alt="Fundamentals from GitHub: 61 contributions in 30 days, 215 in a year, 4-day streak, 51 public repos, 19 stars, 16 followers, 21 merged PRs. Top languages: C, JavaScript, HTML."></picture></p>
 
 <details>
 <summary>How does this work?</summary>
@@ -30,7 +30,7 @@
 <p>There's no server behind this. A GitHub Action runs at the open, at the close and whenever someone places an order, then redraws these images. Every trade is in <a href="data/market.json">data/market.json</a>.</p>
 </details>
 
-<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/footer.d0b70ae784.svg"><img src="assets/light/footer.d9dcd2449a.svg" width="100%" alt="Just a game with fake money. Last updated 06 Oct 2026, 16:17 IST."></picture></p>
+<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/footer.20d6e12d35.svg"><img src="assets/light/footer.3cd01ddfd0.svg" width="100%" alt="Just a game with fake money. Last updated 07 Oct 2026, 16:05 IST."></picture></p>
 
 <p align="center"><a href="https://buymeacoffee.com/vineetjk"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/coffee.7d22460e64.svg"><img src="assets/light/coffee.4e10ab1615.svg" height="44" alt="Buy me a coffee"></picture></a></p>
 
