@@ -23,6 +23,20 @@ export const n = (v) => Math.round(v * 100) / 100;
 export const esc = (s) =>
   String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
 
+/** Small seeded PRNG, so anything "random" is the same on every run (no diff, no commit). */
+export function seeded(seedText) {
+  let seed = [...seedText].reduce((h, ch) => (Math.imul(h, 31) + ch.charCodeAt(0)) | 0, 7);
+  return () => {
+    seed = (seed + 0x6d2b79f5) | 0;
+    let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+/** Polygon points from [x, y] pairs. */
+export const pts = (...xy) => xy.map(([x, y]) => `${n(x)},${n(y)}`).join(' ');
+
 /** Rendered width of monospace text: every glyph advances 0.6em. */
 export const width = (s, size, letterSpacing = 0) => {
   const len = [...String(s)].length;
