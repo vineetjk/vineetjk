@@ -4,9 +4,13 @@
 import { circuitBand, fairValue, shareholders } from '../engine.js';
 import { derive } from '../stats.js';
 import { pct } from '../money.js';
-import { addDays } from '../time.js';
+import { addDays, dayPhase } from '../time.js';
 
-export function marketView(state, stats, cfg) {
+/**
+ * `now` sets the light in Commit City (night when it's left out) and `city` is data/city.json,
+ * whose peak keeps the city from shrinking when a count comes back lower.
+ */
+export function marketView(state, stats, cfg, { now = null, city = null } = {}) {
   const s = state.session;
   const open = s?.status === 'open';
   const last = state.candles.at(-1);
@@ -39,5 +43,7 @@ export function marketView(state, stats, cfg) {
     news: state.news,
     amo: state.amo,
     nextOpen: state.nextOpen,
+    phase: now ? dayPhase(now, cfg.market) : 'night',
+    lifetime: Math.max(city?.peak ?? 0, stats.lifetime?.total ?? 0, derived.total),
   };
 }

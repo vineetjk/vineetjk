@@ -6,14 +6,16 @@ import { readFileSync } from 'node:fs';
 const FONT_DIR = new URL('../../fonts/', import.meta.url);
 let fontData;
 
-function fontCss(weights) {
+function fontCss(weights, kannada) {
   fontData ??= Object.fromEntries(
-    ['mono-400', 'mono-700', 'rupee'].map((name) => [name, readFileSync(new URL(`${name}.woff2`, FONT_DIR)).toString('base64')]),
+    ['mono-400', 'mono-700', 'rupee', 'kannada-700'].map((name) => [name, readFileSync(new URL(`${name}.woff2`, FONT_DIR)).toString('base64')]),
   );
   // JetBrains Mono has no ₹ glyph, so family R supplies it from Noto Sans Mono (same 600-unit advance).
+  // Family K is a Noto Sans Kannada subset holding only the city's signs (see render/kannada.js).
   return [
     ...weights.map((w) => `@font-face{font-family:M;font-weight:${w};src:url(data:font/woff2;base64,${fontData[`mono-${w}`]}) format("woff2")}`),
     `@font-face{font-family:R;src:url(data:font/woff2;base64,${fontData.rupee}) format("woff2")}`,
+    kannada ? `@font-face{font-family:K;src:url(data:font/woff2;base64,${fontData['kannada-700']}) format("woff2")}` : '',
   ].join('');
 }
 
@@ -48,12 +50,13 @@ export function truncate(s, max) {
   return chars.length > max ? `${chars.slice(0, max - 1).join('')}…` : String(s);
 }
 
-export function svg({ w, h, title, theme, css = '', defs = '', body, weights = [400, 700] }) {
+export function svg({ w, h, title, theme, css = '', defs = '', body, weights = [400, 700], kannada = false }) {
   return [
     `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" role="img" aria-label="${esc(title)}">`,
     `<title>${esc(title)}</title>`,
-    `<style>${fontCss(weights)}`,
+    `<style>${fontCss(weights, kannada)}`,
     'text{font-family:M,R,ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}',
+    kannada ? '.kn{font-family:K,"Noto Sans Kannada",sans-serif}' : '',
     '.pulse{animation:pulse 1.6s ease-in-out infinite}@keyframes pulse{50%{opacity:.3}}',
     `@media (prefers-reduced-motion:reduce){*{animation:none!important}}${css}</style>`,
     defs && `<defs>${defs}</defs>`,
