@@ -22,7 +22,7 @@ import { skyDefs, sky, clouds, planes, SKY_CSS } from './city/sky.js';
 import { skylineDefs, skyline } from './city/skyline.js';
 import { streetDefs, backStreet, road, median, frontStreet, lamps } from './city/street.js';
 import { buildingDefs, buildings, outskirts, plotX, HOOK_CSS } from './city/buildings.js';
-import { soudhaDefs, soudha, SOUDHA_CSS } from './city/soudha.js';
+import { soudhaDefs, soudha, SOUDHA_CSS, FESTIVE_CSS } from './city/soudha.js';
 import { darshini, metroStairs, parkLawn, trees, bayStart, PLACES_CSS } from './city/places.js';
 import { trafficDefs, traffic, TRAFFIC_CSS, standing, busShelter } from './city/traffic.js';
 
@@ -69,11 +69,12 @@ export function city(v, theme) {
   const today = stats.calendar.at(-1)?.d;
   // Downtown ends one plot past the last building (or the construction site); outskirts before that
   const downtown = Math.min(A - 560, plotX(plan.buildings + 1, A)) - 40;
+  const repoBuildings = buildings(stats.repoList, plan, A, today, p);
   const mid = [
     `<rect x="0" y="${Y.ground}" width="${n(xEnd)}" height="${Y.backWalk - Y.ground}" fill="${p.lawnDark}"/>`,
     ...outskirts(1700, downtown, p),
-    soudha(A - 300, plan, p),
-    ...buildings(stats.repoList, plan, A, today, p).parts,
+    soudha(A - 300, plan, p, { lightsOn: (stats.calendar.at(-1)?.c ?? 0) > 0 || (stats.calendar.at(-2)?.c ?? 0) > 0 }),
+    ...repoBuildings.parts,
   ];
 
   // Near layer: the line and the street under it
@@ -128,6 +129,7 @@ export function city(v, theme) {
     '.blink{animation:blink 1.8s steps(1) infinite}@keyframes blink{60%{opacity:.15}}',
     HOOK_CSS,
     SOUDHA_CSS,
+    FESTIVE_CSS,
     PLACES_CSS,
     TRAFFIC_CSS,
   ].join('');
@@ -148,9 +150,23 @@ export function city(v, theme) {
     `<rect x=".5" y=".5" width="${W - 1}" height="${H - 1}" rx="12" fill="none" stroke="${theme.border}"/>`,
   ].join('');
 
-  const title = `Commit City: a Bengaluru that grows with my GitHub contributions. ${total} so far${stats.lifetime?.since ? ` since ${stats.lifetime.since}` : ''}. `
-    + `The Commit Metro train runs through it with my last ${weeks.length} weeks, one coach per week and one window per day, lit for days I committed, `
-    + `and pulls up at Commit Street, where $${cfg.symbol} trades at ${rupees(v.price)}. It's ${p.phase.label.toLowerCase()} in Bengaluru.`;
+  // Alt text: what the picture shows, in words
+  const names = repoBuildings.built.map((r) => r.name);
+  const listed = names.length > 5 ? `${names.slice(0, 5).join(', ')} and ${names.length - 5} more` : names.join(', ');
+  const { built: soudhaBuilt, start, done } = plan.soudha;
+  const townHall = soudhaBuilt >= 1 ? 'is finished'
+    : soudhaBuilt > 0 ? `is ${Math.round(soudhaBuilt * 100)}% built and opens at ${done.toLocaleString('en-IN')} contributions`
+      : `starts going up at ${start.toLocaleString('en-IN')} contributions`;
+  const buses = plan.has.buses ? (stats.prs ?? []).length : 0;
+  const title = [
+    `Commit City: a Bengaluru that grows with my GitHub contributions, ${total.toLocaleString('en-IN')} so far${stats.lifetime?.since ? ` since ${stats.lifetime.since}` : ''}.`,
+    `It has ${plan.buildings} building${plan.buildings === 1 ? '' : 's'}, one for each of my public repos${listed ? ` (${listed})` : ''}.`,
+    `Commit Soudha, the town hall, ${townHall}.`,
+    buses ? `${buses} BMTC bus${buses === 1 ? '' : 'es'} carry the pull requests I merged this year.` : '',
+    plan.has.planes && stats.posts?.length ? 'Banner planes fly my DEV posts.' : '',
+    `The Commit Metro train runs through it with my last ${weeks.length} weeks, one coach per week and one window per day, lit for days I committed, and stops at Commit Street, where $${cfg.symbol} trades at ${rupees(v.price)}.`,
+    `It's ${p.phase.label.toLowerCase()} in Bengaluru.`,
+  ].filter(Boolean).join(' ');
   return svg({ w: W, h: H, theme, css, defs: defs.join(''), body, title, kannada: true });
 }
 

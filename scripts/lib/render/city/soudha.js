@@ -91,8 +91,26 @@ export function soudhaDefs(p, lit) {
     + `<path d="M3,15v-8a2.25,2.25 0 0 1 4.5,0v8z" fill="${glass}"/></pattern>`];
 }
 
+/**
+ * Bulb strings along the rooflines and over the domes, the way the real Soudha is lit up on
+ * special nights. Here the special nights are the ones after a day I committed.
+ */
+function festive(cx) {
+  const x = (dx) => n(cx + dx);
+  const lines = [
+    `M${x(-164)},${MAIN}H${x(164)}`,
+    ...[-145, 145].map((d) => `M${x(d - 19)},${PAVILION}H${x(d + 19)}`),
+    `M${x(-55)},${G - 70}H${x(55)}`,
+    `M${x(-29 + ROOF.dx / 2)},${G - 102 - ROOF.dy / 2} C${x(-29 + ROOF.dx / 2)},${G - 123 - ROOF.dy / 2} ${x(-10 + ROOF.dx / 2)},${G - 128 - ROOF.dy / 2} ${x(ROOF.dx / 2)},${G - 130 - ROOF.dy / 2} C${x(10 + ROOF.dx / 2)},${G - 128 - ROOF.dy / 2} ${x(29 + ROOF.dx / 2)},${G - 123 - ROOF.dy / 2} ${x(29 + ROOF.dx / 2)},${G - 102 - ROOF.dy / 2}`,
+  ].join('');
+  return `<g fill="none" stroke-linecap="round" stroke-width="1.5"><path d="${lines}" stroke="#ffe08a" stroke-dasharray="0 3.4"/>`
+    + `<path class="bulbs" d="${lines}" stroke="#ff9f43" stroke-dasharray="0 3.4" stroke-dashoffset="1.7"/></g>`;
+}
+
+export const FESTIVE_CSS = '.bulbs{animation:bulbs 1.2s steps(1) infinite}@keyframes bulbs{50%{opacity:0}}';
+
 /** Where the town hall stands and how far along it is. Returns what goes in the mid layer. */
-export function soudha(cx, plan, p) {
+export function soudha(cx, plan, p, { lightsOn = false } = {}) {
   const { built, start, done } = plan.soudha;
   const finished = built >= 1;
   // Floodlit when finished (warm light on granite at night); otherwise lit like everything else
@@ -111,6 +129,7 @@ export function soudha(cx, plan, p) {
   const out = [];
   if (finished) {
     out.push(building(cx, c, true));
+    if (lightsOn && p.lit) out.push(festive(cx));
     return out.join('');
   }
 
@@ -125,6 +144,7 @@ export function soudha(cx, plan, p) {
     out.push(`<clipPath id="sdbuilt"><rect x="${n(cx - 200)}" y="${n(reached)}" width="400" height="${n(G - reached + 20)}"/></clipPath>`);
     out.push(`<g clip-path="url(#sdbuilt)">${building(cx, c, false)}</g>`);
   }
+  if (built <= 0) return out.join('') + siteBoard(cx, plan, p);
   const top = Math.max(G - 140, reached - 16);
   const lines = [];
   for (let sx = cx - 172; sx <= cx + 172; sx += 11.5) lines.push(`M${n(sx)},${G}V${n(top)}`);
@@ -151,7 +171,13 @@ export function soudha(cx, plan, p) {
     for (const dx of [-80, 0, 80]) out.push(`<circle cx="${n(cx + dx)}" cy="${n(reached - 6)}" r="16" fill="url(#glow)" opacity=".35"/>`);
   }
 
-  // The site board: what's being built and how far along it is
+  return out.join('') + siteBoard(cx, plan, p);
+}
+
+/** The site board: what's being built and how far along it is. */
+function siteBoard(cx, plan, p) {
+  const { built, start, done } = plan.soudha;
+  const out = [];
   const pct = Math.round(built * 100);
   const status = built > 0 ? `${pct}% BUILT · OPENS AT ${done.toLocaleString('en-IN')}` : `WORK STARTS AT ${start.toLocaleString('en-IN')}`;
   const bw = Math.max(width(status, 6.5, 0.3), width('COMMIT SOUDHA', 8, 0.8), knWidth(KN.soudha, 9)) + 18;
