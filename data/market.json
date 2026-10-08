@@ -1,20 +1,22 @@
 {
   "version": 1,
   "listedOn": "2026-10-06",
-  "price": 6105,
+  "price": 6665,
   "prevClose": 6060,
   "ath": 17470,
   "session": {
     "date": "2026-10-08",
-    "status": "open",
+    "status": "closed",
     "o": 6060,
-    "h": 6150,
+    "h": 6665,
     "l": 6060,
     "v": 15,
     "trades": 3,
-    "flags": []
+    "flags": [],
+    "c": 6665,
+    "fv": 14230
   },
-  "nextOpen": null,
+  "nextOpen": "2026-10-09",
   "candles": [
     {
       "d": "2026-06-30",
@@ -724,6 +726,15 @@
       "c": 6060,
       "v": 30,
       "fv": 11935
+    },
+    {
+      "d": "2026-10-08",
+      "o": 6060,
+      "h": 6665,
+      "l": 6060,
+      "c": 6665,
+      "v": 15,
+      "fv": 14230
     }
   ],
   "holders": {
@@ -762,9 +773,29 @@
       "orders": 2,
       "joinedAt": "2026-10-08T05:40:09.939Z",
       "lastOrderAt": "2026-10-08T05:40:35.530Z"
+    },
+    "creepernet": {
+      "id": 22804701,
+      "avatar": "https://avatars.githubusercontent.com/u/22804701?v=4",
+      "cash": 1000000,
+      "shares": 0,
+      "cost": 0,
+      "realized": 0,
+      "dividends": 0,
+      "orders": 0,
+      "joinedAt": "2026-10-08T10:18:40.490Z",
+      "lastOrderAt": "2026-10-08T10:18:40.490Z"
     }
   },
-  "amo": [],
+  "amo": [
+    {
+      "issue": 13,
+      "login": "creepernet",
+      "side": "buy",
+      "qty": 5,
+      "placedAt": "2026-10-08T10:18:40.490Z"
+    }
+  ],
   "tape": [
     {
       "t": "2026-10-08T05:40:35.530Z",
@@ -810,6 +841,10 @@
   ],
   "news": [
     {
+      "t": "2026-10-08T10:18:40.490Z",
+      "text": "Closing bell: $VJK ₹66.65 ▲ +9.98%, fair value ₹142.30"
+    },
+    {
       "t": "2026-10-08T05:40:09.939Z",
       "text": "Opening bell: 1 after-market order executed"
     },
@@ -842,12 +877,13 @@
     9,
     10,
     11,
-    12
+    12,
+    13
   ],
   "dividends": {
     "mergedPRs": 21,
     "source": "graphql",
     "perShare": 0
   },
-  "updatedAt": "2026-10-08T09:00:56.008Z"
+  "updatedAt": "2026-10-08T10:18:40.490Z"
 }
