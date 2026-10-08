@@ -1,22 +1,20 @@
 {
   "version": 1,
   "listedOn": "2026-10-06",
-  "price": 6060,
-  "prevClose": 5510,
+  "price": 6150,
+  "prevClose": 6060,
   "ath": 17470,
   "session": {
-    "date": "2026-10-06",
-    "status": "closed",
-    "o": 5510,
-    "h": 6060,
-    "l": 5510,
-    "v": 30,
+    "date": "2026-10-08",
+    "status": "open",
+    "o": 6060,
+    "h": 6150,
+    "l": 6060,
+    "v": 10,
     "trades": 2,
-    "flags": [],
-    "c": 6060,
-    "fv": 11935
+    "flags": []
   },
-  "nextOpen": "2026-10-08",
+  "nextOpen": null,
   "candles": [
     {
       "d": "2026-06-30",
@@ -744,26 +742,47 @@
     "Dev2023-Op": {
       "id": 152665582,
       "avatar": "https://avatars.githubusercontent.com/u/152665582?v=4",
-      "cash": 1000000,
-      "shares": 0,
-      "cost": 0,
+      "cash": 969475,
+      "shares": 5,
+      "cost": 30525,
       "realized": 0,
       "dividends": 0,
-      "orders": 0,
+      "orders": 1,
       "joinedAt": "2026-10-07T23:46:21.970Z",
       "lastOrderAt": "2026-10-07T23:46:21.970Z"
+    },
+    "hanzlabaig-dev": {
+      "id": 280592686,
+      "avatar": "https://avatars.githubusercontent.com/u/280592686?v=4",
+      "cash": 969250,
+      "shares": 5,
+      "cost": 30750,
+      "realized": 0,
+      "dividends": 0,
+      "orders": 1,
+      "joinedAt": "2026-10-08T05:40:09.939Z",
+      "lastOrderAt": "2026-10-08T05:40:09.939Z"
     }
   },
-  "amo": [
+  "amo": [],
+  "tape": [
     {
-      "issue": 4,
+      "t": "2026-10-08T05:40:09.939Z",
+      "login": "hanzlabaig-dev",
+      "side": "buy",
+      "qty": 5,
+      "px": 6150,
+      "issue": 5
+    },
+    {
+      "t": "2026-10-08T05:40:09.939Z",
       "login": "Dev2023-Op",
       "side": "buy",
       "qty": 5,
-      "placedAt": "2026-10-07T23:46:21.970Z"
-    }
-  ],
-  "tape": [
+      "px": 6105,
+      "issue": 4,
+      "amo": true
+    },
     {
       "t": "2026-10-06T06:10:01.739Z",
       "login": "Santhu32144",
@@ -782,6 +801,10 @@
     }
   ],
   "news": [
+    {
+      "t": "2026-10-08T05:40:09.939Z",
+      "text": "Opening bell: 1 after-market order executed"
+    },
     {
       "t": "2026-10-06T10:47:49.525Z",
       "text": "Closing bell: $VJK ₹60.60 ▲ +9.98%, fair value ₹119.35"
@@ -803,12 +826,13 @@
     1,
     2,
     3,
-    4
+    4,
+    5
   ],
   "dividends": {
     "mergedPRs": 21,
     "source": "graphql",
     "perShare": 0
   },
-  "updatedAt": "2026-10-07T23:46:21.970Z"
+  "updatedAt": "2026-10-08T05:40:09.939Z"
 }
