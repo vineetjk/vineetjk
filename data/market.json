@@ -838,12 +838,14 @@
     5,
     6,
     7,
-    8
+    8,
+    9,
+    10
   ],
   "dividends": {
     "mergedPRs": 21,
     "source": "graphql",
     "perShare": 0
   },
-  "updatedAt": "2026-10-08T08:59:54.989Z"
+  "updatedAt": "2026-10-08T09:00:16.445Z"
 }

@@ -49,7 +49,7 @@
 <p>There's no server behind this. A GitHub Action runs at the open, at the close and whenever someone places an order, then redraws these images. Every trade is in <a href="data/market.json">data/market.json</a>.</p>
 </details>
 
-<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/footer.602a746b0c.svg"><img src="assets/light/footer.338def8907.svg" width="100%" alt="Just a game with fake money. Last updated 08 Oct 2026, 14:29 IST."></picture></p>
+<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/footer.64607918b1.svg"><img src="assets/light/footer.70c775d3ac.svg" width="100%" alt="Just a game with fake money. Last updated 08 Oct 2026, 14:30 IST."></picture></p>
 
 <p align="center"><a href="https://buymeacoffee.com/vineetjk"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/coffee.7d22460e64.svg"><img src="assets/light/coffee.4e10ab1615.svg" height="44" alt="Buy me a coffee"></picture></a></p>
 
