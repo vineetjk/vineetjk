@@ -1,22 +1,20 @@
 {
   "version": 1,
   "listedOn": "2026-10-06",
-  "price": 6665,
-  "prevClose": 6060,
+  "price": 6715,
+  "prevClose": 6665,
   "ath": 17470,
   "session": {
-    "date": "2026-10-08",
-    "status": "closed",
-    "o": 6060,
-    "h": 6665,
-    "l": 6060,
-    "v": 15,
-    "trades": 3,
-    "flags": [],
-    "c": 6665,
-    "fv": 14230
+    "date": "2026-10-09",
+    "status": "open",
+    "o": 6665,
+    "h": 6715,
+    "l": 6665,
+    "v": 5,
+    "trades": 1,
+    "flags": []
   },
-  "nextOpen": "2026-10-09",
+  "nextOpen": null,
   "candles": [
     {
       "d": "2026-06-30",
@@ -777,26 +775,27 @@
     "creepernet": {
       "id": 22804701,
       "avatar": "https://avatars.githubusercontent.com/u/22804701?v=4",
-      "cash": 1000000,
-      "shares": 0,
-      "cost": 0,
+      "cash": 966425,
+      "shares": 5,
+      "cost": 33575,
       "realized": 0,
       "dividends": 0,
-      "orders": 0,
+      "orders": 1,
       "joinedAt": "2026-10-08T10:18:40.490Z",
       "lastOrderAt": "2026-10-08T10:18:40.490Z"
     }
   },
-  "amo": [
+  "amo": [],
+  "tape": [
     {
-      "issue": 13,
+      "t": "2026-10-09T05:56:22.368Z",
       "login": "creepernet",
       "side": "buy",
       "qty": 5,
-      "placedAt": "2026-10-08T10:18:40.490Z"
-    }
-  ],
-  "tape": [
+      "px": 6715,
+      "issue": 13,
+      "amo": true
+    },
     {
       "t": "2026-10-08T05:40:35.530Z",
       "login": "hanzlabaig-dev",
@@ -840,6 +839,10 @@
     }
   ],
   "news": [
+    {
+      "t": "2026-10-09T05:56:22.368Z",
+      "text": "Opening bell: 1 after-market order executed"
+    },
     {
       "t": "2026-10-08T10:18:40.490Z",
       "text": "Closing bell: $VJK ₹66.65 ▲ +9.98%, fair value ₹142.30"
@@ -885,5 +888,5 @@
     "source": "graphql",
     "perShare": 0
   },
-  "updatedAt": "2026-10-08T10:18:40.490Z"
+  "updatedAt": "2026-10-09T05:56:22.368Z"
 }
