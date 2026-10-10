@@ -4,7 +4,7 @@
   "name": "Vineet J Karni",
   "avatarUrl": "https://avatars.githubusercontent.com/u/42497152?u=56bd4a2e2e27f41492a6e8e676c9c680ddb89e01&v=4",
   "followers": 16,
-  "repos": 52,
+  "repos": 53,
   "stars": 19,
   "mergedPRs": 21,
   "languages": [
@@ -16,32 +16,32 @@
     {
       "name": "JavaScript",
       "color": "#f1e05a",
-      "size": 5050853
+      "size": 5056598
     },
     {
       "name": "HTML",
       "color": "#e34c26",
-      "size": 2667238
+      "size": 2668550
     },
     {
       "name": "CSS",
       "color": "#663399",
-      "size": 1159820
+      "size": 1177219
+    },
+    {
+      "name": "Python",
+      "color": "#3572A5",
+      "size": 383619
     },
     {
       "name": "TypeScript",
       "color": "#3178c6",
-      "size": 215407
-    },
-    {
-      "name": "SCSS",
-      "color": "#c6538c",
-      "size": 176872
+      "size": 299349
     },
     {
       "name": "Other",
       "color": "#8b949e",
-      "size": 359523
+      "size": 394570
     }
   ],
   "calendar": [
@@ -1527,17 +1527,10 @@
     },
     {
       "d": "2026-10-10",
-      "c": 0
+      "c": 39
     }
   ],
   "stations": [
-    {
-      "name": "vfd-explorer",
-      "color": "#e34c26",
-      "stars": 0,
-      "commits": 3,
-      "week": "2026-03-01"
-    },
     {
       "name": "tripppyyy",
       "color": "#f1e05a",
@@ -1560,15 +1553,29 @@
       "week": "2026-07-26"
     },
     {
+      "name": "CloudSea",
+      "color": "#3572A5",
+      "stars": 0,
+      "commits": 34,
+      "week": "2026-10-04"
+    },
+    {
       "name": "AllergySafe",
       "color": "#3178c6",
       "stars": 0,
       "commits": 29,
       "week": "2026-10-04"
+    },
+    {
+      "name": "skills-code-with-codespaces",
+      "color": "#89e051",
+      "stars": 0,
+      "commits": 4,
+      "week": "2026-10-04"
     }
   ],
   "lifetime": {
-    "total": 936,
+    "total": 975,
     "since": 2018
   },
   "repoList": [
@@ -1583,12 +1590,12 @@
     },
     {
       "name": "CloudSea",
-      "color": "#8b949e",
+      "color": "#3572A5",
       "stars": 0,
-      "pushed": "2026-10-09",
+      "pushed": "2026-10-10",
       "created": "2026-10-09",
-      "size": 0,
-      "commits": 0
+      "size": 4391,
+      "commits": 34
     },
     {
       "name": "FireCrash",
@@ -1951,6 +1958,15 @@
       "commits": 0
     },
     {
+      "name": "skills-code-with-codespaces",
+      "color": "#89e051",
+      "stars": 0,
+      "pushed": "2026-10-10",
+      "created": "2026-10-10",
+      "size": 440,
+      "commits": 4
+    },
+    {
       "name": "sslcscrapin",
       "color": "#3572A5",
       "stars": 0,
@@ -2106,5 +2122,5 @@
       "url": "https://dev.to/vineetjk/can-prithvi-eat-this-a-food-companion-i-built-for-my-friend-living-in-a-pg-2nf"
     }
   ],
-  "fetchedAt": "2026-10-10T05:38:53.355Z"
+  "fetchedAt": "2026-10-10T16:13:21.577Z"
 }
