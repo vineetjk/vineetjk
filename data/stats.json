@@ -1585,7 +1585,7 @@
       "stars": 0,
       "pushed": "2026-10-10",
       "created": "2026-10-10",
-      "size": 0,
+      "size": 25,
       "commits": 4
     },
     {
@@ -2136,5 +2136,5 @@
       "url": "https://dev.to/vineetjk/can-prithvi-eat-this-a-food-companion-i-built-for-my-friend-living-in-a-pg-2nf"
     }
   ],
-  "fetchedAt": "2026-10-10T17:23:12.289Z"
+  "fetchedAt": "2026-10-10T17:57:44.328Z"
 }
