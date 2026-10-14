@@ -36,7 +36,7 @@
 
 <p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/book.41dfafac52.svg"><img src="assets/light/book.8190b6579e.svg" width="100%" alt="Largest shareholder: @Santhu32144 with 30 shares. Last trade: buy 5 at ₹67.15. Market is closed. New orders go through at 09:15 IST on Thu 15 Oct."></picture></p>
 
-<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/fundamentals.6ef3f51ad7.svg"><img src="assets/light/fundamentals.0f22c31f4b.svg" width="100%" alt="Fundamentals from GitHub: 138 contributions in 30 days, 292 in a year, 3-day streak, 54 public repos, 19 stars, 16 followers, 21 merged PRs. Top languages: C, JavaScript, HTML."></picture></p>
+<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/fundamentals.a1f364343d.svg"><img src="assets/light/fundamentals.52e0fc1310.svg" width="100%" alt="Fundamentals from GitHub: 138 contributions in 30 days, 292 in a year, 3-day streak, 54 public repos, 20 stars, 16 followers, 21 merged PRs. Top languages: C, JavaScript, HTML."></picture></p>
 
 <details>
 <summary>How does this work?</summary>
