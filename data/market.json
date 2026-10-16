@@ -1,20 +1,22 @@
 {
   "version": 1,
   "listedOn": "2026-10-06",
-  "price": 10725,
+  "price": 11795,
   "prevClose": 10725,
   "ath": 17470,
   "session": {
     "date": "2026-10-16",
-    "status": "open",
+    "status": "closed",
     "o": 10725,
-    "h": 10725,
+    "h": 11795,
     "l": 10725,
     "v": 0,
     "trades": 0,
-    "flags": []
+    "flags": [],
+    "c": 11795,
+    "fv": 19620
   },
-  "nextOpen": null,
+  "nextOpen": "2026-10-19",
   "candles": [
     {
       "d": "2026-06-30",
@@ -778,6 +780,15 @@
       "c": 10725,
       "v": 0,
       "fv": 19365
+    },
+    {
+      "d": "2026-10-16",
+      "o": 10725,
+      "h": 11795,
+      "l": 10725,
+      "c": 11795,
+      "v": 0,
+      "fv": 19620
     }
   ],
   "holders": {
@@ -885,6 +896,10 @@
   ],
   "news": [
     {
+      "t": "2026-10-16T13:59:56.102Z",
+      "text": "Closing bell: $VJK ₹117.95 ▲ +9.98%, fair value ₹196.20"
+    },
+    {
       "t": "2026-10-15T14:12:23.528Z",
       "text": "Closing bell: $VJK ₹107.25 ▲ +10.00%, fair value ₹193.65"
     },
@@ -927,10 +942,6 @@
     {
       "t": "2026-10-06T05:25:55.099Z",
       "text": "@Santhu32144 is now the largest shareholder"
-    },
-    {
-      "t": "2026-10-05T20:36:10.336Z",
-      "text": "$VJK lists on Commit Street at ₹55.10, priced off 70 backtested sessions of commits"
     }
   ],
   "processed": [
@@ -953,5 +964,5 @@
     "source": "graphql",
     "perShare": 0
   },
-  "updatedAt": "2026-10-16T04:19:22.959Z"
+  "updatedAt": "2026-10-16T13:59:56.102Z"
 }
