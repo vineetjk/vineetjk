@@ -1,20 +1,22 @@
 {
   "version": 1,
   "listedOn": "2026-10-06",
-  "price": 11795,
+  "price": 12970,
   "prevClose": 11795,
   "ath": 17470,
   "session": {
     "date": "2026-10-19",
-    "status": "open",
+    "status": "closed",
     "o": 11795,
-    "h": 11795,
+    "h": 12970,
     "l": 11795,
     "v": 0,
     "trades": 0,
-    "flags": []
+    "flags": [],
+    "c": 12970,
+    "fv": 19750
   },
-  "nextOpen": null,
+  "nextOpen": "2026-10-20",
   "candles": [
     {
       "d": "2026-06-30",
@@ -787,6 +789,15 @@
       "c": 11795,
       "v": 0,
       "fv": 19620
+    },
+    {
+      "d": "2026-10-19",
+      "o": 11795,
+      "h": 12970,
+      "l": 11795,
+      "c": 12970,
+      "v": 0,
+      "fv": 19750
     }
   ],
   "holders": {
@@ -894,6 +905,10 @@
   ],
   "news": [
     {
+      "t": "2026-10-19T16:54:30.224Z",
+      "text": "Closing bell: $VJK ₹129.70 ▲ +9.96%, fair value ₹197.50"
+    },
+    {
       "t": "2026-10-16T13:59:56.102Z",
       "text": "Closing bell: $VJK ₹117.95 ▲ +9.98%, fair value ₹196.20"
     },
@@ -936,10 +951,6 @@
     {
       "t": "2026-10-06T06:10:01.739Z",
       "text": "Whale alert: @Santhu32144 buys 25 $VJK at ₹57.60"
-    },
-    {
-      "t": "2026-10-06T05:25:55.099Z",
-      "text": "@Santhu32144 is now the largest shareholder"
     }
   ],
   "processed": [
@@ -962,5 +973,5 @@
     "source": "graphql",
     "perShare": 0
   },
-  "updatedAt": "2026-10-19T04:26:56.894Z"
+  "updatedAt": "2026-10-19T16:54:30.224Z"
 }
