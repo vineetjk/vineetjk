@@ -1,20 +1,22 @@
 {
   "version": 1,
   "listedOn": "2026-10-06",
-  "price": 14800,
+  "price": 15690,
   "prevClose": 14265,
   "ath": 17470,
   "session": {
     "date": "2026-10-21",
-    "status": "open",
+    "status": "closed",
     "o": 14265,
-    "h": 14800,
+    "h": 15690,
     "l": 14265,
     "v": 25,
     "trades": 1,
-    "flags": []
+    "flags": [],
+    "c": 15690,
+    "fv": 20370
   },
-  "nextOpen": null,
+  "nextOpen": "2026-10-22",
   "candles": [
     {
       "d": "2026-06-30",
@@ -805,6 +807,15 @@
       "c": 14265,
       "v": 0,
       "fv": 20310
+    },
+    {
+      "d": "2026-10-21",
+      "o": 14265,
+      "h": 15690,
+      "l": 14265,
+      "c": 15690,
+      "v": 25,
+      "fv": 20370
     }
   ],
   "holders": {
@@ -932,6 +943,10 @@
   ],
   "news": [
     {
+      "t": "2026-10-21T14:41:35.939Z",
+      "text": "Closing bell: $VJK ₹156.90 ▲ +9.99%, fair value ₹203.70"
+    },
+    {
       "t": "2026-10-21T05:51:16.226Z",
       "text": "Whale alert: @partham20 buys 25 $VJK at ₹148.00"
     },
@@ -974,10 +989,6 @@
     {
       "t": "2026-10-08T10:18:40.490Z",
       "text": "Closing bell: $VJK ₹66.65 ▲ +9.98%, fair value ₹142.30"
-    },
-    {
-      "t": "2026-10-08T05:40:09.939Z",
-      "text": "Opening bell: 1 after-market order executed"
     }
   ],
   "processed": [
@@ -1001,5 +1012,5 @@
     "source": "graphql",
     "perShare": 0
   },
-  "updatedAt": "2026-10-21T05:51:16.226Z"
+  "updatedAt": "2026-10-21T14:41:35.939Z"
 }
