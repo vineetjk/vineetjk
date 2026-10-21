@@ -1,17 +1,17 @@
 {
   "version": 1,
   "listedOn": "2026-10-06",
-  "price": 14265,
+  "price": 14800,
   "prevClose": 14265,
   "ath": 17470,
   "session": {
     "date": "2026-10-21",
     "status": "open",
     "o": 14265,
-    "h": 14265,
+    "h": 14800,
     "l": 14265,
-    "v": 0,
-    "trades": 0,
+    "v": 25,
+    "trades": 1,
     "flags": []
   },
   "nextOpen": null,
@@ -855,10 +855,30 @@
       "orders": 1,
       "joinedAt": "2026-10-08T10:18:40.490Z",
       "lastOrderAt": "2026-10-08T10:18:40.490Z"
+    },
+    "partham20": {
+      "id": 123355647,
+      "avatar": "https://avatars.githubusercontent.com/u/123355647?v=4",
+      "cash": 630000,
+      "shares": 25,
+      "cost": 370000,
+      "realized": 0,
+      "dividends": 0,
+      "orders": 1,
+      "joinedAt": "2026-10-21T05:51:16.226Z",
+      "lastOrderAt": "2026-10-21T05:51:16.226Z"
     }
   },
   "amo": [],
   "tape": [
+    {
+      "t": "2026-10-21T05:51:16.226Z",
+      "login": "partham20",
+      "side": "buy",
+      "qty": 25,
+      "px": 14800,
+      "issue": 14
+    },
     {
       "t": "2026-10-09T05:56:22.368Z",
       "login": "creepernet",
@@ -912,6 +932,10 @@
   ],
   "news": [
     {
+      "t": "2026-10-21T05:51:16.226Z",
+      "text": "Whale alert: @partham20 buys 25 $VJK at ₹148.00"
+    },
+    {
       "t": "2026-10-20T14:31:08.004Z",
       "text": "Closing bell: $VJK ₹142.65 ▲ +9.98%, fair value ₹203.10"
     },
@@ -954,10 +978,6 @@
     {
       "t": "2026-10-08T05:40:09.939Z",
       "text": "Opening bell: 1 after-market order executed"
-    },
-    {
-      "t": "2026-10-06T10:47:49.525Z",
-      "text": "Closing bell: $VJK ₹60.60 ▲ +9.98%, fair value ₹119.35"
     }
   ],
   "processed": [
@@ -973,12 +993,13 @@
     10,
     11,
     12,
-    13
+    13,
+    14
   ],
   "dividends": {
     "mergedPRs": 21,
     "source": "graphql",
     "perShare": 0
   },
-  "updatedAt": "2026-10-21T04:30:44.891Z"
+  "updatedAt": "2026-10-21T05:51:16.226Z"
 }
