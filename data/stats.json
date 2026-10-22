@@ -1516,6 +1516,10 @@
     {
       "d": "2026-10-21",
       "c": 1
+    },
+    {
+      "d": "2026-10-22",
+      "c": 0
     }
   ],
   "stations": [
@@ -2133,5 +2137,5 @@
       "url": "https://dev.to/vineetjk/can-prithvi-eat-this-a-food-companion-i-built-for-my-friend-living-in-a-pg-2nf"
     }
   ],
-  "fetchedAt": "2026-10-21T18:13:30.549Z"
+  "fetchedAt": "2026-10-22T04:28:45.469Z"
 }
