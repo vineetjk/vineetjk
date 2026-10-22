@@ -4,7 +4,7 @@
   "name": "Vineet J Karni",
   "avatarUrl": "https://avatars.githubusercontent.com/u/42497152?u=56bd4a2e2e27f41492a6e8e676c9c680ddb89e01&v=4",
   "followers": 16,
-  "repos": 55,
+  "repos": 56,
   "stars": 24,
   "mergedPRs": 21,
   "languages": [
@@ -41,7 +41,7 @@
     {
       "name": "Other",
       "color": "#8b949e",
-      "size": 597354
+      "size": 607989
     }
   ],
   "calendar": [
@@ -1519,7 +1519,7 @@
     },
     {
       "d": "2026-10-22",
-      "c": 0
+      "c": 3
     }
   ],
   "stations": [
@@ -1567,7 +1567,7 @@
     }
   ],
   "lifetime": {
-    "total": 1021,
+    "total": 1024,
     "since": 2018
   },
   "repoList": [
@@ -1950,6 +1950,15 @@
       "commits": 0
     },
     {
+      "name": "resume",
+      "color": "#3D6117",
+      "stars": 0,
+      "pushed": "2026-10-22",
+      "created": "2026-10-22",
+      "size": 0,
+      "commits": 2
+    },
+    {
       "name": "rit-course-reg",
       "color": "#e34c26",
       "stars": 4,
@@ -2137,5 +2146,5 @@
       "url": "https://dev.to/vineetjk/can-prithvi-eat-this-a-food-companion-i-built-for-my-friend-living-in-a-pg-2nf"
     }
   ],
-  "fetchedAt": "2026-10-22T04:28:45.469Z"
+  "fetchedAt": "2026-10-22T18:08:38.950Z"
 }
