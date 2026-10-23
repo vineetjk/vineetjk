@@ -1,20 +1,22 @@
 {
   "version": 1,
   "listedOn": "2026-10-06",
-  "price": 16640,
+  "price": 17435,
   "prevClose": 16640,
   "ath": 17470,
   "session": {
     "date": "2026-10-23",
-    "status": "open",
+    "status": "closed",
     "o": 16640,
-    "h": 16640,
+    "h": 17435,
     "l": 16640,
     "v": 0,
     "trades": 0,
-    "flags": []
+    "flags": [],
+    "c": 17435,
+    "fv": 20615
   },
-  "nextOpen": null,
+  "nextOpen": "2026-10-26",
   "candles": [
     {
       "d": "2026-06-30",
@@ -823,6 +825,15 @@
       "c": 16640,
       "v": 0,
       "fv": 20435
+    },
+    {
+      "d": "2026-10-23",
+      "o": 16640,
+      "h": 17435,
+      "l": 16640,
+      "c": 17435,
+      "v": 0,
+      "fv": 20615
     }
   ],
   "holders": {
@@ -836,7 +847,7 @@
       "dividends": 0,
       "orders": 2,
       "joinedAt": "2026-10-06T05:25:55.099Z",
-      "lastOrderAt": "2026-10-06T06:10:01.739Z"
+      "lastOrderAt": "2026-10-23T10:36:32.791Z"
     },
     "Dev2023-Op": {
       "id": 152665582,
@@ -887,7 +898,15 @@
       "lastOrderAt": "2026-10-21T05:51:16.226Z"
     }
   },
-  "amo": [],
+  "amo": [
+    {
+      "issue": 15,
+      "login": "Santhu32144",
+      "side": "buy",
+      "qty": 25,
+      "placedAt": "2026-10-23T10:36:32.791Z"
+    }
+  ],
   "tape": [
     {
       "t": "2026-10-21T05:51:16.226Z",
@@ -950,6 +969,10 @@
   ],
   "news": [
     {
+      "t": "2026-10-23T10:36:32.791Z",
+      "text": "Closing bell: $VJK ₹174.35 ▲ +4.78%, fair value ₹206.15"
+    },
+    {
       "t": "2026-10-22T14:42:01.682Z",
       "text": "Closing bell: $VJK ₹166.40 ▲ +6.05%, fair value ₹204.35"
     },
@@ -992,10 +1015,6 @@
     {
       "t": "2026-10-09T10:55:31.401Z",
       "text": "Closing bell: $VJK ₹73.30 ▲ +9.98%, fair value ₹142.30"
-    },
-    {
-      "t": "2026-10-09T05:56:22.368Z",
-      "text": "Opening bell: 1 after-market order executed"
     }
   ],
   "processed": [
@@ -1012,12 +1031,13 @@
     11,
     12,
     13,
-    14
+    14,
+    15
   ],
   "dividends": {
     "mergedPRs": 21,
     "source": "graphql",
     "perShare": 0
   },
-  "updatedAt": "2026-10-23T04:34:19.610Z"
+  "updatedAt": "2026-10-23T10:36:32.791Z"
 }
