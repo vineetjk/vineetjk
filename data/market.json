@@ -1,22 +1,22 @@
 {
   "version": 1,
   "listedOn": "2026-10-06",
-  "price": 17435,
-  "prevClose": 16640,
-  "ath": 17470,
+  "price": 18090,
+  "prevClose": 17435,
+  "ath": 18090,
   "session": {
-    "date": "2026-10-23",
-    "status": "closed",
-    "o": 16640,
-    "h": 17435,
-    "l": 16640,
-    "v": 0,
-    "trades": 0,
-    "flags": [],
-    "c": 17435,
-    "fv": 20615
+    "date": "2026-10-26",
+    "status": "open",
+    "o": 17435,
+    "h": 18090,
+    "l": 17435,
+    "v": 25,
+    "trades": 1,
+    "flags": [
+      "ath"
+    ]
   },
-  "nextOpen": "2026-10-26",
+  "nextOpen": null,
   "candles": [
     {
       "d": "2026-06-30",
@@ -840,12 +840,12 @@
     "Santhu32144": {
       "id": 124969460,
       "avatar": "https://avatars.githubusercontent.com/u/124969460?v=4",
-      "cash": 828250,
-      "shares": 30,
-      "cost": 171750,
+      "cash": 376000,
+      "shares": 55,
+      "cost": 624000,
       "realized": 0,
       "dividends": 0,
-      "orders": 2,
+      "orders": 3,
       "joinedAt": "2026-10-06T05:25:55.099Z",
       "lastOrderAt": "2026-10-23T10:36:32.791Z"
     },
@@ -898,16 +898,17 @@
       "lastOrderAt": "2026-10-21T05:51:16.226Z"
     }
   },
-  "amo": [
+  "amo": [],
+  "tape": [
     {
-      "issue": 15,
+      "t": "2026-10-26T04:31:21.615Z",
       "login": "Santhu32144",
       "side": "buy",
       "qty": 25,
-      "placedAt": "2026-10-23T10:36:32.791Z"
-    }
-  ],
-  "tape": [
+      "px": 18090,
+      "issue": 15,
+      "amo": true
+    },
     {
       "t": "2026-10-21T05:51:16.226Z",
       "login": "partham20",
@@ -969,6 +970,18 @@
   ],
   "news": [
     {
+      "t": "2026-10-26T04:31:21.615Z",
+      "text": "Opening bell: 1 after-market order executed"
+    },
+    {
+      "t": "2026-10-26T04:31:21.615Z",
+      "text": "Whale alert: @Santhu32144 buys 25 $VJK at ₹180.90"
+    },
+    {
+      "t": "2026-10-26T04:31:21.615Z",
+      "text": "New all-time high: ₹180.90"
+    },
+    {
       "t": "2026-10-23T10:36:32.791Z",
       "text": "Closing bell: $VJK ₹174.35 ▲ +4.78%, fair value ₹206.15"
     },
@@ -1003,18 +1016,6 @@
     {
       "t": "2026-10-14T14:41:29.138Z",
       "text": "Closing bell: $VJK ₹97.50 ▲ +9.98%, fair value ₹192.35"
-    },
-    {
-      "t": "2026-10-13T11:08:51.262Z",
-      "text": "Closing bell: $VJK ₹88.65 ▲ +9.99%, fair value ₹185.05"
-    },
-    {
-      "t": "2026-10-12T11:20:40.251Z",
-      "text": "Closing bell: $VJK ₹80.60 ▲ +9.96%, fair value ₹182.35"
-    },
-    {
-      "t": "2026-10-09T10:55:31.401Z",
-      "text": "Closing bell: $VJK ₹73.30 ▲ +9.98%, fair value ₹142.30"
     }
   ],
   "processed": [
@@ -1039,5 +1040,5 @@
     "source": "graphql",
     "perShare": 0
   },
-  "updatedAt": "2026-10-23T10:36:32.791Z"
+  "updatedAt": "2026-10-26T04:31:21.615Z"
 }
