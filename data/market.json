@@ -1,20 +1,22 @@
 {
   "version": 1,
   "listedOn": "2026-10-06",
-  "price": 19745,
+  "price": 19990,
   "prevClose": 19745,
-  "ath": 19745,
+  "ath": 19990,
   "session": {
     "date": "2026-10-30",
-    "status": "open",
+    "status": "closed",
     "o": 19745,
-    "h": 19745,
+    "h": 19990,
     "l": 19745,
     "v": 0,
     "trades": 0,
-    "flags": []
+    "flags": [],
+    "c": 19990,
+    "fv": 20975
   },
-  "nextOpen": null,
+  "nextOpen": "2026-11-02",
   "candles": [
     {
       "d": "2026-06-30",
@@ -868,6 +870,15 @@
       "c": 19745,
       "v": 0,
       "fv": 20975
+    },
+    {
+      "d": "2026-10-30",
+      "o": 19745,
+      "h": 19990,
+      "l": 19745,
+      "c": 19990,
+      "v": 0,
+      "fv": 20975
     }
   ],
   "holders": {
@@ -1004,6 +1015,14 @@
   ],
   "news": [
     {
+      "t": "2026-10-30T10:28:46.861Z",
+      "text": "$VJK closes at an all-time high"
+    },
+    {
+      "t": "2026-10-30T10:28:46.861Z",
+      "text": "Closing bell: $VJK ₹199.90 ▲ +1.24%, fair value ₹209.75"
+    },
+    {
       "t": "2026-10-29T10:26:21.712Z",
       "text": "$VJK closes at an all-time high"
     },
@@ -1042,14 +1061,6 @@
     {
       "t": "2026-10-26T04:31:21.615Z",
       "text": "Whale alert: @Santhu32144 buys 25 $VJK at ₹180.90"
-    },
-    {
-      "t": "2026-10-26T04:31:21.615Z",
-      "text": "New all-time high: ₹180.90"
-    },
-    {
-      "t": "2026-10-23T10:36:32.791Z",
-      "text": "Closing bell: $VJK ₹174.35 ▲ +4.78%, fair value ₹206.15"
     }
   ],
   "processed": [
@@ -1074,5 +1085,5 @@
     "source": "graphql",
     "perShare": 0
   },
-  "updatedAt": "2026-10-30T05:33:53.575Z"
+  "updatedAt": "2026-10-30T10:28:46.861Z"
 }
