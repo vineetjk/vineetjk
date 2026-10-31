@@ -1,4 +1,4 @@
-<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/city.c5782ce2ba.svg"><img src="assets/light/city.4810771d14.svg" width="100%" alt="Commit City: a Bengaluru that grows with my GitHub contributions, 1,030 so far since 2018. It has 16 buildings, one for each of my public repos (CloudSea, AllergySafe, quiettv, skills-code-with-codespaces, 3d-ticket-kiosk and 11 more). Commit Soudha, the town hall, is 33% built and opens at 1,500 contributions. 10 BMTC buses carry the pull requests I merged this year. Banner planes fly my DEV posts. The Commit Metro train runs through it with my last 53 weeks, one coach per week and one window per day, lit for days I committed, and stops at Commit Street, where $VJK trades at ₹199.90. It's night in Bengaluru."></picture></p>
+<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/city.d1721cde56.svg"><img src="assets/light/city.c5ff342472.svg" width="100%" alt="Commit City: a Bengaluru that grows with my GitHub contributions, 1,034 so far since 2018. It has 16 buildings, one for each of my public repos (CloudSea, AllergySafe, quiettv, skills-code-with-codespaces, 3d-ticket-kiosk and 11 more). Commit Soudha, the town hall, is 33% built and opens at 1,500 contributions. 10 BMTC buses carry the pull requests I merged this year. Banner planes fly my DEV posts. The Commit Metro train runs through it with my last 53 weeks, one coach per week and one window per day, lit for days I committed, and stops at Commit Street, where $VJK trades at ₹199.90. It's night in Bengaluru."></picture></p>
 
 <p align="center"><sub>The sky follows the time in Bengaluru. Pick a time of day to see the city then.</sub><br>
 <a href="https://github.com/vineetjk/vineetjk/blob/HEAD/views/dawn.md"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/light-dawn.c0781e5e99.svg"><img src="assets/light/light-dawn.6c489f0a15.svg" height="34" alt="See Commit City at dawn"></picture></a> <a href="https://github.com/vineetjk/vineetjk/blob/HEAD/views/day.md"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/light-day.76f0d9d739.svg"><img src="assets/light/light-day.ba0bb15de2.svg" height="34" alt="See Commit City at day"></picture></a> <a href="https://github.com/vineetjk/vineetjk/blob/HEAD/views/dusk.md"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/light-dusk.b32a862c01.svg"><img src="assets/light/light-dusk.1ed723678d.svg" height="34" alt="See Commit City at dusk"></picture></a> <a href="https://github.com/vineetjk/vineetjk/blob/HEAD/views/night.md"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/light-night.85cbf61604.svg"><img src="assets/light/light-night.2ccc04edca.svg" height="34" alt="See Commit City at night"></picture></a></p>
@@ -21,9 +21,9 @@
 
 <p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/sign.7bbc92792e.svg"><img src="assets/light/sign.6c69be064b.svg" width="100%" alt="COMMIT STREET, in golden lights"></picture></p>
 
-<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/ticker.1af686db43.svg"><img src="assets/light/ticker.3eef583c50.svg" width="100%" alt="$VJK ₹199.90 +1.24%. market closed. $VJK closes at an all-time high"></picture></p>
+<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/ticker.5c14f83288.svg"><img src="assets/light/ticker.1719f05436.svg" width="100%" alt="$VJK ₹199.90 +1.24%. market closed. $VJK closes at an all-time high"></picture></p>
 
-<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/quote.0e96651e47.svg"><img src="assets/light/quote.6897298e3e.svg" width="100%" alt="$VJK at ₹199.90, +1.24% at last close, market closed. Fair value from commits: ₹209.75. Circuit band ₹177.75 to ₹217.15."></picture></p>
+<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/quote.634c245275.svg"><img src="assets/light/quote.7141e2d071.svg" width="100%" alt="$VJK at ₹199.90, +1.24% at last close, market closed. Fair value from commits: ₹210.35. Circuit band ₹177.75 to ₹217.15."></picture></p>
 
 <p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/chart.590a125bb1.svg"><img src="assets/light/chart.9e69ece22a.svg" width="100%" alt="Daily candlestick chart of $VJK over 80 sessions from 10 Jul, with the fair value implied by commit activity. Last price 199.90."></picture></p>
 
@@ -36,7 +36,7 @@
 
 <p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/book.ef2e2adee0.svg"><img src="assets/light/book.dbc73325b9.svg" width="100%" alt="Largest shareholder: @Santhu32144 with 55 shares. Last trade: buy 25 at ₹180.90. Market is closed. New orders go through at 09:15 IST on Mon 02 Nov."></picture></p>
 
-<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/fundamentals.e7c0b50822.svg"><img src="assets/light/fundamentals.0977e86492.svg" width="100%" alt="Fundamentals from GitHub: 166 contributions in 30 days, 320 in a year, 0-day streak, 56 public repos, 24 stars, 17 followers, 21 merged PRs. Top languages: C, JavaScript, HTML."></picture></p>
+<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/fundamentals.b5b78038f6.svg"><img src="assets/light/fundamentals.1b43b276c2.svg" width="100%" alt="Fundamentals from GitHub: 167 contributions in 30 days, 321 in a year, 1-day streak, 56 public repos, 24 stars, 17 followers, 21 merged PRs. Top languages: C, JavaScript, HTML."></picture></p>
 
 <details>
 <summary>How does this work?</summary>
@@ -49,7 +49,7 @@
 <p>There's no server behind this. A GitHub Action runs at the open, at the close and whenever someone places an order, then redraws these images. Every trade is in <a href="data/market.json">data/market.json</a>.</p>
 </details>
 
-<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/footer.63aa58e67d.svg"><img src="assets/light/footer.5db8840159.svg" width="100%" alt="Just a game with fake money. Last updated 30 Oct 2026, 15:58 IST."></picture></p>
+<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/footer.cd7f85427c.svg"><img src="assets/light/footer.0842a2f05b.svg" width="100%" alt="Just a game with fake money. Last updated 01 Nov 2026, 01:19 IST."></picture></p>
 
 <p align="center"><a href="https://buymeacoffee.com/vineetjk"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/coffee.7d22460e64.svg"><img src="assets/light/coffee.4e10ab1615.svg" height="44" alt="Buy me a coffee"></picture></a></p>
 
