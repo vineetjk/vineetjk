@@ -941,9 +941,29 @@
       "orders": 1,
       "joinedAt": "2026-10-21T05:51:16.226Z",
       "lastOrderAt": "2026-10-21T05:51:16.226Z"
+    },
+    "PingPongPlus": {
+      "id": 180537317,
+      "avatar": "https://avatars.githubusercontent.com/u/180537317?v=4",
+      "cash": 1000000,
+      "shares": 0,
+      "cost": 0,
+      "realized": 0,
+      "dividends": 0,
+      "orders": 0,
+      "joinedAt": "2026-10-31T19:49:32.804Z",
+      "lastOrderAt": "2026-10-31T19:49:32.804Z"
     }
   },
-  "amo": [],
+  "amo": [
+    {
+      "issue": 17,
+      "login": "PingPongPlus",
+      "side": "buy",
+      "qty": 25,
+      "placedAt": "2026-10-31T19:49:32.804Z"
+    }
+  ],
   "tape": [
     {
       "t": "2026-10-26T04:31:21.615Z",
@@ -1079,12 +1099,13 @@
     13,
     14,
     15,
-    16
+    16,
+    17
   ],
   "dividends": {
     "mergedPRs": 21,
     "source": "graphql",
     "perShare": 0
   },
-  "updatedAt": "2026-10-31T19:49:14.152Z"
+  "updatedAt": "2026-10-31T19:49:32.804Z"
 }

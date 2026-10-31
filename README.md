@@ -34,7 +34,7 @@
 
 <p align="center"><sub>Buttons open a pre-filled issue. Hit <b>Create</b> to place your order.</sub></p>
 
-<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/book.ef2e2adee0.svg"><img src="assets/light/book.dbc73325b9.svg" width="100%" alt="Largest shareholder: @Santhu32144 with 55 shares. Last trade: buy 25 at ₹180.90. Market is closed. New orders go through at 09:15 IST on Mon 02 Nov."></picture></p>
+<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/book.a79cd68fb9.svg"><img src="assets/light/book.1a98c0b29d.svg" width="100%" alt="Largest shareholder: @Santhu32144 with 55 shares. Last trade: buy 25 at ₹180.90. Market is closed. 1 order is waiting for 09:15 IST on Mon 02 Nov."></picture></p>
 
 <p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/fundamentals.b5b78038f6.svg"><img src="assets/light/fundamentals.1b43b276c2.svg" width="100%" alt="Fundamentals from GitHub: 167 contributions in 30 days, 321 in a year, 1-day streak, 56 public repos, 24 stars, 17 followers, 21 merged PRs. Top languages: C, JavaScript, HTML."></picture></p>
 
