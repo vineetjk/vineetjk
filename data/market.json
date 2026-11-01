@@ -953,6 +953,18 @@
       "orders": 0,
       "joinedAt": "2026-10-31T19:49:32.804Z",
       "lastOrderAt": "2026-10-31T19:49:32.804Z"
+    },
+    "lavishlohiya": {
+      "id": 211787438,
+      "avatar": "https://avatars.githubusercontent.com/u/211787438?v=4",
+      "cash": 1000000,
+      "shares": 0,
+      "cost": 0,
+      "realized": 0,
+      "dividends": 0,
+      "orders": 0,
+      "joinedAt": "2026-11-01T12:47:13.963Z",
+      "lastOrderAt": "2026-11-01T12:47:13.963Z"
     }
   },
   "amo": [
@@ -962,6 +974,13 @@
       "side": "buy",
       "qty": 25,
       "placedAt": "2026-10-31T19:49:32.804Z"
+    },
+    {
+      "issue": 19,
+      "login": "lavishlohiya",
+      "side": "buy",
+      "qty": 25,
+      "placedAt": "2026-11-01T12:47:13.963Z"
     }
   ],
   "tape": [
@@ -1101,12 +1120,13 @@
     15,
     16,
     17,
-    18
+    18,
+    19
   ],
   "dividends": {
     "mergedPRs": 21,
     "source": "graphql",
     "perShare": 0
   },
-  "updatedAt": "2026-10-31T19:50:01.681Z"
+  "updatedAt": "2026-11-01T12:47:13.963Z"
 }
