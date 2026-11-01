@@ -977,6 +977,18 @@
       "orders": 0,
       "joinedAt": "2026-11-01T17:05:27.809Z",
       "lastOrderAt": "2026-11-01T17:05:27.809Z"
+    },
+    "riascho": {
+      "id": 123465523,
+      "avatar": "https://avatars.githubusercontent.com/u/123465523?v=4",
+      "cash": 1000000,
+      "shares": 0,
+      "cost": 0,
+      "realized": 0,
+      "dividends": 0,
+      "orders": 0,
+      "joinedAt": "2026-11-01T18:33:49.908Z",
+      "lastOrderAt": "2026-11-01T18:33:49.908Z"
     }
   },
   "amo": [
@@ -1000,6 +1012,13 @@
       "side": "buy",
       "qty": 25,
       "placedAt": "2026-11-01T17:05:27.809Z"
+    },
+    {
+      "issue": 21,
+      "login": "riascho",
+      "side": "buy",
+      "qty": 25,
+      "placedAt": "2026-11-01T18:33:49.908Z"
     }
   ],
   "tape": [
@@ -1141,12 +1160,13 @@
     17,
     18,
     19,
-    20
+    20,
+    21
   ],
   "dividends": {
     "mergedPRs": 21,
     "source": "graphql",
     "perShare": 0
   },
-  "updatedAt": "2026-11-01T17:05:27.809Z"
+  "updatedAt": "2026-11-01T18:33:49.908Z"
 }
