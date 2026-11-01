@@ -965,6 +965,18 @@
       "orders": 0,
       "joinedAt": "2026-11-01T12:47:13.963Z",
       "lastOrderAt": "2026-11-01T12:47:13.963Z"
+    },
+    "ladecruze": {
+      "id": 39010220,
+      "avatar": "https://avatars.githubusercontent.com/u/39010220?v=4",
+      "cash": 1000000,
+      "shares": 0,
+      "cost": 0,
+      "realized": 0,
+      "dividends": 0,
+      "orders": 0,
+      "joinedAt": "2026-11-01T17:05:27.809Z",
+      "lastOrderAt": "2026-11-01T17:05:27.809Z"
     }
   },
   "amo": [
@@ -981,6 +993,13 @@
       "side": "buy",
       "qty": 25,
       "placedAt": "2026-11-01T12:47:13.963Z"
+    },
+    {
+      "issue": 20,
+      "login": "ladecruze",
+      "side": "buy",
+      "qty": 25,
+      "placedAt": "2026-11-01T17:05:27.809Z"
     }
   ],
   "tape": [
@@ -1121,12 +1140,13 @@
     16,
     17,
     18,
-    19
+    19,
+    20
   ],
   "dividends": {
     "mergedPRs": 21,
     "source": "graphql",
     "perShare": 0
   },
-  "updatedAt": "2026-11-01T12:47:13.963Z"
+  "updatedAt": "2026-11-01T17:05:27.809Z"
 }
