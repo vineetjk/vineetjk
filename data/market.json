@@ -1,22 +1,23 @@
 {
   "version": 1,
   "listedOn": "2026-10-06",
-  "price": 19990,
-  "prevClose": 19745,
-  "ath": 19990,
+  "price": 21985,
+  "prevClose": 19990,
+  "ath": 21985,
   "session": {
-    "date": "2026-10-30",
-    "status": "closed",
-    "o": 19745,
-    "h": 19990,
-    "l": 19745,
-    "v": 0,
-    "trades": 0,
-    "flags": [],
-    "c": 19990,
-    "fv": 20975
+    "date": "2026-11-02",
+    "status": "open",
+    "o": 19990,
+    "h": 21985,
+    "l": 19990,
+    "v": 75,
+    "trades": 3,
+    "flags": [
+      "ath",
+      "upper"
+    ]
   },
-  "nextOpen": "2026-11-02",
+  "nextOpen": null,
   "candles": [
     {
       "d": "2026-06-30",
@@ -945,36 +946,36 @@
     "PingPongPlus": {
       "id": 180537317,
       "avatar": "https://avatars.githubusercontent.com/u/180537317?v=4",
-      "cash": 1000000,
-      "shares": 0,
-      "cost": 0,
+      "cash": 481500,
+      "shares": 25,
+      "cost": 518500,
       "realized": 0,
       "dividends": 0,
-      "orders": 0,
+      "orders": 1,
       "joinedAt": "2026-10-31T19:49:32.804Z",
       "lastOrderAt": "2026-10-31T19:49:32.804Z"
     },
     "lavishlohiya": {
       "id": 211787438,
       "avatar": "https://avatars.githubusercontent.com/u/211787438?v=4",
-      "cash": 1000000,
-      "shares": 0,
-      "cost": 0,
+      "cash": 462000,
+      "shares": 25,
+      "cost": 538000,
       "realized": 0,
       "dividends": 0,
-      "orders": 0,
+      "orders": 1,
       "joinedAt": "2026-11-01T12:47:13.963Z",
       "lastOrderAt": "2026-11-01T12:47:13.963Z"
     },
     "ladecruze": {
       "id": 39010220,
       "avatar": "https://avatars.githubusercontent.com/u/39010220?v=4",
-      "cash": 1000000,
-      "shares": 0,
-      "cost": 0,
+      "cash": 450375,
+      "shares": 25,
+      "cost": 549625,
       "realized": 0,
       "dividends": 0,
-      "orders": 0,
+      "orders": 1,
       "joinedAt": "2026-11-01T17:05:27.809Z",
       "lastOrderAt": "2026-11-01T17:05:27.809Z"
     },
@@ -991,37 +992,35 @@
       "lastOrderAt": "2026-11-01T18:33:49.908Z"
     }
   },
-  "amo": [
+  "amo": [],
+  "tape": [
     {
-      "issue": 17,
-      "login": "PingPongPlus",
-      "side": "buy",
-      "qty": 25,
-      "placedAt": "2026-10-31T19:49:32.804Z"
-    },
-    {
-      "issue": 19,
-      "login": "lavishlohiya",
-      "side": "buy",
-      "qty": 25,
-      "placedAt": "2026-11-01T12:47:13.963Z"
-    },
-    {
-      "issue": 20,
+      "t": "2026-11-02T04:44:58.889Z",
       "login": "ladecruze",
       "side": "buy",
       "qty": 25,
-      "placedAt": "2026-11-01T17:05:27.809Z"
+      "px": 21985,
+      "issue": 20,
+      "amo": true
     },
     {
-      "issue": 21,
-      "login": "riascho",
+      "t": "2026-11-02T04:44:58.889Z",
+      "login": "lavishlohiya",
       "side": "buy",
       "qty": 25,
-      "placedAt": "2026-11-01T18:33:49.908Z"
-    }
-  ],
-  "tape": [
+      "px": 21520,
+      "issue": 19,
+      "amo": true
+    },
+    {
+      "t": "2026-11-02T04:44:58.889Z",
+      "login": "PingPongPlus",
+      "side": "buy",
+      "qty": 25,
+      "px": 20740,
+      "issue": 17,
+      "amo": true
+    },
     {
       "t": "2026-10-26T04:31:21.615Z",
       "login": "Santhu32144",
@@ -1092,6 +1091,30 @@
   ],
   "news": [
     {
+      "t": "2026-11-02T04:44:58.889Z",
+      "text": "Opening bell: 4 after-market orders executed"
+    },
+    {
+      "t": "2026-11-02T04:44:58.889Z",
+      "text": "Whale alert: @ladecruze buys 25 $VJK at ₹219.85"
+    },
+    {
+      "t": "2026-11-02T04:44:58.889Z",
+      "text": "$VJK hits the upper circuit at ₹219.85. Buyers locked out for the day"
+    },
+    {
+      "t": "2026-11-02T04:44:58.889Z",
+      "text": "Whale alert: @lavishlohiya buys 25 $VJK at ₹215.20"
+    },
+    {
+      "t": "2026-11-02T04:44:58.889Z",
+      "text": "Whale alert: @PingPongPlus buys 25 $VJK at ₹207.40"
+    },
+    {
+      "t": "2026-11-02T04:44:58.889Z",
+      "text": "New all-time high: ₹207.40"
+    },
+    {
       "t": "2026-10-30T10:28:46.861Z",
       "text": "$VJK closes at an all-time high"
     },
@@ -1114,30 +1137,6 @@
     {
       "t": "2026-10-28T10:02:00.456Z",
       "text": "Closing bell: $VJK ₹194.40 ▲ +2.02%, fair value ₹209.75"
-    },
-    {
-      "t": "2026-10-27T15:49:52.746Z",
-      "text": "$VJK closes at an all-time high"
-    },
-    {
-      "t": "2026-10-27T15:49:52.746Z",
-      "text": "Closing bell: $VJK ₹190.55 ▲ +2.34%, fair value ₹207.95"
-    },
-    {
-      "t": "2026-10-26T10:11:54.413Z",
-      "text": "$VJK closes at an all-time high"
-    },
-    {
-      "t": "2026-10-26T10:11:54.413Z",
-      "text": "Closing bell: $VJK ₹186.20 ▲ +6.80%, fair value ₹207.35"
-    },
-    {
-      "t": "2026-10-26T04:31:21.615Z",
-      "text": "Opening bell: 1 after-market order executed"
-    },
-    {
-      "t": "2026-10-26T04:31:21.615Z",
-      "text": "Whale alert: @Santhu32144 buys 25 $VJK at ₹180.90"
     }
   ],
   "processed": [
@@ -1168,5 +1167,5 @@
     "source": "graphql",
     "perShare": 0
   },
-  "updatedAt": "2026-11-01T18:33:49.908Z"
+  "updatedAt": "2026-11-02T04:44:58.889Z"
 }
