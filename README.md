@@ -34,7 +34,7 @@
 
 <p align="center"><sub>Buttons open a pre-filled issue. Hit <b>Create</b> to place your order.</sub></p>
 
-<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/book.7f9c4fc5d9.svg"><img src="assets/light/book.f3a9f850f1.svg" width="100%" alt="Largest shareholder: @Santhu32144 with 55 shares. Last trade: buy 25 at ₹219.85. Market is open. Orders go through within a minute."></picture></p>
+<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/book.d9da19ea6f.svg"><img src="assets/light/book.6d7318dc45.svg" width="100%" alt="Largest shareholder: @Santhu32144 with 55 shares. Last trade: buy 25 at ₹219.85. Market is open. Orders go through within a minute."></picture></p>
 
 <p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/fundamentals.e5a4215c15.svg"><img src="assets/light/fundamentals.be245b3614.svg" width="100%" alt="Fundamentals from GitHub: 171 contributions in 30 days, 325 in a year, 2-day streak, 56 public repos, 30 stars, 19 followers, 21 merged PRs. Top languages: C, JavaScript, HTML."></picture></p>
 
@@ -49,7 +49,7 @@
 <p>There's no server behind this. A GitHub Action runs at the open, at the close and whenever someone places an order, then redraws these images. Every trade is in <a href="data/market.json">data/market.json</a>.</p>
 </details>
 
-<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/footer.b901854685.svg"><img src="assets/light/footer.4cf5d5cf20.svg" width="100%" alt="Just a game with fake money. Last updated 02 Nov 2026, 10:24 IST."></picture></p>
+<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/footer.22ecfd9038.svg"><img src="assets/light/footer.1b59827304.svg" width="100%" alt="Just a game with fake money. Last updated 02 Nov 2026, 10:52 IST."></picture></p>
 
 <p align="center"><a href="https://buymeacoffee.com/vineetjk"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/coffee.7d22460e64.svg"><img src="assets/light/coffee.4e10ab1615.svg" height="44" alt="Buy me a coffee"></picture></a></p>
 

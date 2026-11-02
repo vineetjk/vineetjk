@@ -990,6 +990,18 @@
       "orders": 0,
       "joinedAt": "2026-11-01T18:33:49.908Z",
       "lastOrderAt": "2026-11-01T18:33:49.908Z"
+    },
+    "gusti-dimas": {
+      "id": 126201811,
+      "avatar": "https://avatars.githubusercontent.com/u/126201811?v=4",
+      "cash": 1000000,
+      "shares": 0,
+      "cost": 0,
+      "realized": 0,
+      "dividends": 0,
+      "orders": 0,
+      "joinedAt": "2026-11-02T05:22:44.684Z",
+      "lastOrderAt": "2026-11-02T05:22:44.684Z"
     }
   },
   "amo": [],
@@ -1161,12 +1173,13 @@
     19,
     20,
     21,
-    22
+    22,
+    23
   ],
   "dividends": {
     "mergedPRs": 21,
     "source": "graphql",
     "perShare": 0
   },
-  "updatedAt": "2026-11-02T04:54:53.592Z"
+  "updatedAt": "2026-11-02T05:22:44.684Z"
 }
