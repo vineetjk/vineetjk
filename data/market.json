@@ -2,21 +2,19 @@
   "version": 1,
   "listedOn": "2026-10-06",
   "price": 21395,
-  "prevClose": 21840,
+  "prevClose": 21395,
   "ath": 21985,
   "session": {
-    "date": "2026-11-03",
-    "status": "closed",
-    "o": 21840,
-    "h": 21840,
+    "date": "2026-11-04",
+    "status": "open",
+    "o": 21395,
+    "h": 21395,
     "l": 21395,
     "v": 0,
     "trades": 0,
-    "flags": [],
-    "c": 21395,
-    "fv": 19620
+    "flags": []
   },
-  "nextOpen": "2026-11-04",
+  "nextOpen": null,
   "candles": [
     {
       "d": "2026-06-30",
@@ -1198,5 +1196,5 @@
     "source": "graphql",
     "perShare": 0
   },
-  "updatedAt": "2026-11-03T11:22:21.496Z"
+  "updatedAt": "2026-11-04T06:01:22.539Z"
 }
