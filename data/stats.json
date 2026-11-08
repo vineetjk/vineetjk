@@ -3,9 +3,9 @@
   "login": "vineetjk",
   "name": "Vineet J Karni",
   "avatarUrl": "https://avatars.githubusercontent.com/u/42497152?u=56bd4a2e2e27f41492a6e8e676c9c680ddb89e01&v=4",
-  "followers": 20,
+  "followers": 21,
   "repos": 56,
-  "stars": 33,
+  "stars": 34,
   "mergedPRs": 21,
   "languages": [
     {
@@ -45,34 +45,6 @@
     }
   ],
   "calendar": [
-    {
-      "d": "2025-11-02",
-      "c": 0
-    },
-    {
-      "d": "2025-11-03",
-      "c": 0
-    },
-    {
-      "d": "2025-11-04",
-      "c": 0
-    },
-    {
-      "d": "2025-11-05",
-      "c": 0
-    },
-    {
-      "d": "2025-11-06",
-      "c": 0
-    },
-    {
-      "d": "2025-11-07",
-      "c": 0
-    },
-    {
-      "d": "2025-11-08",
-      "c": 0
-    },
     {
       "d": "2025-11-09",
       "c": 0
@@ -1528,6 +1500,10 @@
     {
       "d": "2026-11-07",
       "c": 0
+    },
+    {
+      "d": "2026-11-08",
+      "c": 0
     }
   ],
   "stations": [
@@ -1569,7 +1545,7 @@
     {
       "name": "quiettv",
       "color": "#b07219",
-      "stars": 5,
+      "stars": 6,
       "commits": 8,
       "week": "2026-10-18"
     }
@@ -1942,7 +1918,7 @@
     {
       "name": "quiettv",
       "color": "#b07219",
-      "stars": 5,
+      "stars": 6,
       "pushed": "2026-10-20",
       "created": "2026-10-19",
       "size": 1194,
@@ -2154,5 +2130,5 @@
       "url": "https://dev.to/vineetjk/can-prithvi-eat-this-a-food-companion-i-built-for-my-friend-living-in-a-pg-2nf"
     }
   ],
-  "fetchedAt": "2026-11-07T05:46:58.591Z"
+  "fetchedAt": "2026-11-08T05:49:59.042Z"
 }
