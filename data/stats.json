@@ -3,7 +3,7 @@
   "login": "vineetjk",
   "name": "Vineet J Karni",
   "avatarUrl": "https://avatars.githubusercontent.com/u/42497152?u=56bd4a2e2e27f41492a6e8e676c9c680ddb89e01&v=4",
-  "followers": 21,
+  "followers": 22,
   "repos": 56,
   "stars": 34,
   "mergedPRs": 21,
@@ -1503,7 +1503,7 @@
     },
     {
       "d": "2026-11-08",
-      "c": 0
+      "c": 1
     }
   ],
   "stations": [
@@ -1551,7 +1551,7 @@
     }
   ],
   "lifetime": {
-    "total": 1040,
+    "total": 1041,
     "since": 2018
   },
   "repoList": [
@@ -2130,5 +2130,5 @@
       "url": "https://dev.to/vineetjk/can-prithvi-eat-this-a-food-companion-i-built-for-my-friend-living-in-a-pg-2nf"
     }
   ],
-  "fetchedAt": "2026-11-08T05:49:59.042Z"
+  "fetchedAt": "2026-11-08T17:58:25.530Z"
 }
