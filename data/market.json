@@ -1,20 +1,22 @@
 {
   "version": 1,
   "listedOn": "2026-10-06",
-  "price": 17380,
+  "price": 16435,
   "prevClose": 17380,
   "ath": 21985,
   "session": {
     "date": "2026-11-11",
-    "status": "open",
+    "status": "closed",
     "o": 17380,
     "h": 17380,
-    "l": 17380,
+    "l": 16435,
     "v": 0,
     "trades": 0,
-    "flags": []
+    "flags": [],
+    "c": 16435,
+    "fv": 12650
   },
-  "nextOpen": null,
+  "nextOpen": "2026-11-12",
   "candles": [
     {
       "d": "2026-06-30",
@@ -940,6 +942,15 @@
       "c": 17380,
       "v": 0,
       "fv": 13230
+    },
+    {
+      "d": "2026-11-11",
+      "o": 17380,
+      "h": 17380,
+      "l": 16435,
+      "c": 16435,
+      "v": 0,
+      "fv": 12650
     }
   ],
   "holders": {
@@ -1163,6 +1174,10 @@
   ],
   "news": [
     {
+      "t": "2026-11-11T11:28:02.822Z",
+      "text": "Closing bell: $VJK ₹164.35 ▼ -5.44%, fair value ₹126.50"
+    },
+    {
       "t": "2026-11-10T11:48:17.410Z",
       "text": "Closing bell: $VJK ₹173.80 ▼ -5.65%, fair value ₹132.30"
     },
@@ -1205,10 +1220,6 @@
     {
       "t": "2026-11-02T04:44:58.889Z",
       "text": "Whale alert: @lavishlohiya buys 25 $VJK at ₹215.20"
-    },
-    {
-      "t": "2026-11-02T04:44:58.889Z",
-      "text": "Whale alert: @PingPongPlus buys 25 $VJK at ₹207.40"
     }
   ],
   "processed": [
@@ -1241,5 +1252,5 @@
     "source": "graphql",
     "perShare": 0
   },
-  "updatedAt": "2026-11-11T05:56:27.282Z"
+  "updatedAt": "2026-11-11T11:28:02.822Z"
 }
