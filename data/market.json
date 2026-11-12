@@ -1,20 +1,22 @@
 {
   "version": 1,
   "listedOn": "2026-10-06",
-  "price": 16435,
+  "price": 15575,
   "prevClose": 16435,
   "ath": 21985,
   "session": {
     "date": "2026-11-12",
-    "status": "open",
+    "status": "closed",
     "o": 16435,
     "h": 16435,
-    "l": 16435,
+    "l": 15575,
     "v": 0,
     "trades": 0,
-    "flags": []
+    "flags": [],
+    "c": 15575,
+    "fv": 12145
   },
-  "nextOpen": null,
+  "nextOpen": "2026-11-13",
   "candles": [
     {
       "d": "2026-06-30",
@@ -949,6 +951,15 @@
       "c": 16435,
       "v": 0,
       "fv": 12650
+    },
+    {
+      "d": "2026-11-12",
+      "o": 16435,
+      "h": 16435,
+      "l": 15575,
+      "c": 15575,
+      "v": 0,
+      "fv": 12145
     }
   ],
   "holders": {
@@ -1172,6 +1183,10 @@
   ],
   "news": [
     {
+      "t": "2026-11-12T11:52:57.821Z",
+      "text": "Closing bell: $VJK ₹155.75 ▼ -5.23%, fair value ₹121.45"
+    },
+    {
       "t": "2026-11-11T11:28:02.822Z",
       "text": "Closing bell: $VJK ₹164.35 ▼ -5.44%, fair value ₹126.50"
     },
@@ -1214,10 +1229,6 @@
     {
       "t": "2026-11-02T04:44:58.889Z",
       "text": "$VJK hits the upper circuit at ₹219.85. Buyers locked out for the day"
-    },
-    {
-      "t": "2026-11-02T04:44:58.889Z",
-      "text": "Whale alert: @lavishlohiya buys 25 $VJK at ₹215.20"
     }
   ],
   "processed": [
@@ -1250,5 +1261,5 @@
     "source": "graphql",
     "perShare": 0
   },
-  "updatedAt": "2026-11-12T06:59:09.102Z"
+  "updatedAt": "2026-11-12T11:52:57.821Z"
 }
