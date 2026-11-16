@@ -1,20 +1,22 @@
 {
   "version": 1,
   "listedOn": "2026-10-06",
-  "price": 14650,
+  "price": 13770,
   "prevClose": 14650,
   "ath": 21985,
   "session": {
     "date": "2026-11-16",
-    "status": "open",
+    "status": "closed",
     "o": 14650,
     "h": 14650,
-    "l": 14650,
+    "l": 13770,
     "v": 0,
     "trades": 0,
-    "flags": []
+    "flags": [],
+    "c": 13770,
+    "fv": 10245
   },
-  "nextOpen": null,
+  "nextOpen": "2026-11-17",
   "candles": [
     {
       "d": "2026-06-30",
@@ -967,6 +969,15 @@
       "c": 14650,
       "v": 0,
       "fv": 10955
+    },
+    {
+      "d": "2026-11-16",
+      "o": 14650,
+      "h": 14650,
+      "l": 13770,
+      "c": 13770,
+      "v": 0,
+      "fv": 10245
     }
   ],
   "holders": {
@@ -1190,6 +1201,10 @@
   ],
   "news": [
     {
+      "t": "2026-11-16T12:04:18.083Z",
+      "text": "Closing bell: $VJK ₹137.70 ▼ -6.01%, fair value ₹102.45"
+    },
+    {
       "t": "2026-11-13T11:36:56.598Z",
       "text": "Closing bell: $VJK ₹146.50 ▼ -5.94%, fair value ₹109.55"
     },
@@ -1232,10 +1247,6 @@
     {
       "t": "2026-11-02T04:44:58.889Z",
       "text": "Opening bell: 4 after-market orders executed"
-    },
-    {
-      "t": "2026-11-02T04:44:58.889Z",
-      "text": "Whale alert: @ladecruze buys 25 $VJK at ₹219.85"
     }
   ],
   "processed": [
@@ -1268,5 +1279,5 @@
     "source": "graphql",
     "perShare": 0
   },
-  "updatedAt": "2026-11-16T06:08:58.599Z"
+  "updatedAt": "2026-11-16T12:04:18.083Z"
 }
