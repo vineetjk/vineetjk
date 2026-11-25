@@ -1,20 +1,22 @@
 {
   "version": 1,
   "listedOn": "2026-10-06",
-  "price": 9980,
+  "price": 9535,
   "prevClose": 9980,
   "ath": 21985,
   "session": {
     "date": "2026-11-25",
-    "status": "open",
+    "status": "closed",
     "o": 9980,
     "h": 9980,
-    "l": 9980,
+    "l": 9535,
     "v": 0,
     "trades": 0,
-    "flags": []
+    "flags": [],
+    "c": 9535,
+    "fv": 7745
   },
-  "nextOpen": null,
+  "nextOpen": "2026-11-26",
   "candles": [
     {
       "d": "2026-06-30",
@@ -1030,6 +1032,15 @@
       "c": 9980,
       "v": 0,
       "fv": 7905
+    },
+    {
+      "d": "2026-11-25",
+      "o": 9980,
+      "h": 9980,
+      "l": 9535,
+      "c": 9535,
+      "v": 0,
+      "fv": 7745
     }
   ],
   "holders": {
@@ -1261,6 +1272,10 @@
   ],
   "news": [
     {
+      "t": "2026-11-25T10:18:27.419Z",
+      "text": "Closing bell: $VJK ₹95.35 ▼ -4.46%, fair value ₹77.45"
+    },
+    {
       "t": "2026-11-24T11:30:58.195Z",
       "text": "Closing bell: $VJK ₹99.80 ▼ -4.95%, fair value ₹79.05"
     },
@@ -1303,10 +1318,6 @@
     {
       "t": "2026-11-10T11:48:17.410Z",
       "text": "Closing bell: $VJK ₹173.80 ▼ -5.65%, fair value ₹132.30"
-    },
-    {
-      "t": "2026-11-09T12:10:13.592Z",
-      "text": "Closing bell: $VJK ₹184.20 ▼ -6.59%, fair value ₹132.30"
     }
   ],
   "processed": [
@@ -1340,5 +1351,5 @@
     "source": "graphql",
     "perShare": 0
   },
-  "updatedAt": "2026-11-25T08:15:00.744Z"
+  "updatedAt": "2026-11-25T10:18:27.419Z"
 }
